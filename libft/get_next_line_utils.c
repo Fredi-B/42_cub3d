@@ -3,106 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: afey <afey@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/16 15:09:17 by fbechtol          #+#    #+#             */
-/*   Updated: 2021/08/17 17:07:19 by fbechtol         ###   ########.fr       */
+/*   Created: 2021/12/28 11:44:58 by afey              #+#    #+#             */
+/*   Updated: 2021/12/28 11:44:59 by afey             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "fdf.h"
 
-//size_t	ft_strlen(const char *s)
-//{
-//	size_t	i;
-//
-//	i = 0;
-//	while (s[i])
-//		i++;
-//	return (i);
-//}
-//
-//char	*ft_strjoin(char const *s1, char const *s2)
-//{
-//	char	*s3;
-//	int		i;
-//	int		j;
-//
-//	if (s1 == NULL)
-//		return (NULL);
-//	s3 = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-//	if (s3 == NULL)
-//		return (NULL);
-//	i = 0;
-//	while (s1[i])
-//	{
-//		s3[i] = s1[i];
-//		i++;
-//	}
-//	j = 0;
-//	while (s2[j])
-//	{
-//		s3[i] = s2[j];
-//		j++;
-//		i++;
-//	}
-//	s3[i] = '\0';
-//	return (s3);
-//}
-//
-//char	*ft_strchr(const char *s, int c)
-//{
-//	int		i;
-//
-//	i = 0;
-//	while (s[i] != '\0')
-//	{
-//		if (s[i] == c)
-//			return ((char *)(s + i));
-//		i++;
-//	}
-//	return (NULL);
-//}
-//
-//char	*ft_substr(char const *s, unsigned int start, size_t len)
-//{
-//	size_t	i;
-//	size_t	s_len;
-//	char	*substr;
-//
-//	if (!s)
-//		return (0);
-//	s_len = ft_strlen(s);
-//	substr = malloc(len + 1);
-//	if (!substr)
-//		return (0);
-//	i = 0;
-//	while (len--)
-//	{
-//		if (s[i] && start <= s_len)
-//		{
-//			substr[i] = s[i + start];
-//			i++;
-//		}
-//	}
-//	substr[i] = '\0';
-//	return (substr);
-//}
-//
-//char	*ft_strdup(const char *s)
-//{
-//	int		i;
-//	char	*dup;
-//
-//	i = 0;
-//	dup = malloc(ft_strlen(s) + 1);
-//	if (dup == NULL)
-//		return (NULL);
-//	while (s[i] != '\0')
-//	{
-//		dup[i] = s[i];
-//		i++;
-//	}
-//	dup[i] = '\0';
-//	return (dup);
-//}
+size_t	ft_strlen_gnl(const char *str)
+{
+	size_t	len;
+
+	if (!str)
+		return (0);
+	len = 0;
+	while (str[len] != '\0')
+	{
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_strchr_gnl(const char *s, int c)
+{
+	size_t	slen;
+	size_t	i;
+
+	slen = ft_strlen_gnl(s);
+	i = 0;
+	while (i < slen)
+	{
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i++;
+	}
+	return (NULL);
+}
+
+char	*ft_strjoin_gnl(char const *save, char const *line)
+{
+	char	*str;
+	size_t	i;
+	size_t	len1;
+	size_t	len2;
+
+	len1 = ft_strlen_gnl(save);
+	len2 = ft_strlen_gnl(line);
+	str = (char *)malloc ((len1 + len2 + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	while (len1 > 0 && save[i] != '\0')
+	{
+		str[i] = save[i];
+		i++;
+	}
+	while (line[i - len1] != '\0')
+	{
+		str[i] = line[i - len1];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_strdup_gnl(const char *s1)
+{
+	char	*str;
+	size_t	len;
+	size_t	i;
+
+	len = ft_strlen_gnl(s1);
+	str = (char *)malloc((len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	size_t	s_len;
+	char	*substr;
+
+	if (!s)
+		return (0);
+	s_len = ft_strlen_gnl(s);
+	substr = (char *)malloc((len + 1) * sizeof(char));
+	if (!substr)
+		return (0);
+	i = 0;
+	while (len--)
+	{
+		if (s[i] && start <= s_len)
+		{
+			substr[i] = s[i + start];
+			i++;
+		}
+	}
+	substr[i] = '\0';
+	return (substr);
+}

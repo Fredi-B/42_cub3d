@@ -5,7 +5,7 @@ CFLAGS = -g -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 USER = $(shell echo $$USER)
 # -L followed by the relative path of the library to link it 
-LINUX_LIBRARIES = -L ./libft /home/$(USER)/MLX42/libmlx42.a -lglfw -ldl
+LINUX_LIBRARIES = -L ./libft MLX42/libmlx42.a -lglfw -ldl
 MAC_LIBRARIES = -L ./libft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
 
 CFILES = \
@@ -18,6 +18,8 @@ UNAME_S := $(shell uname -s)
 
 $(NAME): $(ODIR) $(OBJECTS) 
 	@make -C ./libft
+	@make -C ./MLX42
+
 ifeq ($(UNAME_S),Linux)
 	clang $(CFLAGS) $(OBJECTS) -lm $(LINUX_LIBRARIES) -o $(NAME)
 else

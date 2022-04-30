@@ -44,6 +44,7 @@ typedef struct s_data
 
 /*  ------------------------ Function prototypes --------------------------- */
 
-/*  ------------------------------ main.c----------------------------------- */
+/*  --------------------------- err_exit.c --------------------------------- */
+void	err_exit(t_data *data, char *msg, int len, int exit_status);
 
 #endif

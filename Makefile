@@ -9,7 +9,7 @@ LINUX_LIBRARIES = -L ./libft MLX42/libmlx42.a -lglfw -ldl
 MAC_LIBRARIES = -L ./libft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
 
 CFILES = \
-main.c parsing.c
+main.c parsing.c err_exit.c
 
 
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afey <afey@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 11:44:58 by afey              #+#    #+#             */
-/*   Updated: 2021/12/28 11:44:59 by afey             ###   ########.fr       */
+/*   Updated: 2022/04/30 12:52:31 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
 size_t	ft_strlen_gnl(const char *str)
 {

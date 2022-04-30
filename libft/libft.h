@@ -6,7 +6,7 @@
 /*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:05:34 by fbechtol          #+#    #+#             */
-/*   Updated: 2021/12/09 16:52:26 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/04/30 12:52:21 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <stdlib.h>
-# include "get_next_line.h"
 
 /* ----------------------------- Structures -------------------------------- */
 
@@ -84,5 +83,13 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/* --------------------------- get_next_line -------------------------------- */
+
+size_t	ft_strlen_gnl(const char *str);
+char	*ft_strchr_gnl(const char *s, int c);
+char	*ft_strjoin_gnl(char const *save, char const *line);
+char	*ft_strdup_gnl(const char *s1);
+char	*ft_substr_gnl(char const *s, unsigned int start, size_t len);
 
 #endif

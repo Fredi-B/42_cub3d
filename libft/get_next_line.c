@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afey <afey@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/28 11:44:51 by afey              #+#    #+#             */
-/*   Updated: 2021/12/28 11:44:52 by afey             ###   ########.fr       */
+/*   Updated: 2022/04/30 12:52:40 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
 static char	*ft_check(char **pt_save, char *line, int i)
 {

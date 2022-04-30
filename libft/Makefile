@@ -6,7 +6,7 @@
 #    By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 10:45:40 by fbechtol          #+#    #+#              #
-#    Updated: 2022/04/29 18:36:21 by fbechtol         ###   ########.fr        #
+#    Updated: 2022/04/30 18:55:56 by fbechtol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SOURCES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
 	ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c \
 	ft_int_strdup.c ft_int_memcpy.c ft_atox.c\
-	get_next_line.c get_next_line_utils.c
+	get_next_line.c get_next_line_utils.c ft_strncmp_backwards.c
 
 BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
 	ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c

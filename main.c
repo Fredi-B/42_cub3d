@@ -1,9 +1,5 @@
-#include "MLX42/include/MLX42/MLX42.h"
-#include "libft/libft.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <memory.h>
+#include "cub3D.h"
+
 #define WIDTH 256
 #define HEIGHT 256
 

@@ -6,7 +6,7 @@
 /*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:05:34 by fbechtol          #+#    #+#             */
-/*   Updated: 2022/04/30 12:52:21 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/04/30 12:59:19 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* --------------------------- get_next_line -------------------------------- */
 
+char	*get_next_line(int fd);
 size_t	ft_strlen_gnl(const char *str);
 char	*ft_strchr_gnl(const char *s, int c);
 char	*ft_strjoin_gnl(char const *save, char const *line);

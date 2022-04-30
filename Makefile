@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
+CFLAGS = -g #-Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 USER = $(shell echo $$USER)
 # -L followed by the relative path of the library to link it 
@@ -9,8 +9,9 @@ LINUX_LIBRARIES = -L ./libft MLX42/libmlx42.a -lglfw -ldl
 MAC_LIBRARIES = -L ./libft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
 
 CFILES = \
-main.c 
-
+main.c \
+key_hook.c \
+minimap.c
 
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 OBJECTS := $(addprefix $(ODIR)/,$(OBJECTS))

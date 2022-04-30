@@ -5,15 +5,12 @@ CFLAGS = -g -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 USER = $(shell echo $$USER)
 # -L followed by the relative path of the library to link it 
-LINUX_LIBRARIES = -L ./libft -lft -L/usr/include/readline -lreadline
-MAC_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
-#MAC_INCLUDES = -I ./include -I .MLX42/include
+LINUX_LIBRARIES = -L ./libft /home/$(USER)/MLX42/libmlx42.a -lglfw -ldl
+MAC_LIBRARIES = -L ./libft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
 
 CFILES = \
 main.c 
 
-#@Arno: brauchen wir VPATH und @Fred: MAC_INCLUDES?
-VPATH = $(ODIR)
 
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 OBJECTS := $(addprefix $(ODIR)/,$(OBJECTS))

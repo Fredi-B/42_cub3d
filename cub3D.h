@@ -43,6 +43,10 @@ typedef struct s_data
 }				t_data;
 
 /*  ------------------------ Function prototypes --------------------------- */
+/*  ------------------------------ main.c ---------------------------------- */
+
+/*  ---------------------------- parsing.c --------------------------------- */
+int		parsing(t_data *data, char **argv);
 
 /*  --------------------------- err_exit.c --------------------------------- */
 void	err_exit(t_data *data, char *msg, int len, int exit_status);

@@ -32,7 +32,7 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	int		position;
+	int		position[2];
 	char	orientation;
 }				t_player;
 

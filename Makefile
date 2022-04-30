@@ -6,7 +6,6 @@ ODIR = o-files
 USER = $(shell echo $$USER)
 # -L followed by the relative path of the library to link it 
 LINUX_LIBRARIES = -L ./libft -lft -L/usr/include/readline -lreadline
-# wie fbechtol durch $(USER) ersetzen?
 MAC_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
 #MAC_INCLUDES = -I ./include -I .MLX42/include
 

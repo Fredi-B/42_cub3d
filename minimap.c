@@ -17,11 +17,11 @@ void read_file(t_array *arr)
 	arr->subsize = 64;
 	arr->p_x = 256;
 	arr->p_y = 320;
-	arr->p_a = ODR;
+	arr->p_a = ODR;// * 0.5;
 	arr->p_dx = cos(arr->p_a);
 	arr->p_dy = sin(arr->p_a);
 
-	arr->width = 512; //8 x 64 = 512
+	arr->width = 1024; //8 x 64 = 512
 	arr->height = 512;
 	
 /* 	int i = 0;

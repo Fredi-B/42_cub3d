@@ -6,14 +6,17 @@ ODIR = o-files
 USER = $(shell echo $$USER)
 # -L followed by the relative path of the library to link it 
 LINUX_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -ldl
-MAC_LIBRARIES = -L ./libft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
+# Maybe this works for libft? -> MAC_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
+MAC_LIBRARIES = libft/libft.a -L ./libft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
 
 CFILES = \
+err_exit.c \
 init.c \
 key_hook.c \
 line.c \
 main.c \
 minimap.c \
+parsing.c \
 player.c \
 window.c
 

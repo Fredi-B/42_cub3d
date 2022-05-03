@@ -6,7 +6,7 @@
 /*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:05:34 by fbechtol          #+#    #+#             */
-/*   Updated: 2022/04/30 12:59:19 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/04/30 20:25:50 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 /* ----------------------------- Structures -------------------------------- */
 
@@ -44,6 +45,8 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strncmp_backwards(const char *s1, const char *s2, size_t n);
+bool	ft_cmp_file_extension(const char *s1, const char *s2, size_t len);
 int		ft_atoi(const char *str);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);

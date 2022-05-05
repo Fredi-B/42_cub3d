@@ -82,6 +82,16 @@ typedef struct s_points
 	unsigned int	color;
 }				t_points;
 
+typedef struct s_input_flags
+{
+	bool	no;
+	bool	so;
+	bool	we;
+	bool	ea;
+	bool	ceiling;
+	bool	floor;
+}				t_input_flags;
+
 /*  ------------------------ Function prototypes --------------------------- */
 /*  ------------------------------ main.c ---------------------------------- */
 

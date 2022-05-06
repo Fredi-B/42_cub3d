@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = -g #-Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
+CFLAGS = #-g #-Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 USER = $(shell echo $$USER)
 # -L followed by the relative path of the library to link it 
@@ -29,7 +29,7 @@ $(NAME): $(ODIR) $(OBJECTS)
 	@make -C ./MLX42
 
 ifeq ($(UNAME_S),Linux)
-	clang $(CFLAGS) $(OBJECTS) -lm $(LINUX_LIBRARIES) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJECTS) -lm $(LINUX_LIBRARIES) -o $(NAME)
 else
 	$(CC) $(CFLAGS) $(OBJECTS) -lm $(MAC_LIBRARIES) -o $(NAME)
 endif
@@ -39,7 +39,7 @@ $(ODIR):
 
 $(ODIR)/%.o: %.c
 ifeq ($(UNAME_S),Linux)
-	clang $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 else
 	$(CC) $(CFLAGS) -c $< -o $@ 
 endif

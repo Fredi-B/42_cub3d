@@ -28,7 +28,7 @@ SOURCES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c \
 	ft_int_strdup.c ft_int_memcpy.c ft_atox.c\
 	get_next_line.c get_next_line_utils.c \
-	ft_strncmp_backwards.c ft_cmp_file_extension.c
+	ft_strncmp_backwards.c ft_cmp_file_extension.c ft_atoll.c
 
 BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
 	ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c

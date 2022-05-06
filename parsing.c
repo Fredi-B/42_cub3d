@@ -38,9 +38,9 @@ bool	get_walls_and_rgb(t_data *data, char **argv)
 			return (false);
 		free(line);
 		//free_2d(splitted_line);
+	}
 		return (true);
 	}
-}
 
 bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line)
 {
@@ -49,28 +49,29 @@ bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line)
 		if (flag->no == true)
 			return (false);
 		flag->no = true;
-		ft_strlcpy(data->north, splitted_line[1], ft_strlen(splitted_line[1]));
+		data->north = ft_strdup(splitted_line[1]);
 	}
 	else if (ft_strncmp(splitted_line[0], "SO\0", 3) == 0)
 	{
 		if (flag->so == true)
 			return (false);
 		flag->so = true;
-		ft_strlcpy(data->south, splitted_line[1], ft_strlen(splitted_line[1]));
+		data->south = ft_strdup(splitted_line[1]);
 	}
 	else if (ft_strncmp(splitted_line[0], "WE\0", 3) == 0)
 	{
 		if (flag->we == true)
 			return (false);
 		flag->we = true;
-		ft_strlcpy(data->west, splitted_line[1], ft_strlen(splitted_line[1]));
+		data->west = ft_strdup(splitted_line[1]);
 	}
 	else if (ft_strncmp(splitted_line[0], "EA\0", 3) == 0)
 	{
 		if (flag->ea == true)
 			return (false);
 		flag->ea = true;
-		ft_strlcpy(data->east, splitted_line[1], ft_strlen(splitted_line[1]));
+		data->east = ft_strdup(splitted_line[1]);
+		//muss ich die new line trimmen? mit nem tmp string?
 	}
 	else if (ft_strncmp(splitted_line[0], "F\0", 2) == 0)
 	{

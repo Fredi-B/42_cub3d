@@ -7,7 +7,7 @@ int	main(int argc __attribute__ ((unused)), char **argv)
 	if (argc != 2)
 		err_exit(&data, "Wrong number of arguments", 26, 1);
 	parsing(&data, argv);
-	map_init(&data);
-	draw_map(&data);
+	//map_init(&data);
+	//draw_map(&data);
 	return (OK);
 }

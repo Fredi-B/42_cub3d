@@ -39,8 +39,8 @@ bool	get_walls_and_rgb(t_data *data, char **argv)
 		free(line);
 		//free_2d(splitted_line);
 	}
-		return (true);
-	}
+	return (true);
+}
 
 bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line)
 {
@@ -93,24 +93,24 @@ bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line)
 	}
 	else
 		return (false);
+	return (true);
 }
 
 unsigned int	convert_rgb_to_hex(char *rgb)
 {
 	unsigned int	hex;
-	int				whole_nbr;
-	float			float_nbr;
 	char			**splitted_rgb;
-	int				i;
-	// check misconfiguration
-	splitted_rgb = ft_split(rgb, ',');
-	i = 0;
-	while (splitted_rgb[i])
-	{
-		whole_nbr = ft_atoi(splitted_rgb[i]) / 16;
-		
-	}
+	char			*trimmed_b;
 
+	// check misconfiguration, i.e. mehr als 3 Werte mehr kommata etc.
+	splitted_rgb = ft_split(rgb, ',');
+	trimmed_b = ft_strtrim(splitted_rgb[2], " \n");
+	// check if between 0 - 255
+	hex = ((ft_atoll(splitted_rgb[0]) << 16) + (ft_atoll(splitted_rgb[1]) << 8) \
+				+ ft_atoll(trimmed_b));
+	free(trimmed_b);
+	//free2d(splitted_rgb);
+	return (hex);
 }
 
 void	init_flag(t_input_flags *flag)

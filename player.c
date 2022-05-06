@@ -1,11 +1,11 @@
 #include "cub3D.h"
 
-float	dist_vec(t_array *arr, float x, float y)
+float	dist_vec(t_data *arr, float x, float y)
 {
 	return ( sqrt( (x - arr->p_x) * (x - arr->p_x) + (y - arr->p_y) * (y - arr->p_y) ));
 }
 
-void	get_player(t_array *arr, t_line *line)
+void	get_player(t_data *arr, t_line *line)
 {
 	int		i;
 	t_points p0, p1;
@@ -36,7 +36,7 @@ void	get_player(t_array *arr, t_line *line)
 	} */
 }
 
-void	get_rays(t_array *arr, t_line *line)
+void	get_rays(t_data *arr, t_line *line)
 {
 	int		r, mx, my, mp, dof;
 	float	rx,ry, ra, xo, yo, dist_T;

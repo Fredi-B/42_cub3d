@@ -8,7 +8,7 @@ static int	init_var_s(int x0, int x1)
 		return (-1);
 }
 
-void	ft_plot_pixel(t_array *arr, t_line *line, int n_pixel)
+void	ft_plot_pixel(t_data *arr, t_line *line, int n_pixel)
 {
 	if (line->color0 != line->color1)
 	{
@@ -23,7 +23,7 @@ void	ft_plot_pixel(t_array *arr, t_line *line, int n_pixel)
 	}
 }
 
-void	set_line(t_line *line, t_array *arr, t_points p0, t_points p1)
+void	set_line(t_line *line, t_data *arr, t_points p0, t_points p1)
 {
 	line->x0 = p0.x;
 	line->y0 = p0.y;
@@ -39,7 +39,7 @@ void	set_line(t_line *line, t_array *arr, t_points p0, t_points p1)
 	draw_line(line, arr);
 }
 
-void	draw_line_loop(t_line *line, t_array *arr, int *n_pixel)
+void	draw_line_loop(t_line *line, t_data *arr, int *n_pixel)
 {
 	while (1)
 	{
@@ -65,7 +65,7 @@ void	draw_line_loop(t_line *line, t_array *arr, int *n_pixel)
 		*n_pixel = *n_pixel * -1 - 1;
 }
 
-void	draw_line(t_line *line, t_array *arr)
+void	draw_line(t_line *line, t_data *arr)
 {
 	int	n_pixel;
 	int	tmp_x0;

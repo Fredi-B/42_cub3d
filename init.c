@@ -1,7 +1,7 @@
 #include "cub3D.h"
 
 
-void	init_arr(t_array *arr)
+void	init_arr(t_data *arr)
 {
 	arr->rot_x = asin(tan(M_PI / 6));
 	arr->rot_y = M_PI / 4;
@@ -9,7 +9,7 @@ void	init_arr(t_array *arr)
 	arr->num = (int*) malloc((1000) * sizeof(int));
 }
 
-void	free_arr(t_array *arr)
+void	free_arr(t_data *arr)
 {
 	free(arr->num);
 }

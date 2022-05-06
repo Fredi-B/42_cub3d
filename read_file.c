@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-int	read_file(char *file, t_array *arr)
+int	read_file(char *file, t_data *arr)
 {
 	int		fd;
 	char	*line;

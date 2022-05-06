@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void read_file(t_array *arr)
+void read_file(t_data *arr)
 {
 	char map[] = {'1', '1', '1', '1', '1', '1', '1', '1',
 				 '1', '0', '1', '0', '0', '0', '0', '1',
@@ -33,7 +33,7 @@ void read_file(t_array *arr)
 }
 
 /* Starting point for drawing a map */
-int		map_init(t_array *arr)
+int		map_init(t_data *arr)
 {
 	init_arr(arr);
 	read_file(arr); // MEINE

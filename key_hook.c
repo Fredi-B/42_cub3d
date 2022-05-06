@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-static void	move_y(t_array *arr, int sign)
+static void	move_y(t_data *arr, int sign)
 {
 	float	y;
 	int		mx;
@@ -15,7 +15,7 @@ static void	move_y(t_array *arr, int sign)
 		arr->p_y = y;
 }
 
-static void	move_x(t_array *arr, int sign)
+static void	move_x(t_data *arr, int sign)
 {
 	float	x;
 	int		mx;
@@ -31,7 +31,7 @@ static void	move_x(t_array *arr, int sign)
 	move_y(arr, sign);
 }
 
-static void	turn(t_array *arr, int sign)
+static void	turn(t_data *arr, int sign)
 {
 	arr->p_a += 2 * ODR * sign;
 	if (arr->p_a >= 2 * M_PI)
@@ -44,7 +44,7 @@ static void	turn(t_array *arr, int sign)
 
 void	hook(void *param)
 {
-	t_array		*arr;
+	t_data		*arr;
 
 	arr = param;
 	if (mlx_is_key_down(arr->mlx, MLX_KEY_ESCAPE))

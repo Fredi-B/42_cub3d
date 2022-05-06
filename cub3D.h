@@ -102,28 +102,28 @@ int		parsing(t_data *data, char **argv);
 void	err_exit(t_data *data, char *msg, int len, int exit_status);
 
 /* init.c*/
-void	init_arr(t_array *arr);
-void	free_arr(t_array *arr);
+void	init_arr(t_data *arr);
+void	free_arr(t_data *arr);
 void	init_line(t_line *line);
 
 /* line.c*/
-void	set_line(t_line *line, t_array *arr, t_points p0, t_points p1);
-void	draw_line(t_line *line, t_array *arr);
+void	set_line(t_line *line, t_data *arr, t_points p0, t_points p1);
+void	draw_line(t_line *line, t_data *arr);
 
 /* minimap.c*/
-int		map_init(t_array *arr);
+int		map_init(t_data *arr);
 
 /* key_hook.c*/
 void	hook(void *param);
 
 /* player.c*/
-void	get_player(t_array *arr, t_line *line);
-void	get_rays(t_array *arr, t_line *line);
+void	get_player(t_data *arr, t_line *line);
+void	get_rays(t_data *arr, t_line *line);
 
 /* window.c*/
-void	draw_map(t_array *arr);
-void	pixel_put(t_array *arr, int x, int y, int color);
-int		destroy_window(t_array *arr);
-void	map_to_image(t_array *arr);
+void	draw_map(t_data *arr);
+void	pixel_put(t_data *arr, int x, int y, int color);
+int		destroy_window(t_data *arr);
+void	map_to_image(t_data *arr);
 
 #endif

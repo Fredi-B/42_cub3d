@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void	get_map_2(t_array *arr, t_line *line, int row, int col)
+void	get_map_2(t_data *arr, t_line *line, int row, int col)
 {
 	int		i;
 	t_points p0, p1;
@@ -22,7 +22,7 @@ void	get_map_2(t_array *arr, t_line *line, int row, int col)
 	}
 }
 
-static void	get_map(t_array *arr, t_line *line)
+static void	get_map(t_data *arr, t_line *line)
 {
 	size_t	row;
 	size_t	col;
@@ -40,7 +40,7 @@ static void	get_map(t_array *arr, t_line *line)
 	}
 }
 
-int	destroy_window(t_array *arr)
+int	destroy_window(t_data *arr)
 {
 	mlx_close_window(arr->mlx);
 	mlx_delete_image(arr->mlx, arr->img);
@@ -53,7 +53,7 @@ int	destroy_window(t_array *arr)
 }
 	/* system("leaks cub3D"); */
 
-void	pixel_put(t_array *arr, int x, int y, int color)
+void	pixel_put(t_data *arr, int x, int y, int color)
 {
 	/* char	*dst;
 
@@ -65,7 +65,7 @@ void	pixel_put(t_array *arr, int x, int y, int color)
 
 }
 
-void	map_to_image(t_array *arr)
+void	map_to_image(t_data *arr)
 {
 	t_line			line;
 
@@ -80,7 +80,7 @@ void	map_to_image(t_array *arr)
 }
 
 //called from main.c
-void	draw_map(t_array *arr)
+void	draw_map(t_data *arr)
 {
 	arr->mlx = mlx_init(arr->width, arr->height, "CUB3D", true);
 

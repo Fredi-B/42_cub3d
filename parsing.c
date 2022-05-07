@@ -64,6 +64,8 @@ bool	get_map(t_data *data, int fd)
 	return (true);
 }
 
+/* reads file till all six data points are stored or an error occured.
+calls store_data() to store them */
 bool	get_walls_and_rgb(t_data *data, char **argv, int fd)
 {
 	t_input_flags	flag;

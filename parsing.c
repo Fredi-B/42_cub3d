@@ -134,21 +134,52 @@ bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line)
 	return (true);
 }
 
-unsigned int	convert_rgb_to_hex(char *rgb)
+long long	convert_rgb_to_hex(char *rgb)
 {
-	unsigned int	hex;
-	char			**splitted_rgb;
-	char			*trimmed_b;
+	long long	hex;
+	int			r;
+	int			g;
+	int			b;
 
-	// check misconfiguration, i.e. mehr als 3 Werte mehr kommata etc.
-	splitted_rgb = ft_split(rgb, ',');
-	trimmed_b = ft_strtrim(splitted_rgb[2], " \n");
-	// check if between 0 - 255
-	hex = ((ft_atoll(splitted_rgb[0]) << 16) + (ft_atoll(splitted_rgb[1]) << 8) \
-				+ ft_atoll(trimmed_b));
-	free(trimmed_b);
-	//free2d(splitted_rgb);
+	if (check_rgb_format(rgb, &r, &g, &b) == false)
+		return (-1);
+	hex = ((r << 16) + (g << 8) + b);
 	return (hex);
+}
+
+bool	check_rgb_format(char *rgb, int *r, int *g, int *b)
+{
+	int	count_comma;
+	int	i;
+	char	**splitted_rgb;
+
+	count_comma = 0;
+	i = 0;
+	while (rgb[i])
+	{
+
+		if (rgb[i] == ',')
+			count_comma++;
+		i++;
+	}
+	if (count_comma != 2)
+		return (false);
+	splitted_rgb = ft_split(rgb, ',');
+	if (splitted_rgb[3] != NULL)
+	{
+	//free2d(splitted_rgb);
+		return (false);
+	}
+	*r = ft_atoll(splitted_rgb[0]);
+	*g = ft_atoll(splitted_rgb[1]);
+	*b = ft_atoll(splitted_rgb[2]);
+	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
+	{
+		//free2d(splitted_rgb);
+		return (false);
+	}
+	//free2d(splitted_rgb);
+	return (true);
 }
 
 void	init_flag(t_input_flags *flag)

@@ -1,18 +1,28 @@
 #include "cub3D.h"
 
-bool			get_walls_and_rgb(t_data *data, char **argv);
-void			init_flag(t_input_flags *flag);
-bool			store_data(t_data *data, t_input_flags *flag, char **splitted_line);
-unsigned int	convert_rgb_to_hex(char *rgb);
+bool		get_walls_and_rgb(t_data *data, char **argv, int fd);
+bool		get_map(t_data *data, int fd);
+void		init_flag(t_input_flags *flag);
+bool		store_data(t_data *data, t_input_flags *flag, char **splitted_line);
+long long	convert_rgb_to_hex(char *rgb);
+bool		check_rgb_format(char *rgb, int *r, int *g, int *b);
 
 int	parsing(t_data *data, char **argv)
 {
+	int	fd;
+
 	if (ft_cmp_file_extension(argv[1], ".cub", 4) == false)
 		err_exit(data, "Wrong file extension", 21, 1);
-	if (get_walls_and_rgb(data, argv) == false)
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		err_exit(data, "Could not open file", 19, 1);
+	if (get_walls_and_rgb(data, argv, fd) == false)
 		err_exit(data, "Misconfiguration in file", 24, 1);
 	if (get_map(data, fd) == false)
 		err_exit(data, "Could not get map", 17, 1);
+	close(fd);
+	dsprintf(data->north);
+	dllprintf(data->ceiling_rgb);
 	return (0);
 }
 
@@ -53,9 +63,10 @@ bool	get_map(t_data *data, int fd)
 		return (false);
 	return (true);
 }
+
+bool	get_walls_and_rgb(t_data *data, char **argv, int fd)
 {
 	t_input_flags	flag;
-	int				fd;
 	char			*line;
 	char			*trimmed_line;
 	char			**splitted_line;
@@ -111,7 +122,6 @@ bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line)
 			return (false);
 		flag->ea = true;
 		data->east = ft_strdup(splitted_line[1]);
-		//muss ich die new line trimmen? mit nem tmp string?
 	}
 	else if (ft_strncmp(splitted_line[0], "F\0", 2) == 0)
 	{
@@ -169,7 +179,7 @@ bool	check_rgb_format(char *rgb, int *r, int *g, int *b)
 	splitted_rgb = ft_split(rgb, ',');
 	if (splitted_rgb[3] != NULL)
 	{
-	//free2d(splitted_rgb);
+		//free2d(splitted_rgb);
 		return (false);
 	}
 	*r = ft_atoll(splitted_rgb[0]);

@@ -11,10 +11,48 @@ int	parsing(t_data *data, char **argv)
 		err_exit(data, "Wrong file extension", 21, 1);
 	if (get_walls_and_rgb(data, argv) == false)
 		err_exit(data, "Misconfiguration in file", 24, 1);
+	if (get_map(data, fd) == false)
+		err_exit(data, "Could not get map", 17, 1);
 	return (0);
 }
 
-bool	get_walls_and_rgb(t_data *data, char **argv)
+/* reads map into data->map.
+skips empty lines in the beginning, checks against them thereafter */
+bool	get_map(t_data *data, int fd)
+{
+	//leaks??
+	char	*line;
+	char	*tmp;
+
+	line = NULL;
+	tmp = NULL;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			return (false);
+		if (line[0] != '\n')
+		{
+			data->map = line;
+			break ;
+		}
+	}
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line || line[0] == '\n')
+			break ;
+		tmp = ft_strjoin(data->map, line);
+		free(data->map);
+		data->map = ft_strdup(tmp);
+		free(tmp);
+		free(line);
+	}
+	line = get_next_line(fd);
+	if (line)
+		return (false);
+	return (true);
+}
 {
 	t_input_flags	flag;
 	int				fd;

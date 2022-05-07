@@ -57,17 +57,18 @@ bool	get_map(t_data *data, int fd)
 	t_input_flags	flag;
 	int				fd;
 	char			*line;
+	char			*trimmed_line;
 	char			**splitted_line;
 
 	init_flag(&flag);
-	fd = open(argv[1], O_RDONLY);
 	while (flag.no != true || flag.so != true || flag.we != true \
 			|| flag.ea != true || flag.ceiling != true || flag.floor != true)
 	{
 		line = get_next_line(fd);
 		if (!line || line[0] == '\n')
 			continue ;
-		splitted_line = ft_split(line, ' ');
+		trimmed_line = ft_strtrim(line, " 	\n");
+		splitted_line = ft_split(trimmed_line, ' ');
 		if (splitted_line[0] == NULL)
 			continue ;
 		if (splitted_line[2] != NULL)
@@ -75,7 +76,8 @@ bool	get_map(t_data *data, int fd)
 		if (store_data(data, &flag, splitted_line) == false)
 			return (false);
 		free(line);
-		//free_2d(splitted_line);
+		free(trimmed_line);
+		//free_2d(splitted_line); //auch bei return (false);
 	}
 	return (true);
 }

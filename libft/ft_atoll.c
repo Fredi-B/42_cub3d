@@ -13,7 +13,7 @@ void	isnbr(const char *str)
 {
 	if (*str < '0' || *str > '9')
 	{
-		write(2, "Error\nft_atoll: is not a number\n", 33);
+		write(2, "Error\nft_atoll: not a number\n", 30);
 		exit(2);
 	}
 }
@@ -37,7 +37,7 @@ long	ft_atoll(const char *str)
 	}
 	if (str[i] != '\0')
 	{
-		write(2, "Error\nft_atoll: no '\\0' at the end\n", 35);
+		write(2, "Error\nft_atoll: invalid input\n", 30);
 		exit(2);
 	}
 	return (nbr);

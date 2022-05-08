@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void	init_data(t_data *data);
+static void	init_data(t_data *data);
 
 int	main(int argc __attribute__ ((unused)), char **argv)
 {
@@ -15,7 +15,7 @@ int	main(int argc __attribute__ ((unused)), char **argv)
 	return (OK);
 }
 
-void	init_data(t_data *data)
+static void	init_data(t_data *data)
 {
 	data->map = NULL;
 }

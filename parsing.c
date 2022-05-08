@@ -18,8 +18,9 @@ int	parsing(t_data *data, char **argv)
 		err_exit(data, "Could not open file", 19, 1);
 	if (get_walls_and_rgb(data, argv, fd) == false)
 		err_exit(data, "Misconfiguration in file", 24, 1);
-	if (get_map(data, fd) == false)
-		err_exit(data, "Could not get map", 17, 1);
+	if (parse_map(data) == false)
+		err_exit(data, "allowed chars in map: 1, 0, space \
+and only one of the following: N E S W", 74, 1);
 	close(fd);
 	dsprintf(data->north);
 	dllprintf(data->ceiling_rgb);

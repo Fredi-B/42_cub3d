@@ -17,6 +17,7 @@ line.c \
 main.c \
 minimap.c \
 parsing.c \
+parsing_map.c \
 player.c \
 window.c
 

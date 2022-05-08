@@ -32,6 +32,7 @@ bool	get_map(t_data *data, int fd)
 {
 	//leaks??
 	char	*line;
+	char	*trimmed_line;
 	char	*tmp;
 
 	line = NULL;
@@ -43,7 +44,11 @@ bool	get_map(t_data *data, int fd)
 			return (false);
 		if (line[0] != '\n')
 		{
-			data->map = line;
+			trimmed_line = ft_strtrim(line, "\n");
+			data->map = trimmed_line;
+			data->rows = 1;
+			data->cols = ft_strlen(trimmed_line);
+			free(line);
 			break ;
 		}
 	}
@@ -52,7 +57,11 @@ bool	get_map(t_data *data, int fd)
 		line = get_next_line(fd);
 		if (!line || line[0] == '\n')
 			break ;
-		tmp = ft_strjoin(data->map, line);
+		trimmed_line = ft_strtrim(line, "\n");
+		data->rows++;
+		if (ft_strlen(trimmed_line) > data->cols)
+			data->cols = ft_strlen(trimmed_line);
+		tmp = ft_strjoin(data->map, trimmed_line);
 		free(data->map);
 		data->map = ft_strdup(tmp);
 		free(tmp);

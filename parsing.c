@@ -1,7 +1,7 @@
 #include "cub3D.h"
 
+//static fehlt bei allen fcts
 bool		get_walls_and_rgb(t_data *data, char **argv, int fd);
-bool		get_map(t_data *data, int fd);
 void		init_flag(t_input_flags *flag);
 bool		store_data(t_data *data, t_input_flags *flag, char **splitted_line);
 long long	convert_rgb_to_hex(char *rgb);
@@ -18,60 +18,13 @@ int	parsing(t_data *data, char **argv)
 		err_exit(data, "Could not open file", 19, 1);
 	if (get_walls_and_rgb(data, argv, fd) == false)
 		err_exit(data, "Misconfiguration in file", 24, 1);
+	if (read_map(data, fd) == false)
+		err_exit(data, "Misconfiguration in map", 23, 1);
 	if (parse_map(data) == false)
 		err_exit(data, "allowed chars in map: 1, 0, space \
 and only one of the following: N E S W", 74, 1);
 	close(fd);
-	dsprintf(data->north);
-	dllprintf(data->ceiling_rgb);
 	return (0);
-}
-
-/* reads map into data->map.
-skips empty lines in the beginning, checks against them thereafter */
-bool	get_map(t_data *data, int fd)
-{
-	//leaks??
-	char	*line;
-	char	*trimmed_line;
-	char	*tmp;
-
-	line = NULL;
-	tmp = NULL;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			return (false);
-		if (line[0] != '\n')
-		{
-			trimmed_line = ft_strtrim(line, "\n");
-			data->map = trimmed_line;
-			data->rows = 1;
-			data->cols = ft_strlen(trimmed_line);
-			free(line);
-			break ;
-		}
-	}
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line || line[0] == '\n')
-			break ;
-		trimmed_line = ft_strtrim(line, "\n");
-		data->rows++;
-		if (ft_strlen(trimmed_line) > data->cols)
-			data->cols = ft_strlen(trimmed_line);
-		tmp = ft_strjoin(data->map, trimmed_line);
-		free(data->map);
-		data->map = ft_strdup(tmp);
-		free(tmp);
-		free(line);
-	}
-	line = get_next_line(fd);
-	if (line)
-		return (false);
-	return (true);
 }
 
 /* reads file till all six data points are stored or an error occured.

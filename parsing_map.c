@@ -1,6 +1,54 @@
+#include "cub3D.h"
 
 static void	store_player_pos(t_data *data, char pos, \
 								int counter_map, int counter_line);
+
+/* reads map into data->map.
+skips empty lines in the beginning, checks against them thereafter */
+bool	read_map(t_data *data, int fd)
+{
+	//leaks??
+	char	*line;
+	char	*tmp;
+
+	line = NULL;
+	tmp = NULL;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			return (false);
+		if (line[0] != '\n')
+		{
+			data->map = line;
+			data->rows = 1;
+			data->cols = ft_strlen(line);
+			break ;
+		}
+	}
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line || line[0] == '\n')
+			break ;
+		data->rows++;
+		if (ft_strlen(line) > data->cols)
+			data->cols = ft_strlen(line);
+		tmp = ft_strjoin(data->map, line);
+		free(data->map);
+		data->map = tmp;
+		free(line);
+		line = NULL;
+	}
+	if (line)
+	{
+		free(line);
+		line = NULL;
+		return (false);
+	}
+	return (true);
+}
+
 bool	parse_map(t_data *data)
 {
 	char	*tmp_map;

@@ -23,6 +23,8 @@ int	parsing(t_data *data, char **argv)
 	if (parse_map(data) == false)
 		err_exit(data, "allowed chars in map: 1, 0, space \
 and only one of the following: N E S W", 74, 1);
+	if (validate_map(data) == false)
+		err_exit(data, "Map not surrounded by walls", 27, 1);
 	close(fd);
 	return (0);
 }

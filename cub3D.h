@@ -107,7 +107,8 @@ int		parsing(t_data *data, char **argv);
 /*  -------------------------- parsing_map.c ------------------------------- */
 bool	read_map(t_data *data, int fd);
 bool	parse_map(t_data *data);
-
+/*  ---------------------- parsing_map_validation.c ------------------------ */
+bool	validate_map(t_data *data);
 
 /*  --------------------------- err_exit.c --------------------------------- */
 void	err_exit(t_data *data, char *msg, int len, int exit_status);

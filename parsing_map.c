@@ -102,7 +102,6 @@ bool	parse_map(t_data *data)
 	}
 	if (only_one_player_flag == false)
 		return (false);
-	dsprintf(data->map);
 	return (true);
 }
 

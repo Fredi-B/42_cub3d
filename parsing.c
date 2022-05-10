@@ -22,7 +22,7 @@ int	parsing(t_data *data, char **argv)
 		err_exit(data, "Misconfiguration in map", 23, 1);
 	if (parse_map(data) == false)
 		err_exit(data, "allowed chars in map: 1, 0, space \
-and only one of the following: N E S W", 74, 1);
+and one and only one of the following: N E S W", 80, 1);
 	if (validate_map(data) == false)
 		err_exit(data, "Map not surrounded by walls", 27, 1);
 	close(fd);

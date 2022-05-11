@@ -34,7 +34,7 @@ bool	read_map(t_data *data, int fd)
 		if (!line || line[0] == '\n')
 			break ;
 		data->rows++;
-		if (ft_strlen(line) - 1 >= data->cols)
+		if ((int)ft_strlen(line) - 1 >= data->cols)
 		{
 			data->cols = ft_strlen(line) - 1;
 			longest_row = data->rows;
@@ -80,7 +80,7 @@ bool	parse_map(t_data *data)
 	counter_line = 0;
 	while (tmp_map[counter_tmp_y])
 	{
-		while (counter_line <= ft_strlen(tmp_map[counter_tmp_y]) + 1)
+		while (counter_line <= (int)ft_strlen(tmp_map[counter_tmp_y]) + 1)
 		{
 
 			if (tmp_map[counter_tmp_y][counter_tmp_x] == '1')

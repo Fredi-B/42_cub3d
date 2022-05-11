@@ -1,5 +1,7 @@
 #include "cub3D.h"
 
+static bool	get_first_line(t_data *data, int fd);
+static void	join_lines(t_data *data, char *line, int *longest_row);
 static void	store_player_pos(t_data *data, char pos, \
 								int counter_map, int counter_line);
 
@@ -9,12 +11,36 @@ bool	read_map(t_data *data, int fd)
 {
 	//leaks??
 	char	*line;
-	char	*tmp;
 	int		longest_row;
 
-	line = NULL;
-	tmp = NULL;
 	longest_row = 0;
+	if (get_first_line(data, fd) == false)
+		return (false);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line || line[0] == '\n')
+			break ;
+		join_lines(data, line, &longest_row);
+		free(line);
+		line = NULL;
+	}
+	if (line)
+	{
+		free(line);
+		line = NULL;
+		return (false);
+	}
+	if (longest_row == data->rows)
+		data->cols += 1;
+	return (true);
+}
+
+/* skips empty lines and stores data from first line with data */
+static bool	get_first_line(t_data *data, int fd)
+{
+	char	*line;
+
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -28,32 +54,22 @@ bool	read_map(t_data *data, int fd)
 			break ;
 		}
 	}
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line || line[0] == '\n')
-			break ;
-		data->rows++;
-		if ((int)ft_strlen(line) - 1 >= data->cols)
-		{
-			data->cols = ft_strlen(line) - 1;
-			longest_row = data->rows;
-		}
-		tmp = ft_strjoin(data->map, line);
-		free(data->map);
-		data->map = tmp;
-		free(line);
-		line = NULL;
-	}
-	if (line)
-	{
-		free(line);
-		line = NULL;
-		return (false);
-	}
-	if (longest_row == data->rows)
-		data->cols += 1;
 	return (true);
+}
+
+static void	join_lines(t_data *data, char *line, int *longest_row)
+{
+	char	*tmp;
+
+	data->rows++;
+	if ((int)ft_strlen(line) - 1 >= data->cols)
+	{
+		data->cols = ft_strlen(line) - 1;
+		*longest_row = data->rows;
+	}
+	tmp = ft_strjoin(data->map, line);
+	free(data->map);
+	data->map = tmp;
 }
 
 bool	parse_map(t_data *data)

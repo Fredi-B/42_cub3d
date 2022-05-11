@@ -24,8 +24,8 @@ void	get_map_2(t_data *arr, t_line *line, int row, int col)
 
 static void	get_map(t_data *arr, t_line *line)
 {
-	size_t	row;
-	size_t	col;
+	int	row;
+	int	col;
 
 	row = 0;
 	while (row < arr->rows)

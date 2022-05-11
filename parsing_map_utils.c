@@ -1,5 +1,6 @@
 #include "cub3D.h"
 
+bool		fill_map(t_data *data, t_counter *i, char **tmp_map, bool *only_one_player_flag);
 static void	store_player_pos(t_data *data, char pos, \
 								int counter_map, int counter_line);
 
@@ -26,46 +27,53 @@ void	init_counter_and_flag(t_counter *i, bool *only_one_player_flag)
 bool	parse_tmp_map_into_map(t_data *data, t_counter *i, \
 						char **tmp_map, bool *only_one_player_flag)
 {
-	while (tmp_map[i->tmp_y])
+	while (i->line <= (int)ft_strlen(tmp_map[i->tmp_y]) + 1)
 	{
-		while (i->line <= (int)ft_strlen(tmp_map[i->tmp_y]) + 1)
+		if (tmp_map[i->tmp_y][i->tmp_x] == '1' || tmp_map[i->tmp_y][i->tmp_x] == '0' \
+			|| tmp_map[i->tmp_y][i->tmp_x] == 'N' || tmp_map[i->tmp_y][i->tmp_x] == 'S' \
+			|| tmp_map[i->tmp_y][i->tmp_x] == 'W' || tmp_map[i->tmp_y][i->tmp_x] == 'E' \
+			|| tmp_map[i->tmp_y][i->tmp_x] == ' ')
 		{
-			if (tmp_map[i->tmp_y][i->tmp_x] == '1')
-				data->map[i->map] = '1';
-			else if (tmp_map[i->tmp_y][i->tmp_x] == '0')
-				data->map[i->map] = '0';
-			else if (tmp_map[i->tmp_y][i->tmp_x] == 'N' || tmp_map[i->tmp_y][i->tmp_x] == 'S' \
-				|| tmp_map[i->tmp_y][i->tmp_x] == 'W' || tmp_map[i->tmp_y][i->tmp_x] == 'E')
-			{
-				if (*only_one_player_flag == true)
-				{
-					free_two_d_arr(tmp_map);
-					return (false);
-				}
-				*only_one_player_flag = true;
-				store_player_pos(data, tmp_map[i->tmp_y][i->tmp_x], \
-					i->map, i->line);
-			}
-			else if (tmp_map[i->tmp_y][i->tmp_x] == ' ')
-				data->map[i->map] = 'X';
-			else if (tmp_map[i->tmp_y][i->tmp_x] == '\0')
-			{
-				i->map += data->cols - i->line;
-				break ;
-			}
-			else
-			{
-				free_two_d_arr(tmp_map);
+			if (fill_map(data, i, tmp_map, only_one_player_flag) == false)
 				return (false);
-			}
-			i->tmp_x++;
-			i->map++;
-			i->line++;
 		}
-		i->line = 0;
-		i->tmp_x = 0;
-		i->tmp_y++;
+		else if (tmp_map[i->tmp_y][i->tmp_x] == '\0')
+		{
+			i->map += data->cols - i->line;
+			break ;
+		}
+		else
+		{
+			free_two_d_arr(tmp_map);
+			return (false);
+		}
+		i->tmp_x++;
+		i->map++;
+		i->line++;
 	}
+	return (true);
+}
+
+bool	fill_map(t_data *data, t_counter *i, char **tmp_map, bool *only_one_player_flag)
+{
+	if (tmp_map[i->tmp_y][i->tmp_x] == '1')
+		data->map[i->map] = '1';
+	else if (tmp_map[i->tmp_y][i->tmp_x] == '0')
+		data->map[i->map] = '0';
+	else if (tmp_map[i->tmp_y][i->tmp_x] == 'N' || tmp_map[i->tmp_y][i->tmp_x] == 'S' \
+		|| tmp_map[i->tmp_y][i->tmp_x] == 'W' || tmp_map[i->tmp_y][i->tmp_x] == 'E')
+	{
+		if (*only_one_player_flag == true)
+		{
+			free_two_d_arr(tmp_map);
+			return (false);
+		}
+		*only_one_player_flag = true;
+		store_player_pos(data, tmp_map[i->tmp_y][i->tmp_x], \
+			i->map, i->line);
+	}
+	else if (tmp_map[i->tmp_y][i->tmp_x] == ' ')
+		data->map[i->map] = 'X';
 	return (true);
 }
 

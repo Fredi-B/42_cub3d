@@ -3,7 +3,6 @@
 static bool	get_first_line(t_data *data, int fd);
 static void	join_lines(t_data *data, char *line, int *longest_row);
 
-
 /* reads map into data->map.
 skips empty lines in the beginning, checks against them thereafter */
 bool	read_map(t_data *data, int fd)
@@ -81,7 +80,14 @@ bool	parse_map(t_data *data)
 	if (malloc_map(data) == false)
 		return (false);
 	init_counter_and_flag(&i, &only_one_player_flag);
-	parse_tmp_map_into_map(data, &i, tmp_map, &only_one_player_flag);
+	while (tmp_map[i.tmp_y])
+	{
+		if (parse_tmp_map_into_map(data, &i, tmp_map, &only_one_player_flag) == false)
+			return (false);
+		i.line = 0;
+		i.tmp_x = 0;
+		i.tmp_y++;
+	}
 	free_two_d_arr(tmp_map);
 	if (only_one_player_flag == false)
 		return (false);

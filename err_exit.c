@@ -23,3 +23,22 @@ void	err_exit(t_data *data, char *msg, int len, int exit_status)
 	// free_data(data);
 	exit(exit_status);
 }
+
+void	free_two_d_arr(char **arr)
+{
+	int	i;
+
+	if (arr == NULL)
+		return ;
+	i = 0;
+	while (arr[i] != NULL)
+		i++;
+	while (i >= 0)
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i--;
+	}
+	free(arr);
+	arr = NULL;
+}

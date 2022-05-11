@@ -112,6 +112,7 @@ bool	validate_map(t_data *data);
 
 /*  --------------------------- err_exit.c --------------------------------- */
 void	err_exit(t_data *data, char *msg, int len, int exit_status);
+void	free_two_d_arr(char **arr);
 
 /* init.c*/
 void	init_arr(t_data *arr);

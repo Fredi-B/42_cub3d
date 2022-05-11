@@ -50,12 +50,18 @@ bool	get_walls_and_rgb(t_data *data, char **argv, int fd)
 		if (splitted_line[0] == NULL)
 			continue ;
 		if (splitted_line[2] != NULL)
+		{
+			free_two_d_arr(splitted_line);
 			return (false);
+		}
 		if (store_data(data, &flag, splitted_line) == false)
+		{
+			free_two_d_arr(splitted_line);
 			return (false);
+		}
 		free(line);
 		free(trimmed_line);
-		//free_2d(splitted_line); //auch bei return (false);
+		free_two_d_arr(splitted_line);
 	}
 	return (true);
 }
@@ -128,8 +134,8 @@ long long	convert_rgb_to_hex(char *rgb)
 
 bool	check_rgb_format(char *rgb, int *r, int *g, int *b)
 {
-	int	count_comma;
-	int	i;
+	int		count_comma;
+	int		i;
 	char	**splitted_rgb;
 
 	count_comma = 0;
@@ -146,7 +152,7 @@ bool	check_rgb_format(char *rgb, int *r, int *g, int *b)
 	splitted_rgb = ft_split(rgb, ',');
 	if (splitted_rgb[3] != NULL)
 	{
-		//free2d(splitted_rgb);
+		free_two_d_arr(splitted_rgb);
 		return (false);
 	}
 	*r = ft_atoll(splitted_rgb[0]);
@@ -154,10 +160,10 @@ bool	check_rgb_format(char *rgb, int *r, int *g, int *b)
 	*b = ft_atoll(splitted_rgb[2]);
 	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
 	{
-		//free2d(splitted_rgb);
+		free_two_d_arr(splitted_rgb);
 		return (false);
 	}
-	//free2d(splitted_rgb);
+	free_two_d_arr(splitted_rgb);
 	return (true);
 }
 

@@ -91,7 +91,10 @@ bool	parse_map(t_data *data)
 				|| tmp_map[counter_tmp_y][counter_tmp_x] == 'W' || tmp_map[counter_tmp_y][counter_tmp_x] == 'E')
 			{
 				if (only_one_player_flag == true)
+				{
+					free_two_d_arr(tmp_map);
 					return (false);
+				}
 				only_one_player_flag = true;
 				store_player_pos(data, tmp_map[counter_tmp_y][counter_tmp_x], \
 					counter_map, counter_line);
@@ -104,7 +107,10 @@ bool	parse_map(t_data *data)
 				break ;
 			}
 			else
+			{
+				free_two_d_arr(tmp_map);
 				return (false);
+			}
 			counter_tmp_x++;
 			counter_map++;
 			counter_line++;
@@ -113,6 +119,7 @@ bool	parse_map(t_data *data)
 		counter_tmp_x = 0;
 		counter_tmp_y++;
 	}
+	free_two_d_arr(tmp_map);
 	if (only_one_player_flag == false)
 		return (false);
 	return (true);

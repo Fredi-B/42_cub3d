@@ -79,12 +79,8 @@ bool	parse_map(t_data *data)
 	bool	only_one_player_flag;
 
 	tmp_map = ft_split(data->map, '\n');
-	free(data->map);
-	data->map = malloc(sizeof(char) * ((data->rows * data->cols) + 1));
-	if (!data->map)
+	if (malloc_map(data) == false)
 		return (false);
-	ft_memset(data->map, 'X', data->rows * data->cols);
-	data->map[(data->rows * data->cols) + 1] = '\0';
 	init_counter_and_flag(&i, &only_one_player_flag);
 	while (tmp_map[i.tmp_y])
 	{

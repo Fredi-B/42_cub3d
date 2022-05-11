@@ -98,6 +98,14 @@ typedef struct s_input_flags
 	bool	floor;
 }				t_input_flags;
 
+typedef struct s_counter
+{
+	int	tmp_x;
+	int	tmp_y;
+	int	map;
+	int	line;
+}				t_counter;
+
 /*  ------------------------ Function prototypes --------------------------- */
 /*  ------------------------------ main.c ---------------------------------- */
 
@@ -108,6 +116,10 @@ bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line);
 /*  -------------------------- parsing_map.c ------------------------------- */
 bool	read_map(t_data *data, int fd);
 bool	parse_map(t_data *data);
+/*  ----------------------- parsing_map_utils.c ---------------------------- */
+void	init_counter_and_flag(t_counter *i, bool *only_one_player_flag);
+
+
 /*  ---------------------- parsing_map_validation.c ------------------------ */
 bool	validate_map(t_data *data);
 

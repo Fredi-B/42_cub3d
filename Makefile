@@ -18,6 +18,7 @@ main.c \
 minimap.c \
 parsing.c \
 parsing_map.c \
+parsing_map_utils.c \
 parsing_map_validation.c \
 parsing_store_data.c \
 player.c \

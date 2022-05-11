@@ -75,12 +75,8 @@ static void	join_lines(t_data *data, char *line, int *longest_row)
 bool	parse_map(t_data *data)
 {
 	char	**tmp_map;
-	int		counter_tmp_x;
-	int		counter_tmp_y;
-	int		counter_map;
-	int		counter_line;
+	t_counter i;
 	bool	only_one_player_flag;
-
 
 	tmp_map = ft_split(data->map, '\n');
 	free(data->map);
@@ -89,22 +85,18 @@ bool	parse_map(t_data *data)
 		return (false);
 	ft_memset(data->map, 'X', data->rows * data->cols);
 	data->map[(data->rows * data->cols) + 1] = '\0';
-	only_one_player_flag = false;
-	counter_tmp_x = 0;
-	counter_tmp_y = 0;
-	counter_map = 0;
-	counter_line = 0;
-	while (tmp_map[counter_tmp_y])
+	init_counter_and_flag(&i, &only_one_player_flag);
+	while (tmp_map[i.tmp_y])
 	{
-		while (counter_line <= (int)ft_strlen(tmp_map[counter_tmp_y]) + 1)
+		while (i.line <= (int)ft_strlen(tmp_map[i.tmp_y]) + 1)
 		{
 
-			if (tmp_map[counter_tmp_y][counter_tmp_x] == '1')
-				data->map[counter_map] = '1';
-			else if (tmp_map[counter_tmp_y][counter_tmp_x] == '0')
-				data->map[counter_map] = '0';
-			else if (tmp_map[counter_tmp_y][counter_tmp_x] == 'N' || tmp_map[counter_tmp_y][counter_tmp_x] == 'S' \
-				|| tmp_map[counter_tmp_y][counter_tmp_x] == 'W' || tmp_map[counter_tmp_y][counter_tmp_x] == 'E')
+			if (tmp_map[i.tmp_y][i.tmp_x] == '1')
+				data->map[i.map] = '1';
+			else if (tmp_map[i.tmp_y][i.tmp_x] == '0')
+				data->map[i.map] = '0';
+			else if (tmp_map[i.tmp_y][i.tmp_x] == 'N' || tmp_map[i.tmp_y][i.tmp_x] == 'S' \
+				|| tmp_map[i.tmp_y][i.tmp_x] == 'W' || tmp_map[i.tmp_y][i.tmp_x] == 'E')
 			{
 				if (only_one_player_flag == true)
 				{
@@ -112,14 +104,14 @@ bool	parse_map(t_data *data)
 					return (false);
 				}
 				only_one_player_flag = true;
-				store_player_pos(data, tmp_map[counter_tmp_y][counter_tmp_x], \
-					counter_map, counter_line);
+				store_player_pos(data, tmp_map[i.tmp_y][i.tmp_x], \
+					i.map, i.line);
 			}
-			else if (tmp_map[counter_tmp_y][counter_tmp_x] == ' ')
-				data->map[counter_map] = 'X';
-			else if (tmp_map[counter_tmp_y][counter_tmp_x] == '\0')
+			else if (tmp_map[i.tmp_y][i.tmp_x] == ' ')
+				data->map[i.map] = 'X';
+			else if (tmp_map[i.tmp_y][i.tmp_x] == '\0')
 			{
-				counter_map += data->cols - counter_line;
+				i.map += data->cols - i.line;
 				break ;
 			}
 			else
@@ -127,13 +119,13 @@ bool	parse_map(t_data *data)
 				free_two_d_arr(tmp_map);
 				return (false);
 			}
-			counter_tmp_x++;
-			counter_map++;
-			counter_line++;
+			i.tmp_x++;
+			i.map++;
+			i.line++;
 		}
-		counter_line = 0;
-		counter_tmp_x = 0;
-		counter_tmp_y++;
+		i.line = 0;
+		i.tmp_x = 0;
+		i.tmp_y++;
 	}
 	free_two_d_arr(tmp_map);
 	if (only_one_player_flag == false)

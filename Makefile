@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = #-g #-Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 USER = $(shell echo $$USER)
 # -L followed by the relative path of the library to link it 
@@ -19,6 +19,7 @@ minimap.c \
 parsing.c \
 parsing_map.c \
 parsing_map_validation.c \
+parsing_store_data.c \
 player.c \
 window.c
 

@@ -103,7 +103,8 @@ typedef struct s_input_flags
 
 /*  ---------------------------- parsing.c --------------------------------- */
 int		parsing(t_data *data, char **argv);
-
+/*  ----------------------- parsing_store_map.c ---------------------------- */
+bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line);
 /*  -------------------------- parsing_map.c ------------------------------- */
 bool	read_map(t_data *data, int fd);
 bool	parse_map(t_data *data);

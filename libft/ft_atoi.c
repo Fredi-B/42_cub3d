@@ -65,7 +65,7 @@ int	ft_atoi(const char *str)
 	if (nbr * sign > 2147483647 || nbr * sign < -2147483648 \
 		|| str[i] != '\0')
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error\nft_atoi: input is not a number\n", 37);
 		exit(2);
 	}
 	return (sign * nbr);

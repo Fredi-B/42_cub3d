@@ -34,14 +34,14 @@
 typedef struct s_data
 {
 	/* map variables*/
-	char		*north;
-	char		*south;
-	char		*west;
-	char		*east;
-	long long	floor_rgb;
-	long long	ceiling_rgb;
-	char		*map;
-	int			subsize;
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	unsigned int	floor_rgb;
+	unsigned int	ceiling_rgb;
+	char			*map;
+	int				subsize;
 	/* general variables NEEDS CHECKING!*/
 	int			*num;
 	int			cols;

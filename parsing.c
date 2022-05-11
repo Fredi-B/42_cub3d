@@ -1,11 +1,11 @@
 #include "cub3D.h"
 
 //static fehlt bei allen fcts
-bool		get_walls_and_rgb(t_data *data, char **argv, int fd);
-void		init_flag(t_input_flags *flag);
-bool		store_data(t_data *data, t_input_flags *flag, char **splitted_line);
-long long	convert_rgb_to_hex(char *rgb);
-bool		check_rgb_format(char *rgb, int *r, int *g, int *b);
+bool			get_walls_and_rgb(t_data *data, char **argv, int fd);
+void			init_flag(t_input_flags *flag);
+bool			store_data(t_data *data, t_input_flags *flag, char **splitted_line);
+unsigned int	convert_rgb_to_hex(char *rgb);
+bool			check_rgb_format(char *rgb, int *r, int *g, int *b);
 
 int	parsing(t_data *data, char **argv)
 {
@@ -119,16 +119,17 @@ bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line)
 	return (true);
 }
 
-long long	convert_rgb_to_hex(char *rgb)
+unsigned int	convert_rgb_to_hex(char *rgb)
 {
-	long long	hex;
-	int			r;
-	int			g;
-	int			b;
+	unsigned int	hex;
+	int				r;
+	int				g;
+	int				b;
 
 	if (check_rgb_format(rgb, &r, &g, &b) == false)
 		return (-1);
 	hex = ((r << 16) + (g << 8) + b);
+	printf("%d\n", hex);
 	return (hex);
 }
 
@@ -155,9 +156,9 @@ bool	check_rgb_format(char *rgb, int *r, int *g, int *b)
 		free_two_d_arr(splitted_rgb);
 		return (false);
 	}
-	*r = ft_atoll(splitted_rgb[0]);
-	*g = ft_atoll(splitted_rgb[1]);
-	*b = ft_atoll(splitted_rgb[2]);
+	*r = ft_atoi(splitted_rgb[0]);
+	*g = ft_atoi(splitted_rgb[1]);
+	*b = ft_atoi(splitted_rgb[2]);
 	if (*r < 0 || *r > 255 || *g < 0 || *g > 255 || *b < 0 || *b > 255)
 	{
 		free_two_d_arr(splitted_rgb);

@@ -3,6 +3,7 @@
 //static fehlt bei allen fcts
 static bool	get_walls_and_rgb(t_data *data, int fd);
 static char	**get_next_splitted_line(int fd);
+bool		check_textures_extensions(t_data *data);
 static void	init_flag(t_input_flags *flag);
 
 int	parsing(t_data *data, char **argv)
@@ -53,6 +54,8 @@ static bool	get_walls_and_rgb(t_data *data, int fd)
 		}
 		free_two_d_arr(splitted_line);
 	}
+	if (check_textures_extensions(data) == false)
+		return (false);
 	return (true);
 }
 
@@ -79,6 +82,16 @@ static char	**get_next_splitted_line(int fd)
 	if (splitted_line[0] == NULL)
 		return (NULL);
 	return (splitted_line);
+}
+
+bool	check_textures_extensions(t_data *data)
+{
+	if (ft_cmp_file_extension(data->north, ".png", 4) == false \
+		|| ft_cmp_file_extension(data->south, ".png", 4) == false \
+		|| ft_cmp_file_extension(data->west, ".png", 4) == false \
+		|| ft_cmp_file_extension(data->east, ".png", 4) == false)
+		return (false);
+	return (true);
 }
 
 static void	init_flag(t_input_flags *flag)

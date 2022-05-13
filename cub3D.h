@@ -11,7 +11,6 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <fcntl.h>
 # include <unistd.h>
 # include <limits.h>
 # include <memory.h>
@@ -27,7 +26,6 @@
 /* ---------------------- Defines for debugging ---------------------------- */
 # define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)
 # define diprintf(expr) printf("\n" #expr ":\n|%d|\n", expr)
-# define dllprintf(expr) printf("\n" #expr ":\n|%lld|\n", expr)
 # define dwrite(expr) write(2, "\n" #expr "\n", strlen(#expr) + 2)
 
 /* ----------------------------- Structures -------------------------------- */
@@ -120,7 +118,6 @@ bool	parse_map(t_data *data);
 bool	malloc_map(t_data *data);
 void	init_counter_and_flag(t_counter *i, bool *only_one_player_flag);
 bool	parse_tmp_map_into_map(t_data *data, t_counter *i, char **tmp_map, bool *only_one_player_flag);
-
 
 /*  ---------------------- parsing_map_validation.c ------------------------ */
 bool	validate_map(t_data *data);

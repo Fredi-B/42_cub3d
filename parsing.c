@@ -86,10 +86,10 @@ static char	**get_next_splitted_line(int fd)
 
 bool	check_textures_extensions(t_data *data)
 {
-	if (ft_cmp_file_extension(data->north, ".png", 4) == false \
-		|| ft_cmp_file_extension(data->south, ".png", 4) == false \
-		|| ft_cmp_file_extension(data->west, ".png", 4) == false \
-		|| ft_cmp_file_extension(data->east, ".png", 4) == false)
+	if (ft_cmp_file_extension(data->north, ".bmp", 4) == false \
+		|| ft_cmp_file_extension(data->south, ".bmp", 4) == false \
+		|| ft_cmp_file_extension(data->west, ".bmp", 4) == false \
+		|| ft_cmp_file_extension(data->east, ".bmp", 4) == false)
 		return (false);
 	return (true);
 }

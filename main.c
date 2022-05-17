@@ -10,8 +10,8 @@ int	main(int argc __attribute__ ((unused)), char **argv)
 		err_exit(&data, "Wrong number of arguments", 26, 1);
 	init_data(&data);
 	parsing(&data, argv);
-	//map_init(&data);
-	//draw_map(&data);
+	map_init(&data);
+	draw_map(&data);
 	return (OK);
 }
 

@@ -58,3 +58,5 @@ dkms.conf
 .vscode/settings.json
 cub3D
 test.cub
+.vscode/launch.json
+.vscode/tasks.json

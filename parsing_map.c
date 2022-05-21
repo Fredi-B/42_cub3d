@@ -82,7 +82,8 @@ bool	parse_map(t_data *data)
 	init_counter_and_flag(&i, &only_one_player_flag);
 	while (tmp_map[i.tmp_y])
 	{
-		if (parse_tmp_map_into_map(data, &i, tmp_map, &only_one_player_flag) == false)
+		if (parse_tmp_map_into_map(data, &i, tmp_map, \
+									&only_one_player_flag) == false)
 			return (false);
 		i.line = 0;
 		i.tmp_x = 0;

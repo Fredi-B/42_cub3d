@@ -7,7 +7,6 @@ static bool			store_data_part_three(t_data *data, \
 static unsigned int	convert_rgb_to_int(char *rgb);
 static bool			check_rgb_format(char *rgb, int *r, int *g, int *b);
 
-
 bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line)
 {
 	if (ft_strncmp(splitted_line[0], "NO\0", 3) == 0)
@@ -30,7 +29,8 @@ bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line)
 	return (true);
 }
 
-bool	store_data_part_two(t_data *data, t_input_flags *flag, char **splitted_line)
+bool	store_data_part_two(t_data *data, t_input_flags *flag, \
+								char **splitted_line)
 {
 	if (ft_strncmp(splitted_line[0], "WE\0", 3) == 0)
 	{
@@ -52,7 +52,8 @@ bool	store_data_part_two(t_data *data, t_input_flags *flag, char **splitted_line
 	return (true);
 }
 
-bool	store_data_part_three(t_data *data, t_input_flags *flag, char **splitted_line)
+bool	store_data_part_three(t_data *data, t_input_flags *flag, \
+								char **splitted_line)
 {
 	if (ft_strncmp(splitted_line[0], "F\0", 2) == 0)
 	{
@@ -100,7 +101,6 @@ static bool	check_rgb_format(char *rgb, int *r, int *g, int *b)
 	i = 0;
 	while (rgb[i])
 	{
-
 		if (rgb[i] == ',')
 			count_comma++;
 		i++;

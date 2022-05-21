@@ -118,6 +118,8 @@ bool	parse_map(t_data *data);
 bool	malloc_map(t_data *data);
 void	init_counter_and_flag(t_counter *i, bool *only_one_player_flag);
 bool	parse_tmp_map_into_map(t_data *data, t_counter *i, char **tmp_map, bool *only_one_player_flag);
+/*  ----------------------- parsing_map_utils.c ---------------------------- */
+bool	is_valid_part_of_map(char part);
 
 /*  ---------------------- parsing_map_validation.c ------------------------ */
 bool	validate_map(t_data *data);

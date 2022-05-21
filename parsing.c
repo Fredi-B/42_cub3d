@@ -72,7 +72,6 @@ static char	**get_next_splitted_line(int fd)
 		line = NULL;
 		return (NULL);
 	}
-
 	trimmed_line = ft_strtrim(line, " 	\n");
 	splitted_line = ft_split(trimmed_line, ' ');
 	free(line);

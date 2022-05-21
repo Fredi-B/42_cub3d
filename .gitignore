@@ -60,3 +60,4 @@ cub3D
 test.cub
 .vscode/launch.json
 .vscode/tasks.json
+.DS_Store

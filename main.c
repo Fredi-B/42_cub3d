@@ -11,7 +11,7 @@ int	main(int argc __attribute__ ((unused)), char **argv)
 	init_data(&data);
 	parsing(&data, argv);
 	map_init(&data);
-	draw_map(&data);
+	// draw_map(&data);
 	return (OK);
 }
 

@@ -2,8 +2,7 @@
 # define CUB3D_H
 
 /* ----------------------------- Includes ---------------------------------- */
-# include "./MLX42/include/MLX42/MLX42.h"
-# include "./MLX42/include/MLX42/MLX42_Input.h"
+# include "mlx/mlx.h"
 # include "libft/libft.h"
 # include <stdint.h>
 # include <stdio.h>

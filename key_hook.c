@@ -47,7 +47,7 @@ int	hook(int key, t_data *arr)
 	if (key == ESC)
 		{
 			destroy_window(arr);
-			//exit (OK);
+			exit (OK);
 		}
 /* 	if (key == UP)
 		move_x(arr, -1);
@@ -58,4 +58,5 @@ int	hook(int key, t_data *arr)
 	if (key == RIGHT)
 		turn(arr, 1); */
 	map_to_image(arr);
+	return (0);
 }

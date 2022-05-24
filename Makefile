@@ -9,7 +9,7 @@ USER = $(shell echo $$USER)
 LINUX_LIBRARIES = -L ./libft -lft -L ./minilibX -lmlx_Linux -Imlx_linux -lXext -lX11 -lm # OLD MLXLIB
 # NEW MLXLIB: LINUX_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -ldl
 # Maybe this works for libft? -> MAC_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
-MAC_LIBRARIES = libft/libft.a -L ./libft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
+MAC_LIBRARIES = libft/libft.a -L ./libft -L ./mlx -lmlx -framework OpenGL -framework AppKit
 
 CFILES = \
 err_exit.c \
@@ -33,7 +33,7 @@ UNAME_S := $(shell uname -s)
 
 $(NAME): $(ODIR) $(OBJECTS) 
 	@make -C ./libft
-	@make -C ./MLX42
+#	@make -C ./mlx
 
 ifeq ($(UNAME_S),Linux)
 	$(CC) $(CFLAGS) $(OBJECTS) -lm $(LINUX_LIBRARIES) -o $(NAME)

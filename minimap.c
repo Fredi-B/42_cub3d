@@ -14,14 +14,14 @@ void read_file(t_data *arr)
 	// arr->map = ft_strdup(map);
 	// arr->cols = 8;
 	// arr->rows = 8;
-	arr->subsize = 64;
+	arr->subsize = 8;
 	arr->p_x = arr->p_x * arr->subsize;
 	arr->p_y = arr->p_y * arr->subsize;
 	//arr->p_a = ODR;// * 0.5;
 	arr->p_dx = cos(arr->p_a);
 	arr->p_dy = sin(arr->p_a);
 	// Fenstergröße hard coden. first person hat nix mit der mapgröße zu tun
-	arr->width = 2048; //arr->cols * arr->subsize * 2; //8 x 64 = 512
+	arr->width = 1024; //arr->cols * arr->subsize * 2; //8 x 64 = 512
 	arr->height = 1024; //arr->rows * arr->subsize;
 
 /* 	int i = 0;

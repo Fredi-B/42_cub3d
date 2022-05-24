@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-/* static void	move_y(t_data *arr, int sign)
+static void	move_y(t_data *arr, int sign)
 {
 	float	y;
 	int		mx;
@@ -40,7 +40,7 @@ static void	turn(t_data *arr, int sign)
 			arr->p_a += 2 * M_PI;
 	arr->p_dx = cos(arr->p_a);
 	arr->p_dy = sin(arr->p_a);
-} */
+}
 
 int	hook(int key, t_data *arr)
 {
@@ -49,14 +49,14 @@ int	hook(int key, t_data *arr)
 			destroy_window(arr);
 			exit (OK);
 		}
-/* 	if (key == UP)
+	if (key == UP)
 		move_x(arr, -1);
 	if (key == DOWN)
 		move_x(arr, 1);
 	if (key == LEFT)
 		turn(arr, -1);
 	if (key == RIGHT)
-		turn(arr, 1); */
+		turn(arr, 1);
 	map_to_image(arr);
 	return (0);
 }

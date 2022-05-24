@@ -9,7 +9,7 @@ void	get_map_2(t_data *arr, t_line *line, int row, int col)
 	while (i < arr->subsize -1)
 	{
 		if (arr->map[row * arr->cols + col] == '1')
-			p0.color = WHITE;
+			p0.color = GREEN;
 		else
 			p0.color = BLACK;
 		p0.x = col * arr->subsize + i +1;
@@ -81,8 +81,8 @@ void	draw_map(t_data *arr)
 	arr->mlx = mlx_init();
 	//if (!arr->mlx) AUF FEHLER TESTEN!
 	//	destroy_window(arr);
-	arr->width = 300;
-	arr->height = 300;
+	// arr->width = 1920;
+	// arr->height = 1080;
 
 	arr->mlx_window = mlx_new_window(arr->mlx, arr->width, \
 											arr->height, "cub3D");

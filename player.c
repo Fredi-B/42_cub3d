@@ -43,7 +43,7 @@ void	get_rays(t_data *arr, t_line *line)
 	int		color;
 	t_points p0, p1;
 
-	color = YELLOW;//0x00FFFF00;
+	color = WHITE;//0x00FFFF00;
 	ra= arr->p_a - ODR * 30;
 	for(r = 0; r < 30; r++)
 	{
@@ -205,7 +205,7 @@ void	get_rays(t_data *arr, t_line *line)
 		int i = 0;
 		while (i < 16) //breite 5 Grundstrich
 		{
-			p0.color = YELLOW;
+			p0.color = WHITE;
 			p0.x = r *17 + 512 + i; // + i - 5;
 			p0.y = lineO; // - 5;
 			p1.x = p0.x;

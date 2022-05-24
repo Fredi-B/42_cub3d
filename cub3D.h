@@ -20,15 +20,24 @@
 # define ERROR		1
 # define OK			0
 # define WHITE		16777215
+# define GREEN		0x00FF00
 # define BLACK		0
 # define YELLOW		0xFFFF00FF
 # define ODR		0.01745329252 //one degree in radians
 
-#define ESC 65307
+/* Linux keycodes */
+/* #define ESC 65307
 #define LEFT 65361
 #define RIGHT 65363
 #define DOWN 65364
-#define UP 65362
+#define UP 65362 */
+
+/* Mac keycodes */
+#define ESC 53
+#define LEFT 123
+#define RIGHT 124
+#define DOWN 125
+#define UP 126
 
 /* ---------------------- Defines for debugging ---------------------------- */
 # define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)

@@ -133,6 +133,17 @@ typedef struct s_counter
 	int	line;
 }				t_counter;
 
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}				t_image;
+
 /*  ------------------------ Function prototypes --------------------------- */
 /*  ------------------------------ main.c ---------------------------------- */
 

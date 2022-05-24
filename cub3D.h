@@ -2,8 +2,9 @@
 # define CUB3D_H
 
 /* ----------------------------- Includes ---------------------------------- */
-# include "./MLX42/include/MLX42/MLX42.h"
-# include "./MLX42/include/MLX42/MLX42_Input.h"
+//# include "./MLX42/include/MLX42/MLX42.h"
+//# include "./MLX42/include/MLX42/MLX42_Input.h"
+# include "./minilibX/mlx.h"
 # include "libft/libft.h"
 # include <stdint.h>
 # include <stdio.h>
@@ -22,6 +23,12 @@
 # define BLACK		0
 # define YELLOW		0xFFFF00FF
 # define ODR		0.01745329252 //one degree in radians
+
+#define ESC 65307
+#define LEFT 65361
+#define RIGHT 65363
+#define DOWN 65364
+#define UP 65362
 
 /* ---------------------- Defines for debugging ---------------------------- */
 # define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)
@@ -56,11 +63,24 @@ typedef struct s_data
 	float		p_dx; //player move in x+ y
 	float		p_dy;
 	float		p_a; //player angle
-	/* mlx variables*/
-	u_int32_t	width;
-	u_int32_t	height;
-	mlx_t		*mlx;
-	mlx_image_t	*img;
+	/* mlx variables OLDMLXLIB*/
+	void		*mlx;
+	void		*mlx_window;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			size_line;
+	int			endian;
+	int			width;
+	int			height;
+
+	
+	/* mlx variables NEWMLXLIB*/
+	// u_int32_t	width;
+	// u_int32_t	height;
+	// mlx_t		*mlx;
+	// mlx_image_t	*img;
 }				t_data;
 
 typedef struct s_line
@@ -141,7 +161,10 @@ void	draw_line(t_line *line, t_data *arr);
 int		map_init(t_data *arr);
 
 /* key_hook.c*/
-void	hook(void *param);
+//void	hook(void *param); NEWMINILIB
+int		hook(int key, t_data *arr);
+//int		deal_key(int key, t_array *fdf_win);
+
 
 /* player.c*/
 void	get_player(t_data *arr, t_line *line);

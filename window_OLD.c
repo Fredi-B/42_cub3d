@@ -42,52 +42,51 @@ static void	get_map(t_data *arr, t_line *line)
 
 int	destroy_window(t_data *arr)
 {
-	mlx_destroy_image(arr->mlx, arr->img);
-	mlx_destroy_window(arr->mlx, arr->mlx_window);
+	mlx_close_window(arr->mlx);
+	mlx_delete_image(arr->mlx, arr->img);
+	mlx_terminate(arr->mlx);
+	//mlx_destroy_image(arr->mlx, arr->img);
+	//mlx_destroy_window(arr->mlx, arr->mlx_window);
 	free_arr(arr);
 	exit(0);
 	return (0);
 }
-	/* system("leaks fdf"); */
+	/* system("leaks cub3D"); */
 
 void	pixel_put(t_data *arr, int x, int y, int color)
 {
-	char	*dst;
+	/* char	*dst;
 
 	dst = arr->addr + (y * arr->size_line + x * \
 							(arr->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	*(unsigned int *)dst = color; */
+//WHITE = 0xFFFFFFFF
+	mlx_put_pixel(arr->img, x, y, color); // Single white pixel in the middle.
+
 }
 
 void	map_to_image(t_data *arr)
 {
 	t_line			line;
 
-	mlx_clear_window(arr->mlx, arr->mlx_window);
+	mlx_delete_image(arr->mlx, arr->img); //hier noch altes bild irgendwie loschen
 	arr->img = mlx_new_image(arr->mlx, arr->width, arr->height);
-	arr->addr = mlx_get_data_addr(arr->img, &arr->bits_per_pixel, \
-								&arr->size_line, &arr->endian);
 	init_line(&line);
 	get_map(arr, &line);
-	//get_player(arr, &line);
-	//get_rays(arr, &line);
-	mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
-							arr->img, 0, 0);
-	return ;
+	get_player(arr, &line);
+	get_rays(arr, &line);
+	mlx_put_pixel(arr->img, 10, 10, 0xFF00FFFF); // TESTEST
+	mlx_image_to_window(arr->mlx, arr->img, 0, 0);
 }
 
+//called from main.c
 void	draw_map(t_data *arr)
 {
-	arr->mlx = mlx_init();
-	//if (!arr->mlx) AUF FEHLER TESTEN!
-	//	destroy_window(arr);
-	arr->width = 300;
-	arr->height = 300;
+	arr->mlx = mlx_init(arr->width, arr->height, "CUB3D", true);
 
-	arr->mlx_window = mlx_new_window(arr->mlx, arr->width, \
-											arr->height, "cub3D");
-	
+	if (!arr->mlx)
+		destroy_window(arr);
 	map_to_image(arr);
-	mlx_key_hook(arr->mlx_window, hook, arr);
+	mlx_loop_hook(arr->mlx, &hook, arr);
 	mlx_loop(arr->mlx);
 }

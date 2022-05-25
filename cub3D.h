@@ -45,6 +45,19 @@
 # define dwrite(expr) write(2, "\n" #expr "\n", strlen(#expr) + 2)
 
 /* ----------------------------- Structures -------------------------------- */
+
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		size_line; //ist das das gleiche wie line_length?
+	int		endian;
+	int		width;
+	int		height;
+}				t_image;
+
 typedef struct s_data
 {
 	/* map variables*/
@@ -72,6 +85,7 @@ typedef struct s_data
 	float		p_dx; //player move in x+ y
 	float		p_dy;
 	float		p_a; //player angle
+
 	/* mlx variables OLDMLXLIB*/
 	void		*mlx;
 	void		*mlx_window;
@@ -83,7 +97,11 @@ typedef struct s_data
 	int			endian;
 	int			width;
 	int			height;
-
+	/* mlx variables OLDMLXLIB in eigenem struct für mehrere images */
+	t_image		xpm_file;
+	t_image		first_person_view;
+	t_image		minimap;
+	t_image		player_in_minimap;
 	
 	/* mlx variables NEWMLXLIB*/
 	// u_int32_t	width;
@@ -132,17 +150,6 @@ typedef struct s_counter
 	int	map;
 	int	line;
 }				t_counter;
-
-typedef struct s_image
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}				t_image;
 
 /*  ------------------------ Function prototypes --------------------------- */
 /*  ------------------------------ main.c ---------------------------------- */

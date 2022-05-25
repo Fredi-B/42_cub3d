@@ -5,7 +5,8 @@ void	*my_new_image(void *mlx, int size, t_image *copy)
 	copy->img = mlx_new_image(mlx, size, size);
 	if (copy->img == NULL)
 		return (NULL);
-	copy->addr = mlx_get_data_addr(copy->img, &copy->bits_per_pixel, &copy->line_length, &copy->endian);
+	copy->addr = mlx_get_data_addr(copy->img, &copy->bits_per_pixel, \
+									&copy->line_length, &copy->endian);
 	copy->width = size;
 	copy->height = size;
 	return (copy->img);
@@ -20,11 +21,11 @@ bool	pixel_is_inside_image(int x, int y, t_image *img)
 	return (true);
 }
 
-// same as pixel_put() but with t_image * instead of t_data *
+/* same as pixel_put() but with t_image * instead of t_data * */
 void	image_pixel_put(t_image *img, int x, int y, int color)
 {
 	char	*dst;
-	
+
 	if (pixel_is_inside_image(x, y, img) == false)
 		return ;
 	dst = img->addr + (y * img->line_length + x * \

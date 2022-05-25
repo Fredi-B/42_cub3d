@@ -58,5 +58,6 @@ int	hook(int key, t_data *arr)
 	if (key == RIGHT)
 		turn(arr, 1);
 	map_to_image(arr);
+	all_images_to_window(arr);
 	return (0);
 }

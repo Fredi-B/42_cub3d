@@ -6,7 +6,7 @@
 /*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:05:34 by fbechtol          #+#    #+#             */
-/*   Updated: 2022/04/30 20:25:50 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/05/25 12:42:02 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <stdbool.h>
+
+/* ---------------------- Defines for debugging ---------------------------- */
+# define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)
+# define diprintf(expr) printf("\n" #expr ":\n|%d|\n", expr)
+# define dwrite(expr) write(2, "\n" #expr "\n", strlen(#expr) + 2)
 
 /* ----------------------------- Structures -------------------------------- */
 

@@ -99,7 +99,7 @@ typedef struct s_data
 	int			height;
 	/* mlx variables OLDMLXLIB in eigenem struct für mehrere images */
 	t_image		xpm_file;
-	t_image		wall;
+	t_image		wall; //als array wall[3] und north - west durch definieren von 0 - 4?
 	t_image		first_person_view;
 	t_image		minimap;
 	t_image		player_in_minimap;

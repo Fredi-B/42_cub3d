@@ -36,8 +36,13 @@ static void	init_data(t_data *data)
 		data->wall[i].addr = NULL;
 		i++;
 	}
-	data->xpm_file.img = NULL;
-	data->xpm_file.addr = NULL;
+	i = 0;
+	while (i < 4)
+	{
+		data->xpm_file[i].img = NULL;
+		data->xpm_file[i].addr = NULL;
+		i++;
+	}
 	data->first_person_view.img = NULL;
 	data->first_person_view.addr = NULL;
 	data->minimap.img = NULL;

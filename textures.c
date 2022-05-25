@@ -1,5 +1,6 @@
 #include "cub3D.h"
 
+static bool	put_wall_in_image(t_data *arr, int side, char *direction);
 static void	resize_texture(void *mlx, t_image *original, \
 							t_image *copy, int size);
 static int	get_color_from_texture(t_image *original, int x, int y, int size);
@@ -7,16 +8,27 @@ static int	get_pixel_color(t_image *original, int x, int y);
 
 bool	put_walls_in_images(t_data *arr)
 {
-	arr->xpm_file.img = mlx_xpm_file_to_image(arr->mlx, \
-						arr->west, &arr->xpm_file.width, &arr->xpm_file.height);
-	if (arr->xpm_file.img == NULL)
+	put_wall_in_image(arr, NORTH, arr->north);
+	put_wall_in_image(arr, EAST, arr->east);
+	put_wall_in_image(arr, WEST, arr->west);
+	put_wall_in_image(arr, SOUTH, arr->south);
+
+	return (true);
+}
+
+static bool	put_wall_in_image(t_data *arr, int side, char *direction)
+{
+	arr->xpm_file[side].img = mlx_xpm_file_to_image(arr->mlx, \
+						direction, &arr->xpm_file[side].width, &arr->xpm_file[side].height);
+	if (arr->xpm_file[side].img == NULL)
 		return (false);
-	arr->xpm_file.addr = mlx_get_data_addr \
-						(arr->xpm_file.img, &arr->xpm_file.bits_per_pixel, \
-						&arr->xpm_file.line_length, &arr->xpm_file.endian);
-	if (arr->xpm_file.addr == NULL)
+	arr->xpm_file[side].addr = mlx_get_data_addr \
+						(arr->xpm_file[side].img, &arr->xpm_file[side].bits_per_pixel, \
+						&arr->xpm_file[side].line_length, &arr->xpm_file[side].endian);
+	if (arr->xpm_file[side].addr == NULL)
 		return (false);
-	resize_texture(arr->mlx, &arr->xpm_file, &arr->wall[WEST], 100);
+	resize_texture(arr->mlx, &arr->xpm_file[side], &arr->wall[side], 100);
+	// mlx_destroy_image(arr->mlx, arr->xpm_file[side].img);
 	return (true);
 }
 

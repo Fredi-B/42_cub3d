@@ -67,9 +67,9 @@ typedef struct s_data
 {
 	/* map variables*/
 	char			*north;
+	char			*east;
 	char			*south;
 	char			*west;
-	char			*east;
 	unsigned int	floor_rgb;
 	unsigned int	ceiling_rgb;
 	char			*map;
@@ -103,7 +103,7 @@ typedef struct s_data
 	int			width;
 	int			height;
 	/* mlx variables OLDMLXLIB in eigenem struct für mehrere images */
-	t_image		xpm_file;
+	t_image		xpm_file[4];
 	t_image		wall[4];
 	t_image		first_person_view;
 	t_image		minimap;
@@ -216,5 +216,6 @@ void	draw_map(t_data *arr);
 void	pixel_put(t_data *arr, int x, int y, int color);
 int		destroy_window(t_data *arr);
 void	map_to_image(t_data *arr);
+void	all_images_to_window(t_data *arr);
 
 #endif

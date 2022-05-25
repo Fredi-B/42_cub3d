@@ -24,6 +24,11 @@
 # define BLACK		0
 # define YELLOW		0xFFFF00FF
 # define ODR		0.01745329252 //one degree in radians
+# define NORTH		0
+# define EAST		1
+# define SOUTH		2
+# define WEST		3
+
 
 /* Linux keycodes */
 /* #define ESC 65307
@@ -99,7 +104,7 @@ typedef struct s_data
 	int			height;
 	/* mlx variables OLDMLXLIB in eigenem struct für mehrere images */
 	t_image		xpm_file;
-	t_image		wall; //als array wall[3] und north - west durch definieren von 0 - 4?
+	t_image		wall[4];
 	t_image		first_person_view;
 	t_image		minimap;
 	t_image		player_in_minimap;

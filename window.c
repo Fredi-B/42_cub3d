@@ -134,33 +134,28 @@ void	resize_texture(void *mlx, t_image *original, t_image *copy, int size)
 void	map_to_image(t_data *arr)
 {
 	t_line			line;
-	t_image			*deer;
-	t_image			*copy;
-	char	*path = "deer.xpm";
 
 	mlx_clear_window(arr->mlx, arr->mlx_window);
-	// arr->img = mlx_new_image(arr->mlx, arr->width, arr->height);
-	// arr->addr = mlx_get_data_addr(arr->img, &arr->bits_per_pixel, \
-	// 							&arr->size_line, &arr->endian);
-	// init_line(&line);
-	// get_map(arr, &line);
-	// get_player(arr, &line);
-	// get_rays(arr, &line);
+	arr->img = mlx_new_image(arr->mlx, arr->width, arr->height);
+	arr->addr = mlx_get_data_addr(arr->img, &arr->bits_per_pixel, \
+								&arr->size_line, &arr->endian);
+	init_line(&line);
+	get_map(arr, &line);
+	get_player(arr, &line);
+	get_rays(arr, &line);
 
-	deer = malloc(sizeof(t_image));
-	copy = malloc(sizeof(t_image));
-	deer->img = mlx_xpm_file_to_image(arr->mlx, path, &deer->width, &deer->height);
-	if (deer->img == NULL)
+	arr->xpm_file.img = mlx_xpm_file_to_image(arr->mlx, arr->west, &arr->xpm_file.width, &arr->xpm_file.height);
+	if (arr->xpm_file.img == NULL)
 		return ; //protecten
-	deer->addr = mlx_get_data_addr(deer->img, &deer->bits_per_pixel, &deer->line_length, &deer->endian);
-	if (deer->addr == NULL)
+	arr->xpm_file.addr = mlx_get_data_addr(arr->xpm_file.img, &arr->xpm_file.bits_per_pixel, &arr->xpm_file.line_length, &arr->xpm_file.endian);
+	if (arr->xpm_file.addr == NULL)
 		return ; //protecten
-	resize_texture(arr->mlx, deer, copy, 100);
+	resize_texture(arr->mlx, &arr->xpm_file, &arr->wall, 100);
 
-	mlx_put_image_to_window(arr->mlx, arr->mlx_window, deer->img, 500, 500);
-	mlx_put_image_to_window(arr->mlx, arr->mlx_window, copy->img, 0, 0);
-	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
-	// 						arr->img, 0, 0);
+	mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
+							arr->img, 0, 0);
+	mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->xpm_file.img, 500, 500);
+	mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->wall.img, 100, 100);
 	return ;
 }
 

@@ -70,11 +70,21 @@ void	*my_new_image(void *mlx, int size, t_image *copy)
 	return (copy->img);
 }
 
+bool	pixel_is_inside_image(int x, int y, t_image *img)
+{
+	if (x < 0 || x > img->width -1) // not sure why -1
+		return (false);
+	if (y < 0 || y > img->height -1)
+		return (false);
+	return (true);
+}
+
 int	get_pixel_color(t_image *original, int x, int y)
 {
 	int	color;
 
-// protecten mit is_inside_image_limits()
+	if (pixel_is_inside_image(x, y, original) == false)
+		return (color);
 	color = BLACK;
 	color = *(unsigned int *)(original->addr + (unsigned int)(int)y * original->line_length + x * (original->bits_per_pixel / 8));
 	return (color);
@@ -101,7 +111,8 @@ void	my_pixel_put(t_image *img, int x, int y, int color)
 {
 	char	*dst;
 	
-// protecten mit is_inside_image_limits()
+	if (pixel_is_inside_image(x, y, img) == false)
+		return ;
 	dst = img->addr + (y * img->line_length + x * \
 							(img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;

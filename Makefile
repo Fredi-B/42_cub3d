@@ -24,6 +24,8 @@ parsing_map_utils.c \
 parsing_map_utils_two.c \
 parsing_map_validation.c \
 parsing_store_data.c \
+textures.c \
+textures_utils.c \
 player.c \
 window.c
 

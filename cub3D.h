@@ -181,6 +181,14 @@ bool	validate_map(t_data *data);
 void	err_exit(t_data *data, char *msg, int len, int exit_status);
 void	free_two_d_arr(char **arr);
 
+/*  --------------------------- textures.c --------------------------------- */
+bool	put_walls_in_images(t_data *arr);
+
+/*  ------------------------ textures_utils.c ------------------------------ */
+void	*my_new_image(void *mlx, int size, t_image *copy);
+bool	pixel_is_inside_image(int x, int y, t_image *img);
+void	image_pixel_put(t_image *img, int x, int y, int color);
+
 /* init.c*/
 void	init_arr(t_data *arr);
 void	free_arr(t_data *arr);

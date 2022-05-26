@@ -6,10 +6,31 @@ static void		move_y(t_data *arr, int sign);
 static void		move_x(t_data *arr, int sign);
 static void		turn(t_data *arr, int sign);
 
+int	hook(int key, t_data *arr)
+{
+	if (key == ESC)
+		{
+			destroy_window(arr);
+			//exit (OK);
+		}
+	if (key == UP)
+		move_x(arr, -1);
+	if (key == DOWN)
+		move_x(arr, 1);
+	if (key == LEFT)
+		turn(arr, -1);
+	if (key == RIGHT)
+		turn(arr, 1);
+	map_to_image(arr);
+	all_images_to_window(arr);
+	return (0);
+}
+
 void	key_hooks(t_data *arr)
 {
-	mlx_hook(arr->mlx_window, 2, 0, &key_pressed, arr);
-	mlx_hook(arr->mlx_window, 3, 0, &key_released, arr);
+	mlx_key_hook(arr->mlx_window, hook, arr); // alter Ansatz, bei dem gedrückt halten und 2 keys gleichzeitig nicht funktioniert
+	// mlx_hook(arr->mlx_window, 2, 0, &key_pressed, arr); // neuer Ansatz
+	// mlx_hook(arr->mlx_window, 3, 0, &key_released, arr);
 	// mlx_loop_hook(arr->mlx, &hook, 0); //segfaults: fct nicht in meiner mlx?
 }
 
@@ -91,19 +112,19 @@ static void	turn(t_data *arr, int sign)
 }
 
 /* supposed to update player position using key_flags */
-int	hook(t_data *arr)
-{
-	// dwrite(test);
-	// diprintf(arr->key_flag.up);
-	if (arr->key_flag.up == ON)
-		move_x(arr, -1);
-	if (arr->key_flag.down == ON)
-		move_x(arr, 1);
-	if (arr->key_flag.left == ON)
-		turn(arr, -1);
-	if (arr->key_flag.right == ON)
-		turn(arr, 1);
-	map_to_image(arr);
-	all_images_to_window(arr);
-	return (0);
-}
+// int	hook(t_data *arr)
+// {
+// 	// dwrite(test);
+// 	// diprintf(arr->key_flag.up);
+// 	if (arr->key_flag.up == ON)
+// 		move_x(arr, -1);
+// 	if (arr->key_flag.down == ON)
+// 		move_x(arr, 1);
+// 	if (arr->key_flag.left == ON)
+// 		turn(arr, -1);
+// 	if (arr->key_flag.right == ON)
+// 		turn(arr, 1);
+// 	map_to_image(arr);
+// 	all_images_to_window(arr);
+// 	return (0);
+// }

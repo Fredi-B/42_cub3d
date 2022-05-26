@@ -217,7 +217,7 @@ int		map_init(t_data *arr);
 /* key_hook.c*/
 //void	hook(void *param); NEWMINILIB
 void	key_hooks(t_data *arr);
-int		hook(t_data *arr);
+// int		hook(t_data *arr);
 
 //int		deal_key(int key, t_array *fdf_win);
 

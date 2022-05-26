@@ -1,7 +1,7 @@
 NAME = cub3D
 
 CC = cc
-CFLAGS = # -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
+CFLAGS = -g # -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 USER = $(shell echo $$USER)
 # -L followed by the relative path of the library to link it

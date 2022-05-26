@@ -2,10 +2,16 @@
 
 static void	init_data(t_data *data);
 
+void	check_leaks(void)
+{
+	system("leaks cub3D");
+}
+
 int	main(int argc __attribute__ ((unused)), char **argv)
 {
 	t_data	data;
 
+	atexit(check_leaks);
 	if (argc != 2)
 		err_exit(&data, "Wrong number of arguments", 26, 1);
 	init_data(&data);

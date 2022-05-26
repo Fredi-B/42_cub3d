@@ -1,6 +1,7 @@
 #include "cub3D.h"
 
 static void	init_data(t_data *data);
+static void	init_key_flags(t_data *data);
 
 void	check_leaks(void)
 {
@@ -56,4 +57,13 @@ static void	init_data(t_data *data)
 	data-> minimap.addr = NULL;
 	data->player_in_minimap.img = NULL;
 	data->player_in_minimap.addr = NULL;
+	init_key_flags(data);
+}
+
+static void	init_key_flags(t_data *data)
+{
+	data->key_flag.up = OFF;
+	data->key_flag.down = OFF;
+	data->key_flag.left = OFF;
+	data->key_flag.right = OFF;
 }

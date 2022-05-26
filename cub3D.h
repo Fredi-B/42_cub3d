@@ -28,6 +28,8 @@
 # define EAST		1
 # define SOUTH		2
 # define WEST		3
+# define ON			1
+# define OFF		0
 
 
 /* Linux keycodes */
@@ -50,6 +52,14 @@
 # define dwrite(expr) write(2, "\n" #expr "\n", strlen(#expr) + 2)
 
 /* ----------------------------- Structures -------------------------------- */
+
+typedef struct s_key_flags
+{
+	int	up;
+	int	down;
+	int	left;
+	int	right;
+}				t_key_flags;
 
 typedef struct s_image
 {
@@ -114,6 +124,9 @@ typedef struct s_data
 	// u_int32_t	height;
 	// mlx_t		*mlx;
 	// mlx_image_t	*img;
+
+	/* key hook variables */
+	t_key_flags	key_flag;
 }				t_data;
 
 typedef struct s_line

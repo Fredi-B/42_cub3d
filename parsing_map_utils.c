@@ -12,7 +12,7 @@ bool	malloc_map(t_data *data)
 	if (!data->map)
 		return (false);
 	ft_memset(data->map, 'X', data->rows * data->cols);
-	data->map[(data->rows * data->cols) + 1] = '\0';
+	data->map[(data->rows * data->cols)] = '\0';
 	return (true);
 }
 

@@ -51,6 +51,8 @@ static bool	get_first_line(t_data *data, int fd)
 			data->cols = ft_strlen(line) - 1;
 			break ;
 		}
+		else
+			free(line);
 	}
 	return (true);
 }

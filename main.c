@@ -12,13 +12,15 @@ int	main(int argc __attribute__ ((unused)), char **argv)
 {
 	t_data	data;
 
-	atexit(check_leaks);
+	// atexit(check_leaks);
 	if (argc != 2)
 		err_exit(&data, "Wrong number of arguments", 26, 1);
 	init_data(&data);
 	parsing(&data, argv);
 	map_init(&data);
 	draw_map(&data);
+	key_hooks(&data);
+	mlx_loop(data.mlx);
 	free_data(&data);
 	return (OK);
 }

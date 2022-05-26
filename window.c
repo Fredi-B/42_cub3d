@@ -97,6 +97,5 @@ void	draw_map(t_data *arr)
 
 	map_to_image(arr);
 	all_images_to_window(arr);
-	mlx_key_hook(arr->mlx_window, hook, arr);
-	mlx_loop(arr->mlx);
+
 }

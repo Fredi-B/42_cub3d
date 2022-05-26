@@ -14,7 +14,7 @@ void read_file(t_data *arr)
 	// arr->map = ft_strdup(map);
 	// arr->cols = 8;
 	// arr->rows = 8;
-	arr->subsize = 8;
+	arr->subsize = 16;
 	arr->p_x = arr->p_x * arr->subsize;
 	arr->p_y = arr->p_y * arr->subsize;
 	//arr->p_a = ODR;// * 0.5;

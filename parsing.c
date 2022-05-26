@@ -44,15 +44,15 @@ static bool	get_walls_and_rgb(t_data *data, int fd)
 			continue ;
 		if (splitted_line[2] != NULL)
 		{
-			free_two_d_arr(splitted_line);
+			ft_free_two_d_arr(splitted_line);
 			return (false);
 		}
 		if (store_data(data, &flag, splitted_line) == false)
 		{
-			free_two_d_arr(splitted_line);
+			ft_free_two_d_arr(splitted_line);
 			return (false);
 		}
-		free_two_d_arr(splitted_line);
+		ft_free_two_d_arr(splitted_line);
 	}
 	if (check_textures_extensions(data) == false)
 		return (false);

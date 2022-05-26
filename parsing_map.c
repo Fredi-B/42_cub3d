@@ -89,7 +89,7 @@ bool	parse_map(t_data *data)
 		i.tmp_x = 0;
 		i.tmp_y++;
 	}
-	free_two_d_arr(tmp_map);
+	ft_free_two_d_arr(tmp_map);
 	if (only_one_player_flag == false)
 		return (false);
 	return (true);

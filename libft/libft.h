@@ -6,7 +6,7 @@
 /*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 18:05:34 by fbechtol          #+#    #+#             */
-/*   Updated: 2022/05/25 12:42:02 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/05/26 12:45:31 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_strncmp_backwards(const char *s1, const char *s2, size_t n);
-bool	ft_cmp_file_extension(const char *s1, const char *s2, size_t len);
 int		ft_atoi(const char *str);
 long	ft_atoll(const char *str);
 int		ft_isalnum(int c);
@@ -66,6 +64,10 @@ void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s);
 int		*ft_int_strdup(const int *s, int len);
 void	*ft_int_memcpy(void *dst, const void *src, size_t n);
+
+int		ft_strncmp_backwards(const char *s1, const char *s2, size_t n);
+bool	ft_cmp_file_extension(const char *s1, const char *s2, size_t len);
+void	ft_free_two_d_arr(char **arr);
 
 /* ---------------------------- Part 2 ------------------------------------- */
 

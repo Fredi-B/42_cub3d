@@ -42,7 +42,7 @@ bool	parse_tmp_map_into_map(t_data *data, t_counter *i, \
 		}
 		else
 		{
-			free_two_d_arr(tmp_map);
+			ft_free_two_d_arr(tmp_map);
 			return (false);
 		}
 		i->tmp_x++;
@@ -66,7 +66,7 @@ static bool	fill_map(t_data *data, t_counter *i, char **tmp_map, \
 	{
 		if (*only_one_player_flag == true)
 		{
-			free_two_d_arr(tmp_map);
+			ft_free_two_d_arr(tmp_map);
 			return (false);
 		}
 		*only_one_player_flag = true;

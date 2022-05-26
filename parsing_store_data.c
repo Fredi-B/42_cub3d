@@ -110,12 +110,12 @@ static bool	check_rgb_format(char *rgb, int *r, int *g, int *b)
 	splitted_rgb = ft_split(rgb, ',');
 	if (splitted_rgb[3] != NULL)
 	{
-		free_two_d_arr(splitted_rgb);
+		ft_free_two_d_arr(splitted_rgb);
 		return (false);
 	}
 	*r = ft_atoi(splitted_rgb[0]);
 	*g = ft_atoi(splitted_rgb[1]);
 	*b = ft_atoi(splitted_rgb[2]);
-	free_two_d_arr(splitted_rgb);
+	ft_free_two_d_arr(splitted_rgb);
 	return (true);
 }

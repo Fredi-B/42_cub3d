@@ -179,7 +179,7 @@ bool	validate_map(t_data *data);
 
 /*  --------------------------- err_exit.c --------------------------------- */
 void	err_exit(t_data *data, char *msg, int len, int exit_status);
-void	free_two_d_arr(char **arr);
+void	free_data(t_data *data);
 
 /*  --------------------------- textures.c --------------------------------- */
 bool	put_walls_in_images(t_data *arr);

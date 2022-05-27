@@ -199,7 +199,7 @@ void	free_data(t_data *data);
 bool	put_walls_in_images(t_data *arr);
 
 /*  ------------------------ textures_utils.c ------------------------------ */
-void	*my_new_image(void *mlx, int size, t_image *copy);
+void	*my_new_image(void *mlx, int width, int height, t_image *copy);
 bool	pixel_is_inside_image(int x, int y, t_image *img);
 void	image_pixel_put(t_image *img, int x, int y, int color);
 
@@ -237,5 +237,6 @@ void	pixel_put(t_data *arr, int x, int y, int color);
 int		destroy_window(t_data *arr);
 void	map_to_image(t_data *arr);
 void	all_images_to_window(t_data *arr);
+bool	pixel_is_inside_window(int x, int y, t_data *arr);
 
 #endif

@@ -2,8 +2,8 @@
 
 static bool	put_wall_in_image(t_data *arr, int side, char *direction);
 static void	resize_texture(void *mlx, t_image *original, \
-							t_image *copy, int size);
-static int	get_color_from_texture(t_image *original, int x, int y, int size);
+							t_image *copy, int width, int height);
+static int	get_color_from_texture(t_image *original, int x, int y, int width, int height);
 static int	get_pixel_color(t_image *original, int x, int y);
 
 bool	put_walls_in_images(t_data *arr)
@@ -27,19 +27,19 @@ static bool	put_wall_in_image(t_data *arr, int side, char *direction)
 						&arr->xpm_file[side].line_length, &arr->xpm_file[side].endian);
 	if (arr->xpm_file[side].addr == NULL)
 		return (false);
-	resize_texture(arr->mlx, &arr->xpm_file[side], &arr->wall[side], 100);
+	resize_texture(arr->mlx, &arr->xpm_file[side], &arr->wall[side], arr->width, arr->height);
 	// mlx_destroy_image(arr->mlx, arr->xpm_file[side].img);
 	return (true);
 }
 
 static void	resize_texture(void *mlx, t_image *original, \
-								t_image *copy, int size)
+								t_image *copy, int width, int height)
 {
 	int	y;
 	int	x;
 	int	color;
 
-	copy->img = my_new_image(mlx, size, copy);
+	copy->img = my_new_image(mlx, width, height, copy);
 	if (copy->img == NULL)
 		return ; //wie protecten?
 	y = 0;
@@ -48,7 +48,7 @@ static void	resize_texture(void *mlx, t_image *original, \
 		x = 0;
 		while (x < copy->width)
 		{
-			color = get_color_from_texture(original, x, y, size);
+			color = get_color_from_texture(original, x, y, width, height);
 			image_pixel_put(copy, x, y, color);
 			x++;
 		}
@@ -56,7 +56,7 @@ static void	resize_texture(void *mlx, t_image *original, \
 	}
 }
 
-static int	get_color_from_texture(t_image *original, int x, int y, int size)
+static int	get_color_from_texture(t_image *original, int x, int y, int width, int height)
 {
 	int		color;
 	float	scale_x;
@@ -64,8 +64,8 @@ static int	get_color_from_texture(t_image *original, int x, int y, int size)
 	float	tx;
 	float	ty;
 
-	scale_x = original->width / (float)size;
-	scale_y = original->height / (float)size;
+	scale_x = original->width / (float)width;
+	scale_y = original->height / (float)height;
 	tx = x * scale_x;
 	ty = y * scale_y;
 	color = get_pixel_color(original, tx, ty);
@@ -76,9 +76,9 @@ static int	get_pixel_color(t_image *original, int x, int y)
 {
 	int	color;
 
+	color = BLACK;
 	if (pixel_is_inside_image(x, y, original) == false)
 		return (color);
-	color = BLACK;
 	color = *(unsigned int *)(original->addr \
 			+ (unsigned int)(int)y * original->line_length + x \
 			* (original->bits_per_pixel / 8));

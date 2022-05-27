@@ -14,11 +14,11 @@ void	get_player(t_data *arr, t_line *line)
 	while (i < 5) //breite 5 Grundstrich
 	{
 		p0.color = BLUE;
-		p0.x = (arr->p_x + i - 2) + (arr->subsize / 2); // + i - 5;
-		p0.y = arr->p_y + (arr->subsize / 2) - 2; // - 5;
+		p0.x = (arr->p_x + i - 2); // + i - 5;
+		p0.y = arr->p_y - 2; // - 5;
 		p1.x = p0.x;
-		p1.y = arr->p_y + (arr->subsize / 2) + 2;
-		p1.color = p0.color; 
+		p1.y = arr->p_y + 2;
+		p1.color = p0.color;
 		set_line(line, arr, p0, p1);
 		i++;
 	}

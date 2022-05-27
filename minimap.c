@@ -15,8 +15,8 @@ void read_file(t_data *arr)
 	// arr->cols = 8;
 	// arr->rows = 8;
 	arr->subsize = 16;
-	arr->p_x = arr->p_x * arr->subsize;
-	arr->p_y = arr->p_y * arr->subsize;
+	arr->p_x = arr->p_x * arr->subsize + (arr->subsize / 2);
+	arr->p_y = arr->p_y * arr->subsize + (arr->subsize / 2);
 	//arr->p_a = ODR;// * 0.5;
 	arr->p_dx = cos(arr->p_a);
 	arr->p_dy = sin(arr->p_a);

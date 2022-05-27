@@ -50,13 +50,31 @@ int	destroy_window(t_data *arr)
 }
 	/* system("leaks fdf"); */
 
+/* same as pixel_is_inside_image() but with t_data * as argument.
+if we put mlx variables for the main image in the t_image struct
+this function gets obsolete */
+bool	pixel_is_inside_window(int x, int y, t_data *arr)
+{
+	if (x < 0 || x > arr->width -1) // not sure why -1
+		return (false);
+	if (y < 0 || y > arr->height -1)
+		return (false);
+	return (true);
+}
+
 void	pixel_put(t_data *arr, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = arr->addr + (y * arr->size_line + x * \
-							(arr->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	// diprintf(x);
+	// diprintf(y);
+	// diprintf(arr->width);
+	if (pixel_is_inside_window(x, y, arr) == true)
+	{
+		dst = arr->addr + (y * arr->size_line + x * \
+								(arr->bits_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
 }
 
 void	map_to_image(t_data *arr)
@@ -78,8 +96,8 @@ void	all_images_to_window(t_data *arr)
 {
 	mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
 							arr->img, 0, 0);
-	mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->xpm_file[WEST].img, 500, 500);
-	mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->wall[WEST].img, 100, 100);
+	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->xpm_file[WEST].img, 500, 500);
+	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->wall[WEST].img, 100, 100);
 }
 
 void	draw_map(t_data *arr)

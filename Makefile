@@ -27,6 +27,7 @@ parsing_store_data.c \
 textures.c \
 textures_utils.c \
 player.c \
+player_movement.c \
 window.c
 
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))

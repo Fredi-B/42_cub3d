@@ -20,8 +20,9 @@
 # define ERROR		1
 # define OK			0
 # define WHITE		16777215
-# define GREEN		0x00FF00
 # define BLACK		0
+# define GREEN		0x00FF00
+# define BLUE		0x00BEFF
 # define YELLOW		0xFFFF00FF
 # define ODR		0.01745329252 //one degree in radians
 # define NORTH		0
@@ -217,7 +218,11 @@ int		map_init(t_data *arr);
 /* key_hook.c*/
 //void	hook(void *param); NEWMINILIB
 void	key_hooks(t_data *arr);
-// int		hook(t_data *arr);
+
+/* player_movement.c */
+void	move_y(t_data *arr, int sign);
+void	move_x(t_data *arr, int sign);
+void	turn(t_data *arr, int sign);
 
 //int		deal_key(int key, t_array *fdf_win);
 

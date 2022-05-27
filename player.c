@@ -68,7 +68,7 @@ void	get_rays(t_data *arr, t_line *line)
 		{
 			ry = (((int)arr->p_y >> 6) << 6) - 0.0001;
 			rx = (arr->p_y - ry) * aTan + arr->p_x;
-			yo = -64;
+			yo = - arr->subsize;
 			xo = -yo * aTan *1;
 	//printf("schaut nach oben\n");
 	 //printf("ra: %f rx: %f ry: %f\n",ra, rx, ry);
@@ -76,9 +76,9 @@ void	get_rays(t_data *arr, t_line *line)
 		}
 		else if (ra > M_PI)//player schaut nach unten
 		{
-			ry = (((int)arr->p_y >> 6) << 6) + 64;
+			ry = (((int)arr->p_y >> 6) << 6) + arr->subsize;
 			rx = (arr->p_y - ry) * aTan + arr->p_x;
-			yo = 64;
+			yo = arr->subsize;
 			xo = -yo * aTan;
 	//printf("schaut nach unten\n");
 	//printf("ra: %f rx: %f ry: %f\n",ra, rx, ry);
@@ -130,7 +130,7 @@ void	get_rays(t_data *arr, t_line *line)
 		{
 			rx = (((int)arr->p_x >> 6) << 6) - 0.0001;
 			ry = (arr->p_x - rx) * nTan + arr->p_y;
-			xo = -64;
+			xo = - arr->subsize;
 			yo = -xo * nTan *1;
 	//printf("schaut nach links\n");
 	 //printf("ra: %f rx: %f ry: %f\n",ra, rx, ry);
@@ -138,9 +138,9 @@ void	get_rays(t_data *arr, t_line *line)
 		}
 		else if (ra > M_PI * 0.5 && ra < M_PI * 1.5)//player schaut nach rechts??
 		{
-			rx = (((int)arr->p_x >> 6) << 6) + 64;
+			rx = (((int)arr->p_x >> 6) << 6) + arr->subsize;
 			ry = (arr->p_x - rx) * nTan + arr->p_y;
-			xo = 64;
+			xo = arr->subsize;
 			yo = -xo * nTan;
 	//printf("schaut nach rechts\n");
 
@@ -193,10 +193,10 @@ void	get_rays(t_data *arr, t_line *line)
 		else if (ca > 2* M_PI)
 			ca -= 2* M_PI;
 		dist_T = dist_T * cos(ca); //fisheye end
-		float lineH = (512 * 64)/dist_T; //lineHeight
-		if (lineH > 512)
-			lineH = 512;
-		float lineO = 256 - lineH  * 0.5; //line Offset
+		float lineH = (arr->height * arr->subsize)/dist_T; //lineHeight
+		if (lineH > arr->height)
+			lineH = arr->height;
+		float lineO = (arr->height / 2) - lineH  * 0.5; //line Offset
 		//printf("3D: distT:%f lineH:%f lineO:%f\n",dist_T, lineH, lineO);
 
 		//int		i;

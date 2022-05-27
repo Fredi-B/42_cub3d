@@ -97,7 +97,7 @@ void	all_images_to_window(t_data *arr)
 	mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
 							arr->img, 0, 0);
 	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->xpm_file[WEST].img, 500, 500);
-	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->wall[WEST].img, 100, 100);
+	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->wall[SOUTH].img, 0, 0);
 }
 
 void	draw_map(t_data *arr)

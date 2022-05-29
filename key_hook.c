@@ -32,7 +32,7 @@ void	key_hooks(t_data *arr)
 	// mlx_hook(arr->mlx_window, 2, 0, &hook, arr);
 	mlx_hook(arr->mlx_window, 2, 0, &key_pressed, arr); // neuer Ansatz
 	mlx_hook(arr->mlx_window, 3, 0, &key_released, arr);	
-	mlx_loop_hook(arr->mlx, &hook, arr); //segfaults: fct nicht in meiner mlx?
+	mlx_loop_hook(arr->mlx, &hook, arr);
 
 }
 

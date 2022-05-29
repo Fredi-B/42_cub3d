@@ -1,5 +1,18 @@
 #include "cub3D.h"
 
+static int	get_pixel_color_arr(t_data *arr, int x, int y)
+{
+	int	color;
+
+	color = BLACK;
+	if (pixel_is_inside_window(x, y, arr) == false)
+		return (color);
+	color = *(unsigned int *)(arr->wall[2].addr \
+			+ (unsigned int)(int)y * arr->wall[2].line_length + x \
+			* (arr->wall[2].bits_per_pixel / 8));
+	return (color);
+}
+
 float	dist_vec(t_data *arr, float x, float y)
 {
 	return ( sqrt( (x - arr->p_x) * (x - arr->p_x) + (y - arr->p_y) * (y - arr->p_y) ));
@@ -211,6 +224,8 @@ void	get_rays(t_data *arr, t_line *line)
 			p1.x = p0.x;
 			p1.y = lineH + lineO;
 			p1.color = p0.color;
+				// p0.color = get_pixel_color_arr(arr, p0.x, p0.y);
+				// p1.color = get_pixel_color_arr(arr, p1.x, p1.y);
 			//printf("start3D: %d %d\n",p0.x, p0.y);
 			//printf("end3D: %d %d\n",p1.x, p1.y);
 			set_line(line, arr, p0, p1);

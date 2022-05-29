@@ -79,7 +79,7 @@ void	get_rays(t_data *arr, t_line *line)
 		}
 		else if (ra < M_PI) //player schaut nach oben
 		{
-			ry = (((int)arr->p_y >> 6) << 6) - 0.0001;
+			ry = (((int)arr->p_y >> arr->sub_bit) << arr->sub_bit) - 0.0001;
 			rx = (arr->p_y - ry) * aTan + arr->p_x;
 			yo = - arr->subsize;
 			xo = -yo * aTan *1;
@@ -89,7 +89,7 @@ void	get_rays(t_data *arr, t_line *line)
 		}
 		else if (ra > M_PI)//player schaut nach unten
 		{
-			ry = (((int)arr->p_y >> 6) << 6) + arr->subsize;
+			ry = (((int)arr->p_y >> arr->sub_bit) << arr->sub_bit) + arr->subsize;
 			rx = (arr->p_y - ry) * aTan + arr->p_x;
 			yo = arr->subsize;
 			xo = -yo * aTan;
@@ -101,8 +101,8 @@ void	get_rays(t_data *arr, t_line *line)
 		while (dof < 8)
 		{
 			//printf("mx: %d my: %d mp: %d\n",mx, my, mp);
-			mx = (int) (rx) >> 6;
-			my = (int) (ry) >> 6;
+			mx = (int) (rx) >> arr->sub_bit;
+			my = (int) (ry) >> arr->sub_bit;
 			mp = my * arr->cols + mx;
 			//printf("map: %c my:%d mx:%d\n",arr->map[mp], my, mx);
 
@@ -141,7 +141,7 @@ void	get_rays(t_data *arr, t_line *line)
 		}
 		else if (ra < M_PI * 0.5 || ra > M_PI * 1.5)//player schaut nach links??
 		{
-			rx = (((int)arr->p_x >> 6) << 6) - 0.0001;
+			rx = (((int)arr->p_x >> arr->sub_bit) << arr->sub_bit) - 0.0001;
 			ry = (arr->p_x - rx) * nTan + arr->p_y;
 			xo = - arr->subsize;
 			yo = -xo * nTan *1;
@@ -151,7 +151,7 @@ void	get_rays(t_data *arr, t_line *line)
 		}
 		else if (ra > M_PI * 0.5 && ra < M_PI * 1.5)//player schaut nach rechts??
 		{
-			rx = (((int)arr->p_x >> 6) << 6) + arr->subsize;
+			rx = (((int)arr->p_x >> arr->sub_bit) << arr->sub_bit) + arr->subsize;
 			ry = (arr->p_x - rx) * nTan + arr->p_y;
 			xo = arr->subsize;
 			yo = -xo * nTan;
@@ -163,8 +163,8 @@ void	get_rays(t_data *arr, t_line *line)
 		while (dof < 8)
 		{
 			//printf("mx: %d my: %d mp: %d\n",mx, my, mp);
-			mx = (int) (rx) >> 6;
-			my = (int) (ry) >> 6;
+			mx = (int) (rx) >> arr->sub_bit;
+			my = (int) (ry) >> arr->sub_bit;
 			mp = my * arr->cols + mx;
 			//printf("map: %c my:%d mx:%d\n",arr->map[mp], my, mx);
 

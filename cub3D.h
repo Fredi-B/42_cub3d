@@ -85,6 +85,7 @@ typedef struct s_data
 	unsigned int	ceiling_rgb;
 	char			*map;
 	int				subsize;
+	int				sub_bit;
 	/* general variables NEEDS CHECKING!*/
 	int			*num;
 	int			cols;
@@ -118,7 +119,7 @@ typedef struct s_data
 	t_image		wall[4];
 	t_image		first_person_view;
 	t_image		minimap;
-	t_image		player_in_minimap;
+	// t_image		player_in_minimap;
 	
 	/* mlx variables NEWMLXLIB*/
 	// u_int32_t	width;

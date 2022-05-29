@@ -58,9 +58,9 @@ void	get_rays(t_data *arr, t_line *line)
 
 	color = WHITE;//0x00FFFF00;
 	ra= arr->p_a - ODR * 30;
-	for(r = 0; r < 30; r++)
+	for(r = 0; r < 60; r++)
 	{
-		ra += 2*ODR;
+		ra += ODR;
 		if (ra < 0)
 			ra += 2 * M_PI;
 		if (ra >= 2 * M_PI)

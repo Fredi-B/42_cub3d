@@ -12,7 +12,12 @@ void read_file(t_data *arr)
 	// Fenstergröße hard coden. first person hat nix mit der mapgröße zu tun
 	arr->width = 1024; //arr->cols * arr->subsize * 2; //8 x 64 = 512
 	arr->height = 1024; //arr->rows * arr->subsize;
-	arr->dof = 8; //erstmal standard sollte max(cols, rows) werden
+	//printf("row: %d,col: %d", arr->rows,arr->cols);
+	if (arr->rows > arr->cols)
+		arr->dof = arr->rows;
+	else
+		arr->dof = arr->cols;
+	//arr->dof = 10; //erstmal standard sollte max(cols, rows) werden
 
 /* 	int i = 0;
 	while (i < arr->subsize -1)

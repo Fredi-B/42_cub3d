@@ -1,6 +1,6 @@
 NAME = cub3D
 
-CC = cc
+CC = gcc
 CFLAGS = -g # -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
 ODIR = o-files
 USER = $(shell echo $$USER)
@@ -14,7 +14,6 @@ MAC_LIBRARIES = libft/libft.a -L ./libft -L ./mlx -lmlx -framework OpenGL -frame
 CFILES = \
 err_exit.c \
 init.c \
-key_hook.c \
 line.c \
 main.c \
 minimap.c \
@@ -30,6 +29,9 @@ player.c \
 player_movement.c \
 window.c
 
+MAC_KEYHOOK = key_hook.c # diese zeile oben einfuegen und unten rausnehmen
+LINUX_KEYHOOK = key_hook_linux.c
+
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 OBJECTS := $(addprefix $(ODIR)/,$(OBJECTS))
 UNAME_S := $(shell uname -s)
@@ -39,9 +41,10 @@ $(NAME): $(ODIR) $(OBJECTS)
 #	@make -C ./mlx
 
 ifeq ($(UNAME_S),Linux)
-	$(CC) $(CFLAGS) $(OBJECTS) -lm $(LINUX_LIBRARIES) -o $(NAME)
+	@make -C ./minilibX
+	$(CC) $(CFLAGS) $(OBJECTS) $(LINUX_KEYHOOK) -lm $(LINUX_LIBRARIES) -o $(NAME)
 else
-	$(CC) $(CFLAGS) $(OBJECTS) -lm $(MAC_LIBRARIES) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJECTS) $(MAC_KEYHOOK) -lm $(MAC_LIBRARIES) -o $(NAME)
 endif
 
 $(ODIR):

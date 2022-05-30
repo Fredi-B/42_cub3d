@@ -51,22 +51,24 @@ void	get_player(t_data *arr, t_line *line)
 
 void	get_rays(t_data *arr, t_line *line)
 {
-	int		r, mx, my, mp, dof;
+	int		r, mx, my, mp, dof, direction, wall_slice, old_direction, image_start_x;
 	float	rx,ry, ra, xo, yo, dist_T;
 	int		color;
 	t_points p0, p1;
 
-	color = WHITE;//0x00FFFF00;
+	wall_slice = arr->width / 60 - 1;
+	color = WHITE;
 	ra= arr->p_a - ODR * 30;
 	for(r = 0; r < 60; r++)
 	{
+		arr->map_flag = 1;
 		ra += ODR;
 		if (ra < 0)
 			ra += 2 * M_PI;
 		if (ra >= 2 * M_PI)
 			ra -= 2 * M_PI;
  		dof = 0;  //check Horitonal line
-		 float aTan;
+		float aTan;
 		float disH=1000000;
 		float hx, hy;
 		if ((ra < 0.00001 && ra > -0.00001) || (ra < M_PI + 0.00001 && ra > M_PI - 0.00001))
@@ -83,6 +85,7 @@ void	get_rays(t_data *arr, t_line *line)
 			rx = (arr->p_y - ry) * aTan + arr->p_x;
 			yo = - arr->subsize;
 			xo = -yo * aTan *1;
+			direction = 0;
 	//printf("schaut nach oben\n");
 	 //printf("ra: %f rx: %f ry: %f\n",ra, rx, ry);
 	 //printf("yo: %f xo: %f aTan: %f\n",yo, xo, aTan);
@@ -93,6 +96,7 @@ void	get_rays(t_data *arr, t_line *line)
 			rx = (arr->p_y - ry) * aTan + arr->p_x;
 			yo = arr->subsize;
 			xo = -yo * aTan;
+			direction = 2;
 	//printf("schaut nach unten\n");
 	//printf("ra: %f rx: %f ry: %f\n",ra, rx, ry);
 	//printf("yo: %f xo: %f aTan: %f\n",yo, xo, aTan);
@@ -119,7 +123,7 @@ void	get_rays(t_data *arr, t_line *line)
 				dof += 1;
 			}
 		}
-		dof = 0;  //check verical line
+		dof = 0;  //check vertical line
 		float nTan;
 		float disV=1000000;
 		float vx, vy;
@@ -145,6 +149,8 @@ void	get_rays(t_data *arr, t_line *line)
 			ry = (arr->p_x - rx) * nTan + arr->p_y;
 			xo = - arr->subsize;
 			yo = -xo * nTan *1;
+			direction = direction + 30;
+
 	//printf("schaut nach links\n");
 	 //printf("ra: %f rx: %f ry: %f\n",ra, rx, ry);
 	 //printf("yo: %f xo: %f nTan: %f\n",yo, xo, nTan);
@@ -155,6 +161,8 @@ void	get_rays(t_data *arr, t_line *line)
 			ry = (arr->p_x - rx) * nTan + arr->p_y;
 			xo = arr->subsize;
 			yo = -xo * nTan;
+			direction = direction + 10;
+
 	//printf("schaut nach rechts\n");
 
 	 //printf("ra: %f rx: %f ry: %f\n",ra, rx, ry);
@@ -185,17 +193,27 @@ void	get_rays(t_data *arr, t_line *line)
 		p0.x = arr->p_x;
 		p0.y = arr->p_y;
 		p1.color = p0.color;
+
 		if (disV < disH)
 		{
 			p1.x = (int) vx;
 			p1.y = (int) vy;
+			image_start_x = p1.y;
+
 			dist_T = disV; //RAY hits Vertical line
+			direction = direction / 10;
 		}
 		else
 		{
 			p1.x = (int) hx;
+			image_start_x = p1.x;
 			p1.y = (int) hy;
 			dist_T = disH; //RAY hits horizontal line
+			direction = direction % 10;
+		}
+		if (disV + 0.001 > disH && disV - 0.001 < disH) //RAY hits Corner?
+		{
+			direction = old_direction;
 		}
 		//printf("player: %d %d\n",p0.x, p0.y);
 		//printf("rayend: %d %d\n",p1.x, p1.y);
@@ -214,12 +232,45 @@ void	get_rays(t_data *arr, t_line *line)
 
 		//int		i;
 		//t_points p0, p1;
-
+		arr->map_flag = 0;
 		int i = 0;
-		while (i < 16) //breite 5 Grundstrich
+		while (i < wall_slice) //eigentlich <= aber sieht man minimap nicht mehr
 		{
-			p0.color = WHITE;
-			p0.x = r *17 + arr->height / 2 + i; // + i - 5;
+			// draw FLOOR
+			p0.color = arr->floor_rgb;
+			p0.x = r *(wall_slice + 1) + i; // + i - 5;
+			p0.y = arr->height; // - 5;
+			p1.x = p0.x;
+			p1.y = arr->height / 2;
+			p1.color = p0.color;
+				// p0.color = get_pixel_color_arr(arr, p0.x, p0.y);
+				// p1.color = get_pixel_color_arr(arr, p1.x, p1.y);
+			//printf("start3D: %d %d\n",p0.x, p0.y);
+			//printf("end3D: %d %d\n",p1.x, p1.y);
+			set_line(line, arr, p0, p1);
+			// draw CEILING
+			p0.color = arr->ceiling_rgb;
+			p0.x = r *(wall_slice + 1) + i; // + i - 5;
+			p0.y = arr->height / 2; // - 5;
+			p1.x = p0.x;
+			p1.y = 0;
+			p1.color = p0.color;
+				// p0.color = get_pixel_color_arr(arr, p0.x, p0.y);
+				// p1.color = get_pixel_color_arr(arr, p1.x, p1.y);
+			//printf("start3D: %d %d\n",p0.x, p0.y);
+			//printf("end3D: %d %d\n",p1.x, p1.y);
+			set_line(line, arr, p0, p1);
+			
+			//!!!!
+			// draw WALL
+			// use image_start_x to get the color of the image at position x
+			// bit shiften um nur die letzten Nummern, also alles kleiner als subsize zu bekommen?
+			// Dann ist das die x_position. fuer y muss das bild genormt sein, auf die groesse der ansicht, wie?
+			// dann muss entlang der Linie jede farbe rausgezogen werden und geplottet
+			p0.color = get_wall(direction);
+			old_direction = direction;
+			//p0.x = r *17 + arr->height / 2 + i; // + i - 5;
+			p0.x = r *(wall_slice + 1) + i; // + i - 5;
 			p0.y = lineO; // - 5;
 			p1.x = p0.x;
 			p1.y = lineH + lineO;
@@ -229,6 +280,8 @@ void	get_rays(t_data *arr, t_line *line)
 			//printf("start3D: %d %d\n",p0.x, p0.y);
 			//printf("end3D: %d %d\n",p1.x, p1.y);
 			set_line(line, arr, p0, p1);
+			// drawed WALL
+			//!!!!
 			i++;
 		}
 	}

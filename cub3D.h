@@ -74,6 +74,7 @@ typedef struct s_data
 	char			*map;
 	int				subsize;
 	int				sub_bit;
+	int				map_flag;
 	/* general variables NEEDS CHECKING!*/
 	int			*num;
 	int			cols;
@@ -96,7 +97,9 @@ typedef struct s_data
 	void		*mlx;
 	void		*mlx_window;
 	void		*img;
+	void		*img_map;
 	char		*addr;
+	char		*addr_map;
 	int			bits_per_pixel;
 	int			line_length;
 	int			size_line;
@@ -220,6 +223,9 @@ void	turn(t_data *arr, int sign);
 /* player.c*/
 void	get_player(t_data *arr, t_line *line);
 void	get_rays(t_data *arr, t_line *line);
+
+/* walls.c*/
+unsigned int	get_wall(int direction);
 
 /* window.c*/
 void	draw_map(t_data *arr);

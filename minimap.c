@@ -2,7 +2,7 @@
 
 void read_file(t_data *arr)
 {
-	arr->sub_bit = 4;
+	arr->sub_bit = 6;
 	arr->subsize = pow(2, arr->sub_bit);
 	arr->p_x = arr->p_x * arr->subsize + (arr->subsize / 2);
 	arr->p_y = arr->p_y * arr->subsize + (arr->subsize / 2);

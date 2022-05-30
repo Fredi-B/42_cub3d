@@ -40,13 +40,13 @@ static void	get_map(t_data *arr, t_line *line)
 	}
 }
 
-int	destroy_window(t_data *arr)
+void	destroy_window(t_data *arr)
 {
 	mlx_destroy_image(arr->mlx, arr->img);
+	mlx_destroy_image(arr->mlx, arr->img_map);
 	mlx_destroy_window(arr->mlx, arr->mlx_window);
 	free_arr(arr);
 	exit(0);
-	return (0);
 }
 	/* system("leaks fdf"); */
 
@@ -117,10 +117,8 @@ void	all_images_to_window(t_data *arr)
 void	draw_map(t_data *arr)
 {
 	arr->mlx = mlx_init();
-	//if (!arr->mlx) AUF FEHLER TESTEN!
-	//	destroy_window(arr);
-	// arr->width = 1920;
-	// arr->height = 1080;
+	if (!arr->mlx)
+		destroy_window(arr);
 
 	arr->mlx_window = mlx_new_window(arr->mlx, arr->width, \
 											arr->height, "cub3D");

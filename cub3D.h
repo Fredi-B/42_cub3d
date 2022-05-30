@@ -231,7 +231,7 @@ unsigned int	get_wall(int direction);
 /* window.c*/
 void	draw_map(t_data *arr);
 void	pixel_put(t_data *arr, int x, int y, int color);
-int		destroy_window(t_data *arr);
+void	destroy_window(t_data *arr);
 void	map_to_image(t_data *arr);
 void	all_images_to_window(t_data *arr);
 bool	pixel_is_inside_window(int x, int y, t_data *arr);

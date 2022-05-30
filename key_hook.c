@@ -47,10 +47,7 @@ void	key_hooks(t_data *arr)
 static int	key_pressed(int key, t_data *arr)
 {
 	if (key == ESC)
-	{
 		destroy_window(arr);
-		exit (OK);
-	}
 	if (key == UP)
 		arr->key_flag.up = ON;
 	if (key == DOWN)

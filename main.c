@@ -57,8 +57,8 @@ static void	init_data(t_data *data)
 	data->first_person_view.addr = NULL;
 	data->minimap.img = NULL;
 	data-> minimap.addr = NULL;
-	data->player_in_minimap.img = NULL;
-	data->player_in_minimap.addr = NULL;
+	//data->player_in_minimap.img = NULL;
+	//data->player_in_minimap.addr = NULL;
 	init_key_flags(data);
 }
 

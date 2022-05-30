@@ -75,7 +75,7 @@ void	get_rays(t_data *arr, t_line *line)
 			aTan = -1/tan(ra);
 		if (ra == 0  || ra == M_PI)
 		{
-			rx = arr->p_x; ry=arr->p_y; dof = 8;
+			rx = arr->p_x; ry=arr->p_y; dof = arr->dof;
 		}
 		else if (ra < M_PI) //player schaut nach oben
 		{
@@ -98,7 +98,7 @@ void	get_rays(t_data *arr, t_line *line)
 	//printf("yo: %f xo: %f aTan: %f\n",yo, xo, aTan);
 		}
 
-		while (dof < 8)
+		while (dof < arr->dof)
 		{
 			//printf("mx: %d my: %d mp: %d\n",mx, my, mp);
 			mx = (int) (rx) >> arr->sub_bit;
@@ -110,7 +110,7 @@ void	get_rays(t_data *arr, t_line *line)
 			{
 				hx = rx; hy=ry; disH=dist_vec(arr,rx,ry);
 				//SAVE rx ry and distance player to ray
-				dof = 8;
+				dof = arr->dof;
 			}
 			else
 			{
@@ -137,7 +137,7 @@ void	get_rays(t_data *arr, t_line *line)
 		//float nTan = -tan(ra);
 		if (ra == 0  || ra == M_PI) //player schaut oben unten
 		{
-			rx = arr->p_x; ry=arr->p_y; dof = 8;
+			rx = arr->p_x; ry=arr->p_y; dof = arr->dof;;
 		}
 		else if (ra < M_PI * 0.5 || ra > M_PI * 1.5)//player schaut nach links??
 		{
@@ -160,7 +160,7 @@ void	get_rays(t_data *arr, t_line *line)
 	 //printf("ra: %f rx: %f ry: %f\n",ra, rx, ry);
 	 //printf("yo: %f xo: %f nTan: %f\n",yo, xo, nTan);
 		}
-		while (dof < 8)
+		while (dof < arr->dof)
 		{
 			//printf("mx: %d my: %d mp: %d\n",mx, my, mp);
 			mx = (int) (rx) >> arr->sub_bit;
@@ -171,7 +171,7 @@ void	get_rays(t_data *arr, t_line *line)
 			if (mp >= 0 && mp < arr->cols * arr->rows && arr->map[mp] == '1')
 			{
 				vx = rx; vy=ry; disV=dist_vec(arr,rx,ry);
-				dof = 8;
+				dof = arr->dof;
 			}
 			else
 			{
@@ -219,7 +219,7 @@ void	get_rays(t_data *arr, t_line *line)
 		while (i < 16) //breite 5 Grundstrich
 		{
 			p0.color = WHITE;
-			p0.x = r *17 + 512 + i; // + i - 5;
+			p0.x = r *17 + arr->height / 2 + i; // + i - 5;
 			p0.y = lineO; // - 5;
 			p1.x = p0.x;
 			p1.y = lineH + lineO;

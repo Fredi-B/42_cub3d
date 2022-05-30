@@ -90,6 +90,7 @@ typedef struct s_data
 	int			*num;
 	int			cols;
 	int			rows;
+	int			dof;
 	int			i;
 	int			j;
 	double		rot_x;

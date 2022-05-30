@@ -8,8 +8,8 @@ void	move_y(t_data *arr, int sign)
 	int		mp;
 
 	y = arr->p_y + arr->p_dy * sign;
-	mx = (int)(arr->p_x) >> 6;
-	my = (int)(y) >> 6;
+	mx = (int)(arr->p_x) >> arr->sub_bit;
+	my = (int)(y) >> arr->sub_bit;
 	mp = my * arr->cols + mx;
 	if (arr->map[mp] == '0')
 		arr->p_y = y;
@@ -23,8 +23,8 @@ void	move_x(t_data *arr, int sign)
 	int		mp;
 
 	x = arr->p_x + arr->p_dx * sign;
-	mx = (int)(x) >> 6;
-	my = (int)(arr->p_y) >> 6;
+	mx = (int)(x) >> arr->sub_bit;
+	my = (int)(arr->p_y) >> arr->sub_bit;
 	mp = my * arr->cols + mx;
 	if (arr->map[mp] == '0')
 		arr->p_x = x;

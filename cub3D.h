@@ -33,13 +33,6 @@
 # define OFF		0
 
 
-/* Linux keycodes */
-/* #define ESC 65307
-#define LEFT 65361
-#define RIGHT 65363
-#define DOWN 65364
-#define UP 65362 */
-
 /* Mac keycodes */
 #define ESC 53
 #define LEFT 123

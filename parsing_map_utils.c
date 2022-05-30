@@ -81,16 +81,15 @@ static bool	fill_map(t_data *data, t_counter *i, char **tmp_map, \
 static void	store_player_pos(t_data *data, char pos, \
 								int counter_map, int counter_line)
 {
-	//@arno: passt das oder ist das Quatsch?
 	data->map[counter_map] = '0';
-	if (pos == 'N')
-		data->p_a = 1;
 	if (pos == 'E')
-		data->p_a = 91;
-	if (pos == 'S')
-		data->p_a = 181;
+		data->p_a = 1*ODR;
+	if (pos == 'N')
+		data->p_a = 91*ODR;
 	if (pos == 'W')
-		data->p_a = 271;
+		data->p_a = 181*ODR;
+	if (pos == 'S')
+		data->p_a = 271*ODR;
 	data->p_x = counter_line;
 	data->p_y = counter_map / data->rows;
 }

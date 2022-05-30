@@ -8,11 +8,15 @@ static int	get_pixel_color(t_image *original, int x, int y);
 
 bool	put_walls_in_images(t_data *arr)
 {
-	put_wall_in_image(arr, NORTH, arr->north);
-	put_wall_in_image(arr, EAST, arr->east);
-	put_wall_in_image(arr, WEST, arr->west);
-	put_wall_in_image(arr, SOUTH, arr->south);
-
+	if (put_wall_in_image(arr, NORTH, arr->north) == false)
+		return (false);
+	if (put_wall_in_image(arr, EAST, arr->east) == false)
+		return (false);
+	if (put_wall_in_image(arr, WEST, arr->west) == false)
+		return (false);
+	if (put_wall_in_image(arr, SOUTH, arr->south) == false)
+		return (false);
+	dwrite(test);
 	return (true);
 }
 

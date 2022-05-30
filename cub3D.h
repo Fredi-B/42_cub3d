@@ -103,6 +103,7 @@ typedef struct s_data
 	int			bits_per_pixel;
 	int			line_length;
 	int			size_line;
+	int			size_line_map;
 	int			endian;
 	int			width;
 	int			height;

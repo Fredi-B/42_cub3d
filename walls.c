@@ -10,4 +10,5 @@ unsigned int	get_wall(int direction)
 		return (BLUE);
 	else if (direction == WEST)
 		return (YELLOW);
+	return (ERROR);
 }

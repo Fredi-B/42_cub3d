@@ -39,6 +39,8 @@ static void	init_data(t_data *data)
 	data->mlx_window = NULL;
 	data->img = NULL;
 	data->addr = NULL;
+	data->img_map = NULL;
+	data->addr_map = NULL;
 	i = 0;
 	while (i < 4)
 	{

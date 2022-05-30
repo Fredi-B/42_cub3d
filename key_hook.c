@@ -1,5 +1,12 @@
 #include "cub3D.h"
 
+/* Mac keycodes */
+#define ESC 53
+#define LEFT 123
+#define RIGHT 124
+#define DOWN 125
+#define UP 126
+
 static int	key_pressed(int key, t_data *arr);
 static int	key_released(int key, t_data *arr);
 static int	hook(t_data *arr);

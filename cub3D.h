@@ -33,12 +33,7 @@
 # define OFF		0
 
 
-/* Mac keycodes */
-#define ESC 53
-#define LEFT 123
-#define RIGHT 124
-#define DOWN 125
-#define UP 126
+
 
 /* ---------------------- Defines for debugging ---------------------------- */
 # define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)

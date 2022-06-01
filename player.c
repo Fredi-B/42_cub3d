@@ -56,17 +56,21 @@ void	get_rays(t_data *arr, t_line *line)
 	int		color;
 	t_points p0, p1;
 
-	wall_slice = arr->width / 60 - 1;
+	wall_slice = 1; //arr->width / 60 - 1;
 	color = WHITE;
-	ra= arr->p_a - ODR * 30;
-	for(r = 0; r < 60; r++)
+	// ra= arr->p_a - ODR * 30;
+	// for(r = 0; r < 60; r++)
+	ra= arr->p_a - ODR01 * 300;
+	for(r = 0; r <= 600; r++)
 	{
 		arr->map_flag = 1;
-		ra += ODR;
-		if (ra < 0)
+		ra += ODR01;
+		
+		if (ra < 0)        //inside_360???
 			ra += 2 * M_PI;
 		if (ra >= 2 * M_PI)
 			ra -= 2 * M_PI;
+
  		dof = 0;  //check Horitonal line
 		float aTan;
 		float disH=1000000;
@@ -141,7 +145,7 @@ void	get_rays(t_data *arr, t_line *line)
 		//float nTan = -tan(ra);
 		if (ra == 0  || ra == M_PI) //player schaut oben unten
 		{
-			rx = arr->p_x; ry=arr->p_y; dof = arr->dof;;
+			rx = arr->p_x; ry=arr->p_y; dof = arr->dof;
 		}
 		else if (ra < M_PI * 0.5 || ra > M_PI * 1.5)//player schaut nach links??
 		{
@@ -218,6 +222,8 @@ void	get_rays(t_data *arr, t_line *line)
 		//printf("player: %d %d\n",p0.x, p0.y);
 		//printf("rayend: %d %d\n",p1.x, p1.y);
 		set_line(line, arr, p0, p1); //RAY in 2D Map
+
+
 		float ca = arr->p_a - ra; //fisheye start
 		if (ca < 0)
 			ca += 2* M_PI;
@@ -241,7 +247,7 @@ void	get_rays(t_data *arr, t_line *line)
 			p0.x = r *(wall_slice + 1) + i; // + i - 5;
 			p0.y = arr->height; // - 5;
 			p1.x = p0.x;
-			p1.y = arr->height / 2;
+			p1.y = lineH + lineO;
 			p1.color = p0.color;
 				// p0.color = get_pixel_color_arr(arr, p0.x, p0.y);
 				// p1.color = get_pixel_color_arr(arr, p1.x, p1.y);
@@ -251,7 +257,7 @@ void	get_rays(t_data *arr, t_line *line)
 			// draw CEILING
 			p0.color = arr->ceiling_rgb;
 			p0.x = r *(wall_slice + 1) + i; // + i - 5;
-			p0.y = arr->height / 2; // - 5;
+			p0.y = lineO; //arr->height / 2; // - 5;
 			p1.x = p0.x;
 			p1.y = 0;
 			p1.color = p0.color;
@@ -268,7 +274,10 @@ void	get_rays(t_data *arr, t_line *line)
 			// Dann ist das die x_position. fuer y muss das bild genormt sein, auf die groesse der ansicht, wie?
 			// dann muss entlang der Linie jede farbe rausgezogen werden und geplottet
 			p0.color = get_wall(direction);
+			
 			old_direction = direction;
+			draw_wall_line(direction, image_start_x, lineH, arr);
+
 			//p0.x = r *17 + arr->height / 2 + i; // + i - 5;
 			p0.x = r *(wall_slice + 1) + i; // + i - 5;
 			p0.y = lineO; // - 5;
@@ -279,7 +288,7 @@ void	get_rays(t_data *arr, t_line *line)
 				// p1.color = get_pixel_color_arr(arr, p1.x, p1.y);
 			//printf("start3D: %d %d\n",p0.x, p0.y);
 			//printf("end3D: %d %d\n",p1.x, p1.y);
-			set_line(line, arr, p0, p1);
+			//set_line(line, arr, p0, p1);
 			// drawed WALL
 			//!!!!
 			i++;

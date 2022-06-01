@@ -83,13 +83,13 @@ static void	store_player_pos(t_data *data, char pos, \
 {
 	data->map[counter_map] = '0';
 	if (pos == 'W')
-		data->p_a = 1*ODR;
+		data->p_a = 0*ODR;
 	if (pos == 'N')
-		data->p_a = 91*ODR;
+		data->p_a = 90*ODR;
 	if (pos == 'E')
-		data->p_a = 181*ODR;
+		data->p_a = 180*ODR;
 	if (pos == 'S')
-		data->p_a = 271*ODR;
+		data->p_a = 270*ODR;
 	data->p_x = counter_line;
 	data->p_y = counter_map / data->cols;
 }

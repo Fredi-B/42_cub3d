@@ -25,6 +25,7 @@
 # define BLUE		0x00BEFF
 # define YELLOW		0xFFFF00FF
 # define ODR		0.01745329252 //one degree in radians
+# define ODR01		0.001745329252 //0.1 degree in radia
 # define NORTH		0
 # define EAST		1
 # define SOUTH		2
@@ -227,6 +228,7 @@ void	get_rays(t_data *arr, t_line *line);
 
 /* walls.c*/
 unsigned int	get_wall(int direction);
+void	draw_wall_line(int direction, int image_start_x, float lineH, t_data data);
 
 /* window.c*/
 void	draw_map(t_data *arr);

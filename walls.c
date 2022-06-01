@@ -12,3 +12,9 @@ unsigned int	get_wall(int direction)
 		return (YELLOW);
 	return (ERROR);
 }
+
+void	draw_wall_line(int direction, int image_start_x, float lineH, t_data data)
+{
+return;
+
+}

@@ -210,6 +210,12 @@ void	draw_line(t_line *line, t_data *arr);
 /* minimap.c*/
 int		map_init(t_data *arr);
 
+/* minimap_ray.c*/
+void	inside_360(float *ra);
+float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra);
+void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra, int r, float dist_t);
+float	dist_vec(t_data *arr, float x, float y);
+
 /* key_hook.c*/
 //void	hook(void *param); NEWMINILIB
 void	key_hooks(t_data *arr);

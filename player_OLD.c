@@ -13,10 +13,15 @@ static int	get_pixel_color_arr(t_data *arr, int x, int y)
 	return (color);
 }
 
+float	dist_vec(t_data *arr, float x, float y)
+{
+	return ( sqrt( (x - arr->p_x) * (x - arr->p_x) + (y - arr->p_y) * (y - arr->p_y) ));
+}
+
 void	get_player(t_data *arr, t_line *line)
 {
-	int			i;
-	t_points	p0, p1;
+	int		i;
+	t_points p0, p1;
 
 	i = 0;
 	while (i < 5) //breite 5 Grundstrich
@@ -46,22 +51,27 @@ void	get_player(t_data *arr, t_line *line)
 
 void	get_rays(t_data *arr, t_line *line)
 {
-	int			mx, my, mp, dof, direction, wall_slice, old_direction, image_start_x;
-	float		rx, ry, ra, xo, yo, dist_t, dist_T;
-	int			color;
-	int			r;
-	t_points	p0, p1;
+	int		r, mx, my, mp, dof, direction, wall_slice, old_direction, image_start_x;
+	float	rx,ry, ra, xo, yo, dist_T;
+	int		color;
+	t_points p0, p1;
 
-	ra = arr->p_a - ODR01 * 300;
-	r = 0;
-	while (r <= 600)
+	wall_slice = 1; //arr->width / 60 - 1;
+	color = WHITE;
+	// ra= arr->p_a - ODR * 30;
+	// for(r = 0; r < 60; r++)
+	ra= arr->p_a - ODR01 * 300;
+	for(r = 0; r <= 600; r++)
 	{
+		arr->map_flag = 1;
 		ra += ODR01;
-		inside_360(&ra);
+		
+		if (ra < 0)        //inside_360???
+			ra += 2 * M_PI;
+		if (ra >= 2 * M_PI)
+			ra -= 2 * M_PI;
 
-
-//!!!!
-/* 		dof = 0;  //check Horitonal line
+ 		dof = 0;  //check Horitonal line
 		float aTan;
 		float disH=1000000;
 		float hx, hy;
@@ -187,7 +197,6 @@ void	get_rays(t_data *arr, t_line *line)
 		p0.x = arr->p_x;
 		p0.y = arr->p_y;
 		p1.color = p0.color;
-	printf("dish: %f disv:%f dof %d\n",disH, disV, arr->dof);
 
 		if (disV < disH)
 		{
@@ -210,17 +219,79 @@ void	get_rays(t_data *arr, t_line *line)
 		{
 			direction = old_direction;
 		}
-		printf("player: %d %d\n",p0.x, p0.y);
-		printf("rayend: %d %d\n",p1.x, p1.y);
+		//printf("player: %d %d\n",p0.x, p0.y);
+		//printf("rayend: %d %d\n",p1.x, p1.y);
 		set_line(line, arr, p0, p1); //RAY in 2D Map
- */
-//!!!!!
 
 
-		image_start_x = 0;
-		direction = 0;
-		dist_t = draw_ray_minimap(&image_start_x, &direction, arr, line, ra);
-		draw_wall(&image_start_x, &direction, arr, line, ra, r, dist_t);
-		r++;
+		float ca = arr->p_a - ra; //fisheye start
+		if (ca < 0)
+			ca += 2* M_PI;
+		else if (ca > 2* M_PI)
+			ca -= 2* M_PI;
+		dist_T = dist_T * cos(ca); //fisheye end
+		float lineH = (arr->height * arr->subsize)/dist_T; //lineHeight
+		if (lineH > arr->height)
+			lineH = arr->height;
+		float lineO = (arr->height / 2) - lineH  * 0.5; //line Offset
+		//printf("3D: distT:%f lineH:%f lineO:%f\n",dist_T, lineH, lineO);
+
+		//int		i;
+		//t_points p0, p1;
+		arr->map_flag = 0;
+		int i = 0;
+		while (i < wall_slice) //eigentlich <= aber sieht man minimap nicht mehr
+		{
+			// draw FLOOR
+			p0.color = arr->floor_rgb;
+			p0.x = r *(wall_slice + 1) + i; // + i - 5;
+			p0.y = arr->height; // - 5;
+			p1.x = p0.x;
+			p1.y = lineH + lineO;
+			p1.color = p0.color;
+				// p0.color = get_pixel_color_arr(arr, p0.x, p0.y);
+				// p1.color = get_pixel_color_arr(arr, p1.x, p1.y);
+			//printf("start3D: %d %d\n",p0.x, p0.y);
+			//printf("end3D: %d %d\n",p1.x, p1.y);
+			set_line(line, arr, p0, p1);
+			// draw CEILING
+			p0.color = arr->ceiling_rgb;
+			p0.x = r *(wall_slice + 1) + i; // + i - 5;
+			p0.y = lineO; //arr->height / 2; // - 5;
+			p1.x = p0.x;
+			p1.y = 0;
+			p1.color = p0.color;
+				// p0.color = get_pixel_color_arr(arr, p0.x, p0.y);
+				// p1.color = get_pixel_color_arr(arr, p1.x, p1.y);
+			//printf("start3D: %d %d\n",p0.x, p0.y);
+			//printf("end3D: %d %d\n",p1.x, p1.y);
+			set_line(line, arr, p0, p1);
+			
+			//!!!!
+			// draw WALL
+			// use image_start_x to get the color of the image at position x
+			// bit shiften um nur die letzten Nummern, also alles kleiner als subsize zu bekommen?
+			// Dann ist das die x_position. fuer y muss das bild genormt sein, auf die groesse der ansicht, wie?
+			// dann muss entlang der Linie jede farbe rausgezogen werden und geplottet
+			p0.color = get_wall(direction);
+			
+			old_direction = direction;
+			//draw_wall_line(direction, image_start_x, lineH, arr);
+
+			//p0.x = r *17 + arr->height / 2 + i; // + i - 5;
+			p0.x = r *(wall_slice + 1) + i; // + i - 5;
+			p0.y = lineO; // - 5;
+			p1.x = p0.x;
+			p1.y = lineH + lineO;
+			p1.color = p0.color;
+				// p0.color = get_pixel_color_arr(arr, p0.x, p0.y);
+				// p1.color = get_pixel_color_arr(arr, p1.x, p1.y);
+			//printf("start3D: %d %d\n",p0.x, p0.y);
+			//printf("end3D: %d %d\n",p1.x, p1.y);
+			//set_line(line, arr, p0, p1);
+			// drawed WALL
+			//!!!!
+			i++;
+		}
 	}
 }

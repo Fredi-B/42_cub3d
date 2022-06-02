@@ -17,6 +17,7 @@ init.c \
 line.c \
 main.c \
 minimap.c \
+minimap_ray.c \
 parsing.c \
 parsing_map.c \
 parsing_map_utils.c \

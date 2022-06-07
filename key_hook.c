@@ -33,12 +33,22 @@ static int	hook(t_data *arr);
 // 	return (0);
 // }
 
+int	red_x_exit(t_data *arr)
+{
+	mlx_destroy_image(arr->mlx, arr->img);
+	mlx_destroy_image(arr->mlx, arr->img_map);
+	mlx_destroy_window(arr->mlx, arr->mlx_window);
+	free_arr(arr);
+	exit(0);
+	return(0);
+}
 void	key_hooks(t_data *arr)
 {
 	// mlx_key_hook(arr->mlx_window, hook, arr); // alter Ansatz, bei dem gedrückt halten und 2 keys gleichzeitig nicht funktioniert
 	// mlx_hook(arr->mlx_window, 2, 0, &hook, arr);
 	mlx_hook(arr->mlx_window, 2, 0, &key_pressed, arr); // neuer Ansatz
 	mlx_hook(arr->mlx_window, 3, 0, &key_released, arr);	
+	mlx_hook(arr->mlx_window, 17, (1L << 17), &red_x_exit, arr);
 	mlx_loop_hook(arr->mlx, &hook, arr);
 
 }

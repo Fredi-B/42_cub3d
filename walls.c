@@ -13,7 +13,7 @@ unsigned int	get_wall(int direction, float line_h)
 	return (ERROR);
 }
 
-void	draw_wall_line(int direction, int image_start_x, float line_h, t_data data, int r)
+void	draw_wall_line(int direction, int image_start_x, float line_h, t_data *data, int r)
 {
 /* 	static t_image	pic; //nicht immer neu kalkulieren, wenn von davor ist, altes benutzen
 	static old_line_h;

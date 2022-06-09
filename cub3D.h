@@ -234,7 +234,7 @@ void	get_rays(t_data *arr, t_line *line);
 
 /* walls.c*/
 unsigned int	get_wall(int direction, float line_h);
-void	draw_wall_line(int direction, int image_start_x, float line_h, t_data data, int r);
+void	draw_wall_line(int direction, int image_start_x, float line_h, t_data *data, int r);
 
 /* window.c*/
 void	draw_map(t_data *arr);

@@ -16,7 +16,6 @@ bool	put_walls_in_images(t_data *arr)
 		return (false);
 	if (put_wall_in_image(arr, SOUTH, arr->south) == false)
 		return (false);
-	dwrite(test);
 	return (true);
 }
 

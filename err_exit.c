@@ -17,6 +17,7 @@ void	free_data(t_data *data)
 /* frees everything needed. prints out error message. exits with exit_status */
 void	err_exit(t_data *data, char *msg, int len, int exit_status)
 {
+	// strlen hier rein und dafür len nicht übergeben müssen 
 	write(STDERR_FILENO, "Error\n", 6);
 	write(STDERR_FILENO, msg, len);
 	if (len != 0)

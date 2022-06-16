@@ -152,7 +152,7 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 		*image_start_x = pv.y % arr->subsize;
 		//printf("playerv: %d %d\n",ph.x, ph.y);
 		//printf("rayendv: %d %d!\n",pv.x, pv.y);
-		// printf("rayendv: %d %d!\n",((int)pv.y % arr->subsize), pv.y);
+		//printf("rayendv: %d %d!\n",((int)pv.y % arr->subsize), pv.y);
 		set_line(line, arr, ph, pv); //draw RAY in 2D Map
 		*direction = *direction / 10;
 		return (dis_v);
@@ -162,7 +162,7 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 	*image_start_x = ph.x % arr->subsize;
 	//printf("playerh: %d %d\n",pv.x, pv.y);
 	//printf("rayendh: %d! %d\n",ph.x, ph.y);
-	// printf("rayendh: %d! %d\n",ph.x, ((int)ph.x % arr->subsize));
+	//printf("rayendh: %d! %d\n",ph.x, ((int)ph.x % arr->subsize));
 	set_line(line, arr, ph, pv); //draw RAY in 2D Map
 	*direction = *direction % 10;
 	return (dis_h);

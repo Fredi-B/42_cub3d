@@ -172,8 +172,10 @@ typedef struct s_counter
 
 /*  ---------------------------- parsing.c --------------------------------- */
 int		parsing(t_data *data, char **argv);
-/*  ----------------------- parsing_store_map.c ---------------------------- */
-bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line);
+/*  ----------------------- parsing_store_data.c ---------------------------- */
+bool	store_data(t_data *data, t_input_flags *flag, char *trimmed_line);
+/*  -------------------- parsing_store_data_utils.c ------------------------- */
+bool	check_commas_in_rgb(char *rgb);
 /*  -------------------------- parsing_map.c ------------------------------- */
 bool	read_map(t_data *data, int fd);
 bool	parse_map(t_data *data);

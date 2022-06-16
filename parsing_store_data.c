@@ -97,15 +97,7 @@ static bool	check_rgb_format(char *rgb, int *r, int *g, int *b)
 	int		i;
 	char	**splitted_rgb;
 
-	count_comma = 0;
-	i = 0;
-	while (rgb[i])
-	{
-		if (rgb[i] == ',')
-			count_comma++;
-		i++;
-	}
-	if (count_comma != 2)
+	if (check_commas_in_rgb(rgb) == false)
 		return (false);
 	splitted_rgb = ft_split(rgb, ',');
 	if (splitted_rgb[3] != NULL)

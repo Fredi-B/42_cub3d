@@ -156,6 +156,7 @@ typedef struct s_input_flags
 	bool	ea;
 	bool	ceiling;
 	bool	floor;
+	bool	eof;
 }				t_input_flags;
 
 typedef struct s_counter

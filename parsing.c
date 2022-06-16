@@ -36,8 +36,8 @@ static bool	get_walls_and_rgb(t_data *data, int fd)
 	char			**splitted_line;
 
 	init_flag(&flag);
-	while (flag.no != true || flag.so != true || flag.we != true \
-			|| flag.ea != true || flag.ceiling != true || flag.floor != true)
+	while ((flag.no != true || flag.so != true || flag.we != true || flag.ea \
+	!= true || flag.ceiling != true || flag.floor != true) && flag.eof != true)
 	{
 		splitted_line = get_next_splitted_line(fd);
 		if (splitted_line == NULL)
@@ -68,6 +68,8 @@ static char	**get_next_splitted_line(int fd)
 	line = get_next_line(fd);
 	if (!line || line[0] == '\n')
 	{
+		if (!line)
+			flag->eof = true;
 		free(line);
 		line = NULL;
 		return (NULL);
@@ -101,4 +103,5 @@ static void	init_flag(t_input_flags *flag)
 	flag->ea = false;
 	flag->ceiling = false;
 	flag->floor = false;
+	flag->eof = false;
 }

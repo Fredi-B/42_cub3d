@@ -217,5 +217,5 @@ void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, fl
 	//draw WALL
 	//p0.color = get_wall(direction);
 	//old_direction = direction;
-	draw_wall_line(*direction, *image_start_x, line_h, arr, r);
+	draw_wall_line(direction, image_start_x, line_h, arr, r);
 }

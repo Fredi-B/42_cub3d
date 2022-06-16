@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-static int	get_pixel_color_arr(t_data *arr, int x, int y)
+/* static int	get_pixel_color_arr(t_data *arr, int x, int y)
 {
 	int	color;
 
@@ -11,7 +11,7 @@ static int	get_pixel_color_arr(t_data *arr, int x, int y)
 			+ (unsigned int)(int)y * arr->wall[2].line_length + x \
 			* (arr->wall[2].bits_per_pixel / 8));
 	return (color);
-}
+} */
 
 void	get_player(t_data *arr, t_line *line)
 {
@@ -46,13 +46,14 @@ void	get_player(t_data *arr, t_line *line)
 
 void	get_rays(t_data *arr, t_line *line)
 {
-	int			mx, my, mp, dof, direction, wall_slice, old_direction, image_start_x;
-	float		rx, ry, ra, xo, yo, dist_t, dist_T;
-	int			color;
+	int			direction;
+	int			image_start_x;
+	float		ra;
+	float		dist_t;
 	int			r;
-	t_points	p0, p1;
 
-	ra = arr->p_a - ODR01 * arr->width * 0.25;
+
+	ra = arr->p_a - ODR01 * 0.25 * arr->width;
 	r = 0;
 	while (r <= arr->width)
 	{

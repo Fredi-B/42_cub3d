@@ -65,12 +65,15 @@ bool	pixel_is_inside_window(int x, int y, t_data *arr)
 void	pixel_put(t_data *arr, int x, int y, int color)
 {
 	char	*dst;
-
 	// diprintf(x);
 	// diprintf(y);
 	// diprintf(arr->width);
 	if (arr->map_flag == 1)
 	{
+		if (x % arr->scale_map || y % arr->scale_map)
+			return ;
+		x = x / arr->scale_map;
+		y = y / arr->scale_map;
 		dst = arr->addr_map + (y * arr->size_line_map + x * \
 								(arr->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
@@ -93,7 +96,7 @@ void	map_to_image(t_data *arr)
 	arr->addr = mlx_get_data_addr(arr->img, &arr->bits_per_pixel, \
 								&arr->size_line, &arr->endian);
 
-	arr->img_map = mlx_new_image(arr->mlx, arr->cols * arr->subsize, arr->rows * arr->subsize);
+	arr->img_map = mlx_new_image(arr->mlx, arr->cols * arr->subsize / arr->scale_map, arr->rows * arr->subsize / arr->scale_map);
 	arr->addr_map = mlx_get_data_addr(arr->img_map, &arr->bits_per_pixel, \
 								&arr->size_line_map, &arr->endian);
 	init_line(&line);

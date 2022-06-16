@@ -2,6 +2,7 @@
 
 static void	init_data(t_data *data);
 static void	init_key_flags(t_data *data);
+static void	init_xpm(t_data *data);
 
 void	check_leaks(void)
 {
@@ -27,8 +28,6 @@ int	main(int argc __attribute__ ((unused)), char **argv)
 
 static void	init_data(t_data *data)
 {
-	int	i;
-
 	data->map = NULL;
 	data->north = NULL;
 	data->south = NULL;
@@ -41,6 +40,26 @@ static void	init_data(t_data *data)
 	data->addr = NULL;
 	data->img_map = NULL;
 	data->addr_map = NULL;
+	data->first_person_view.img = NULL;
+	data->first_person_view.addr = NULL;
+	data->minimap.img = NULL;
+	data-> minimap.addr = NULL;
+	init_key_flags(data);
+	init_xpm(data);
+}
+
+static void	init_key_flags(t_data *data)
+{
+	data->key_flag.up = OFF;
+	data->key_flag.down = OFF;
+	data->key_flag.left = OFF;
+	data->key_flag.right = OFF;
+}
+
+static void	init_xpm(t_data *data)
+{
+	int	i;
+
 	i = 0;
 	while (i < 4)
 	{
@@ -55,19 +74,4 @@ static void	init_data(t_data *data)
 		data->xpm_file[i].addr = NULL;
 		i++;
 	}
-	data->first_person_view.img = NULL;
-	data->first_person_view.addr = NULL;
-	data->minimap.img = NULL;
-	data-> minimap.addr = NULL;
-	//data->player_in_minimap.img = NULL;
-	//data->player_in_minimap.addr = NULL;
-	init_key_flags(data);
-}
-
-static void	init_key_flags(t_data *data)
-{
-	data->key_flag.up = OFF;
-	data->key_flag.down = OFF;
-	data->key_flag.left = OFF;
-	data->key_flag.right = OFF;
 }

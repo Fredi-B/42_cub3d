@@ -2,7 +2,7 @@
 
 //static fehlt bei allen fcts
 static bool	get_walls_and_rgb(t_data *data, int fd);
-static char	**get_next_splitted_line(int fd);
+static char	*get_next_trimmed_line(int fd, t_input_flags *flag);
 bool		check_textures_extensions(t_data *data);
 static void	init_flag(t_input_flags *flag);
 
@@ -33,37 +33,31 @@ calls store_data() to store them */
 static bool	get_walls_and_rgb(t_data *data, int fd)
 {
 	t_input_flags	flag;
-	char			**splitted_line;
+	char			*trimmed_line;
 
 	init_flag(&flag);
 	while ((flag.no != true || flag.so != true || flag.we != true || flag.ea \
 	!= true || flag.ceiling != true || flag.floor != true) && flag.eof != true)
 	{
-		splitted_line = get_next_splitted_line(fd);
-		if (splitted_line == NULL)
+		trimmed_line = get_next_trimmed_line(fd, &flag);
+		if (trimmed_line == NULL)
 			continue ;
-		if (splitted_line[2] != NULL)
+		if (store_data(data, &flag, trimmed_line) == false)
 		{
-			ft_free_two_d_arr(splitted_line);
+			free(trimmed_line);
 			return (false);
 		}
-		if (store_data(data, &flag, splitted_line) == false)
-		{
-			ft_free_two_d_arr(splitted_line);
-			return (false);
-		}
-		ft_free_two_d_arr(splitted_line);
+		free(trimmed_line);
 	}
 	if (check_textures_extensions(data) == false)
 		return (false);
 	return (true);
 }
 
-static char	**get_next_splitted_line(int fd)
+static char	*get_next_trimmed_line(int fd, t_input_flags *flag)
 {
 	char	*line;
 	char	*trimmed_line;
-	char	**splitted_line;
 
 	line = get_next_line(fd);
 	if (!line || line[0] == '\n')
@@ -75,14 +69,9 @@ static char	**get_next_splitted_line(int fd)
 		return (NULL);
 	}
 	trimmed_line = ft_strtrim(line, " 	\n");
-	splitted_line = ft_split(trimmed_line, ' ');
 	free(line);
 	line = NULL;
-	free(trimmed_line);
-	trimmed_line = NULL;
-	if (splitted_line[0] == NULL)
-		return (NULL);
-	return (splitted_line);
+	return (trimmed_line);
 }
 
 bool	check_textures_extensions(t_data *data)

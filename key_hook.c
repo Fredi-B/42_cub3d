@@ -63,9 +63,9 @@ static int	key_released(int key, t_data *arr)
 static int	hook(t_data *arr)
 {
 	if (arr->key_flag.up == ON)
-		move_x(arr, -1);
+		move_x(arr, -3);
 	if (arr->key_flag.down == ON)
-		move_x(arr, 1);
+		move_x(arr, 3);
 	if (arr->key_flag.left == ON)
 		turn(arr, -1);
 	if (arr->key_flag.right == ON)

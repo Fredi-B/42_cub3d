@@ -208,8 +208,6 @@ void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, fl
 	inside_360(&ca);
 	dist_t = dist_t * cos(ca); //fisheye end
 	line_h = (arr->height * arr->subsize) / dist_t; //line_height
-	if (line_h > arr->height)
-		line_h = arr->height;
 
 	float	line_o;
 		line_o = (arr->height / 2) - line_h * 0.5;

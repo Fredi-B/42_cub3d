@@ -23,11 +23,11 @@ static int	get_color_from_imageatx(t_image *original, int *image_start_x, float 
 
 	scale = (float) original->height / line_h;
 	//scale =  line_h / original->height;
-
 	//return 0;
-	tx = (float) *image_start_x / data->subsize * original->width * scale; //image_start muss eigentlich ein floating-point remainder sein!
-	//printf("tx: %f image_start %d\n", tx, *image_start_x);
+	// scale braucht man bei tx nicht @arno
+	tx = (float) *image_start_x / data->subsize * original->width; //* scale; //image_start muss eigentlich ein floating-point remainder sein!
 	y = 0;
+	ty = 0;
 	while (ty < original->height) //oder +1, was passt?
 	{
 		ty = y * scale;

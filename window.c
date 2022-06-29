@@ -61,6 +61,17 @@ bool	pixel_is_inside_window(int x, int y, t_data *arr)
 		return (false);
 	return (true);
 }
+/* same as pixel_is_inside_window() but for minimap. */
+bool	pixel_is_inside_minimap(int x, int y, t_data *arr)
+{
+	// diprintf(y);
+	// diprintf(arr->minimap_height);
+	if (x < 0 || x > arr->minimap_width -1) // not sure why -1
+		return (false);
+	if (y < 0 || y > arr->minimap_height -1)
+		return (false);
+	return (true);
+}
 
 void	pixel_put(t_data *arr, int x, int y, int color)
 {
@@ -74,10 +85,13 @@ void	pixel_put(t_data *arr, int x, int y, int color)
 			return ;
 		x = x / arr->scale_map;
 		y = y / arr->scale_map;
-		dst = arr->addr_map + (y * arr->size_line_map + x * \
-								(arr->bits_per_pixel / 8));
-		*(unsigned int *)dst = color;
-	 	return ;
+		if (pixel_is_inside_minimap(x, y, arr) == true)
+		{
+			dst = arr->addr_map + (y * arr->size_line_map + x * \
+									(arr->bits_per_pixel / 8));
+			*(unsigned int *)dst = color;
+	 		return ;
+		}
 	}
 	if (pixel_is_inside_window(x, y, arr) == true)
 	{

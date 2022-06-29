@@ -142,8 +142,8 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 	ph.color = WHITE;
 	pv.color = WHITE;
 	//returns distance of ray
-	dis_v = dist_vertical(&pv, arr, ra, direction);
 	dis_h = dist_horizontal(&ph, arr, ra, direction);
+	dis_v = dist_vertical(&pv, arr, ra, direction);
 	//printf("dish: %f disv:%f dof %d\n",dis_h, dis_v, arr->dof);
 	if (dis_v < dis_h) //RAY hits Vertical line
 	{

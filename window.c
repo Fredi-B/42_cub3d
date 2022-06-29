@@ -95,8 +95,9 @@ void	map_to_image(t_data *arr)
 	arr->img = mlx_new_image(arr->mlx, arr->width, arr->height);
 	arr->addr = mlx_get_data_addr(arr->img, &arr->bits_per_pixel, \
 								&arr->size_line, &arr->endian);
-
-	arr->img_map = mlx_new_image(arr->mlx, arr->cols * arr->subsize / arr->scale_map, arr->rows * arr->subsize / arr->scale_map);
+	arr->minimap_width = arr->cols * arr->subsize / arr->scale_map;
+	arr->minimap_height = arr->rows * arr->subsize / arr->scale_map;
+	arr->img_map = mlx_new_image(arr->mlx,arr->minimap_width, arr->minimap_height);
 	arr->addr_map = mlx_get_data_addr(arr->img_map, &arr->bits_per_pixel, \
 								&arr->size_line_map, &arr->endian);
 	init_line(&line);

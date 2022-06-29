@@ -111,6 +111,8 @@ typedef struct s_data
 	int			endian;
 	int			width;
 	int			height;
+	int			minimap_width;
+	int			minimap_height;
 	/* mlx variables OLDMLXLIB in eigenem struct für mehrere images */
 	t_image		xpm_file[4];
 	t_image		wall[4];

@@ -132,7 +132,7 @@ void	all_images_to_window(t_data *arr)
 	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->wall[SOUTH].img, 0, 0);
 }
 
-void	draw_map(t_data *arr)
+bool	draw_map(t_data *arr)
 {
 	arr->mlx = mlx_init();
 	if (!arr->mlx)
@@ -141,9 +141,10 @@ void	draw_map(t_data *arr)
 	arr->mlx_window = mlx_new_window(arr->mlx, arr->width, \
 											arr->height, "cub3D");
 	
-	put_walls_in_images(arr);
+	if (put_walls_in_images(arr) == false)
+		return (false);
 
 	map_to_image(arr);
 	all_images_to_window(arr);
-
+	return (true);
 }

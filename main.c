@@ -19,7 +19,8 @@ int	main(int argc __attribute__ ((unused)), char **argv)
 	init_data(&data);
 	parsing(&data, argv);
 	map_init(&data);
-	draw_map(&data);
+	if (draw_map(&data) == false)
+		err_exit(&data, "Could not draw map", 18, 1);
 	key_hooks(&data);
 	mlx_loop(data.mlx);
 	free_data(&data);

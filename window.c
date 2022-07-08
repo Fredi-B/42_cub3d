@@ -66,9 +66,9 @@ bool	pixel_is_inside_minimap(int x, int y, t_data *arr)
 {
 	// diprintf(y);
 	// diprintf(arr->minimap_height);
-	if (x < 0 || x > arr->minimap_width -1) // not sure why -1
+	if (x < 0 || x > arr->minimap_width -1 || x > arr->width -1) // not sure why -1
 		return (false);
-	if (y < 0 || y > arr->minimap_height -1)
+	if (y < 0 || y > arr->minimap_height -1 || y > arr->height -1)
 		return (false);
 	return (true);
 }

@@ -11,8 +11,11 @@ void	move_y(t_data *arr, int sign)
 	mx = (int)(arr->p_x) >> arr->sub_bit;
 	my = (int)(y) >> arr->sub_bit;
 	mp = my * arr->cols + mx;
-	if (arr->map[mp] == '0')
-		arr->p_y = y;
+/* 	if (arr->map[mp] == '0') //for bonus
+		arr->p_y = y;		//for bonus */
+	if (y > 0 && y < arr->height) //for mand! dachte das geht aber sturzt bei 704 ab (reagiert nicht)
+		arr->p_y = y;		//for mand
+	printf("y-cord: %d, %f, height: %d\n", mp, y, arr->height);
 }
 
 void	move_x(t_data *arr, int sign)
@@ -26,8 +29,10 @@ void	move_x(t_data *arr, int sign)
 	mx = (int)(x) >> arr->sub_bit;
 	my = (int)(arr->p_y) >> arr->sub_bit;
 	mp = my * arr->cols + mx;
-	if (arr->map[mp] == '0')
-		arr->p_x = x;
+	if (arr->map[mp] == '0') 		//for bonus
+		arr->p_x = x; 		//for bonus
+	
+	printf("x-cord: %d, %f\n", mp, x);
 	move_y(arr, sign);
 }
 

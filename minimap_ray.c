@@ -30,7 +30,8 @@ float	calc_dist(t_data *arr, float rx, float ry, t_points *po, float xo, float y
 		my = (int)(ry) >> arr->sub_bit;
 		mp = my * arr->cols + mx;
 		//printf("map: %c my:%d mx:%d\n",arr->map[mp], my, mx);
-		if (mp >= 0 && mp < arr->cols * arr->rows && arr->map[mp] == '1')
+		if (mp >= 0 && mp < arr->cols * arr->rows 
+			&& (arr->map[mp] == '1' || arr->map[mp] == 'X')) //passt das besser, dass er auch bei X endet
 		{
 			po->x = rx;
 			po->y = ry;

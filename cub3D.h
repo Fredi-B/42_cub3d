@@ -51,6 +51,8 @@ typedef struct s_key_flags
 	int	down;
 	int	left;
 	int	right;
+	int	left_rot;
+	int	right_rot;
 }				t_key_flags;
 
 typedef struct s_image
@@ -232,6 +234,7 @@ void	key_hooks(t_data *arr);
 void	move_y(t_data *arr, int sign);
 void	move_x(t_data *arr, int sign);
 void	turn(t_data *arr, int sign);
+void	move_sideways(t_data *arr, int sign);
 
 //int		deal_key(int key, t_array *fdf_win);
 

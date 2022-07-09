@@ -2,10 +2,12 @@
 
 /* Mac keycodes */
 #define ESC 53
-#define LEFT 123
-#define RIGHT 124
-#define DOWN 125
-#define UP 126
+#define UP 13
+#define DOWN 1
+#define RIGHT 0
+#define LEFT 2
+#define LEFT_ROT 123
+#define RIGHT_ROT 124
 
 static int	key_pressed(int key, t_data *arr);
 static int	key_released(int key, t_data *arr);
@@ -42,6 +44,10 @@ static int	key_pressed(int key, t_data *arr)
 		arr->key_flag.left = ON;
 	if (key == RIGHT)
 		arr->key_flag.right = ON;
+	if (key == LEFT_ROT)
+		arr->key_flag.left_rot = ON;
+	if (key == RIGHT_ROT)
+		arr->key_flag.right_rot = ON;
 	return (0);
 }
 
@@ -56,6 +62,10 @@ static int	key_released(int key, t_data *arr)
 		arr->key_flag.left = OFF;
 	if (key == RIGHT)
 		arr->key_flag.right = OFF;
+	if (key == LEFT_ROT)
+		arr->key_flag.left_rot = OFF;
+	if (key == RIGHT_ROT)
+		arr->key_flag.right_rot = OFF;
 	return (0);
 }
 
@@ -67,8 +77,12 @@ static int	hook(t_data *arr)
 	if (arr->key_flag.down == ON)
 		move_x(arr, 3);
 	if (arr->key_flag.left == ON)
-		turn(arr, -1);
+		move_sideways(arr, -3);
 	if (arr->key_flag.right == ON)
+		move_sideways(arr, 3);
+	if (arr->key_flag.left_rot == ON)
+		turn(arr, -1);
+	if (arr->key_flag.right_rot == ON)
 		turn(arr, 1);
 	map_to_image(arr);
 	all_images_to_window(arr);

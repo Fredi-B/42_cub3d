@@ -46,3 +46,25 @@ void	turn(t_data *arr, int sign)
 	arr->p_dx = cos(arr->p_a);
 	arr->p_dy = sin(arr->p_a);
 }
+
+/* uses adjusted turn() before and after move_x().
+First line of turn() is replaced by a 90 degree turn in one direction before move_x() 
+and in the other direction thereafter */
+void	move_sideways(t_data *arr, int sign)
+{
+	arr->p_a += 0.5 * M_PI;
+	if (arr->p_a >= 2 * M_PI)
+		arr->p_a -= 2 * M_PI;
+	if (arr->p_a < 0)
+			arr->p_a += 2 * M_PI;
+	arr->p_dx = cos(arr->p_a);
+	arr->p_dy = sin(arr->p_a);
+	move_x(arr, sign);
+	arr->p_a -= 0.5 * M_PI;
+	if (arr->p_a >= 2 * M_PI)
+		arr->p_a -= 2 * M_PI;
+	if (arr->p_a < 0)
+			arr->p_a += 2 * M_PI;
+	arr->p_dx = cos(arr->p_a);
+	arr->p_dy = sin(arr->p_a);
+}

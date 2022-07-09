@@ -55,6 +55,8 @@ static void	init_key_flags(t_data *data)
 	data->key_flag.down = OFF;
 	data->key_flag.left = OFF;
 	data->key_flag.right = OFF;
+	data->key_flag.left_rot = OFF;
+	data->key_flag.right_rot = OFF;
 }
 
 static void	init_xpm(t_data *data)

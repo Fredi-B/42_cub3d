@@ -82,7 +82,7 @@ void	get_rays(t_data *arr, t_line *line)
 		dist_t = draw_ray_minimap(&image_start_x, &direction, arr, line, ra);
 		if (dist_t < 50) //too close to wall
 		{
-			arr->map_flag = 0;
+			arr->map_flag = OFF;
 			single_color_wall(arr, line, r);
 		}
 		else

@@ -139,7 +139,7 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 	t_points	pv;
 	t_points	ph;
 
-	arr->map_flag = 1;
+	arr->map_flag = ON;
 	ph.color = WHITE;
 	pv.color = WHITE;
 	//returns distance of ray
@@ -154,7 +154,8 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 		//printf("playerv: %d %d\n",ph.x, ph.y);
 		//printf("rayendv: %d %d!\n",pv.x, pv.y);
 		//printf("rayendv: %d %d!\n",((int)pv.y % arr->subsize), pv.y);
-		set_line(line, arr, ph, pv); //draw RAY in 2D Map
+		if (arr->draw_map_flag == ON)
+			set_line(line, arr, ph, pv); //draw RAY in 2D Map
 		*direction = *direction / 10;
 		return (dis_v);
 	}
@@ -164,7 +165,8 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 	//printf("playerh: %d %d\n",pv.x, pv.y);
 	//printf("rayendh: %d! %d\n",ph.x, ph.y);
 	//printf("rayendh: %d! %d\n",ph.x, ((int)ph.x % arr->subsize));
-	set_line(line, arr, ph, pv); //draw RAY in 2D Map
+	if (arr->draw_map_flag == ON)
+		set_line(line, arr, ph, pv); //draw RAY in 2D Map
 	*direction = *direction % 10;
 	return (dis_h);
 /* 		if (disV + 0.001 > disH && disV - 0.001 < disH) //RAY hits Corner?
@@ -204,7 +206,7 @@ void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, fl
 	//t_points pv;
 	//t_points ph;
 	//ph.color = WHITE;
-	arr->map_flag = 0;
+	arr->map_flag = OFF;
 	ca = arr->p_a - ra; //fisheye start
 	inside_360(&ca);
 	dist_t = dist_t * cos(ca); //fisheye end

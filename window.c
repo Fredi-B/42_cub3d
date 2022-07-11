@@ -79,7 +79,7 @@ void	pixel_put(t_data *arr, int x, int y, int color)
 	// diprintf(x);
 	// diprintf(y);
 	// diprintf(arr->width);
-	if (arr->map_flag == 1)
+	if (arr->map_flag == ON)
 	{
 		if (x % arr->scale_map || y % arr->scale_map)
 			return ;
@@ -117,7 +117,7 @@ void	map_to_image(t_data *arr)
 	init_line(&line);
 	arr->map_flag = ON;
 	if (arr->draw_map_flag == ON)
-	get_map(arr, &line);
+		get_map(arr, &line);
 	get_player(arr, &line);
 	get_rays(arr, &line);
 
@@ -128,7 +128,7 @@ void	all_images_to_window(t_data *arr)
 	mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
 							arr->img, 0, 0);
 	if (arr->draw_map_flag == ON)
-	mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
+		mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
 							arr->img_map, 0, 0);
 	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->xpm_file[WEST].img, 500, 500);
 	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->wall[SOUTH].img, 0, 0);

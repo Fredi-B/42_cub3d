@@ -8,6 +8,7 @@
 #define LEFT 2
 #define LEFT_ROT 123
 #define RIGHT_ROT 124
+#define MINIMAP 46
 
 static int	key_pressed(int key, t_data *arr);
 static int	key_released(int key, t_data *arr);
@@ -48,6 +49,8 @@ static int	key_pressed(int key, t_data *arr)
 		arr->key_flag.left_rot = ON;
 	if (key == RIGHT_ROT)
 		arr->key_flag.right_rot = ON;
+	if (key == MINIMAP)
+		arr->draw_map_flag = ON;
 	return (0);
 }
 
@@ -66,6 +69,8 @@ static int	key_released(int key, t_data *arr)
 		arr->key_flag.left_rot = OFF;
 	if (key == RIGHT_ROT)
 		arr->key_flag.right_rot = OFF;
+	if (key == MINIMAP)
+		arr->draw_map_flag = OFF;
 	return (0);
 }
 

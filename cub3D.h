@@ -81,6 +81,7 @@ typedef struct s_data
 	int				sub_bit;
 	int				scale_map;
 	int				map_flag;
+	int				draw_map_flag;
 	/* general variables NEEDS CHECKING!*/
 	int			*num;
 	int			cols;

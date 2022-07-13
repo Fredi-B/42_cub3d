@@ -92,6 +92,7 @@ void	pixel_put(t_data *arr, int x, int y, int color)
 			*(unsigned int *)dst = color;
 	 		return ;
 		}
+		return ;
 	}
 	if (pixel_is_inside_window(x, y, arr) == true)
 	{

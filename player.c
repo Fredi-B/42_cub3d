@@ -26,6 +26,14 @@ void	get_player(t_data *arr, t_line *line)
 		p0.y = arr->p_y - 2; // - 5;
 		p1.x = p0.x;
 		p1.y = arr->p_y + 2;
+		// hab den player mal an einer Stelle fixiert
+		// diprintf(arr->minimap_height / 2);
+		// diprintf(arr->minimap_width / 2);
+		
+		// p0.x = (arr->minimap_width / 2) + i - 2;
+		// p0.y = (arr->minimap_height / 2) - 2; // - 5;
+		// p1.x = p0.x;
+		// p1.y = (arr->minimap_height / 2)+ 2;
 		p1.color = p0.color;
 		set_line(line, arr, p0, p1);
 		i++;
@@ -80,7 +88,7 @@ void	get_rays(t_data *arr, t_line *line)
 		image_start_x = 0;
 		direction = 0;
 		dist_t = draw_ray_minimap(&image_start_x, &direction, arr, line, ra);
-		if (dist_t < 50) //too close to wall
+		if (dist_t < 20) //too close to wall
 		{
 			arr->map_flag = OFF;
 			single_color_wall(arr, line, r);

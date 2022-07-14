@@ -12,6 +12,9 @@ void	get_map_2(t_data *arr, t_line *line, int row, int col)
 			p0.color = GREEN;
 		else
 			p0.color = BLACK;
+		// malt die map noch an der 'falschen' Stelle. d.h. nicht zentriert um den fixen player drum rum.
+		// p0.x = ((col * arr->subsize + i +1) - (arr->p_x / 64));
+		// p0.y = ((row * arr->subsize +1) - (arr->p_y / 64));
 		p0.x = col * arr->subsize + i +1;
 		p0.y = row * arr->subsize +1;
 		p1.x = p0.x;
@@ -24,19 +27,32 @@ void	get_map_2(t_data *arr, t_line *line, int row, int col)
 
 static void	get_map(t_data *arr, t_line *line)
 {
-	int	row;
-	int	col;
+	// malt nur noch die map, die um den player drum rum ist
+	int	start_row;
+	int	start_col;
+	int	end_row;
+	int	end_col;
 
-	row = 0;
-	while (row < arr->rows)
+	start_row = (arr->p_y / 64) - 8 ;
+	if (start_row < 0)
+		start_row = 0;
+	end_row = start_row + 16;
+	if (end_row > arr->rows)
+		end_row = arr->rows;
+	while (start_row < end_row)
 	{
-		col = 0;
-		while (col < arr->cols)
+		start_col = (arr->p_x / 64) - 8;
+		if (start_col < 0)
+			start_col = 0;
+		end_col = start_col + 16;
+		if (end_col > arr->cols)
+			end_col = arr->cols;
+		while (start_col < end_col)
 		{
-			get_map_2(arr, line, row, col);
-			col++;
+			get_map_2(arr, line, start_row, start_col);
+			start_col++;
 		}
-		row++;
+		start_row++;
 	}
 }
 

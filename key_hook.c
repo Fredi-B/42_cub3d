@@ -37,20 +37,21 @@ static int	key_pressed(int key, t_data *arr)
 {
 	if (key == ESC)
 		destroy_window(arr);
-	if (key == UP)
-		arr->key_flag.up = ON;
-	if (key == DOWN)
-		arr->key_flag.down = ON;
-	if (key == LEFT)
-		arr->key_flag.left = ON;
-	if (key == RIGHT)
-		arr->key_flag.right = ON;
+
 	if (key == LEFT_ROT)
 		arr->key_flag.left_rot = ON;
 	if (key == RIGHT_ROT)
 		arr->key_flag.right_rot = ON;
 	if (key == MINIMAP)
 		arr->draw_map_flag = ON;
+	if (key == DOWN)
+		arr->key_flag.down = ON;
+	if (key == LEFT)
+		arr->key_flag.left = ON;
+	if (key == RIGHT)
+		arr->key_flag.right = ON;
+	if (key == UP)
+		arr->key_flag.up = ON;
 	return (0);
 }
 

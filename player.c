@@ -38,10 +38,10 @@ void	get_player(t_data *arr, t_line *line)
 		set_line(line, arr, p0, p1);
 		i++;
 	}
-/*   	i = -1;
-	while (i < 1) //breite Fahne
+  	i = -1;
+	while (i < 5) //breite Fahne
 	{
-		p0.color = YELLOW;
+		p0.color = WHITE;
 		p0.x = arr->p_x + i ; // + i - 5;
 		p0.y = arr->p_y;
 		p1.x = p0.x - arr->p_dx*25;
@@ -49,7 +49,7 @@ void	get_player(t_data *arr, t_line *line)
 		p1.color = p0.color; 
 		set_line(line, arr, p0, p1);
 		i++;
-	} */
+	}
 }
 
 static void	single_color_wall(t_data *arr, t_line *line, int r)
@@ -70,6 +70,69 @@ static void	single_color_wall(t_data *arr, t_line *line, int r)
 		//i++;
 	//}
 }
+
+void	make_bouquet(t_data *arr, t_line *line)
+{
+	t_points	p0;
+	t_points	p1;
+	float		ra;
+	int			i;
+
+	arr->map_flag = ON;
+	p0.color = WHITE;
+	p1.color = WHITE;
+
+	p0.x = arr->p_x;
+	p0.y = arr->p_y;
+
+	ra = arr->p_a - ODR01 * 0.25 * 60;
+	i = 0;
+	while (i < 60)
+	{
+		ra += ODR01 * 0.5;
+		inside_360(&ra);
+		p1.x = cos(ra) * 50;
+		p1.y = sin(ra) * 50;
+		i++;
+		printf("%d, %d\n", i, p1.x);
+		set_line(line, arr, p0, p1);
+	}
+}
+
+
+static void	draw_vision(t_data *data)
+{
+	int		i;
+	int		j;
+	int x = data->p_x;
+	int y = data->p_y;
+
+	float	ang_rad;
+	t_image	*img;
+
+
+	ang_rad = data->p_a * 180 / M_PI;
+	img = data->img_map;
+	j = 0;
+	dwrite(test);
+	while (j <= 41)
+	{
+		i = 0;
+		while (i < 40)
+		{
+			int new_x = x + cos((ang_rad + j) * M_PI / 180) * (i);
+			int new_y = y + sin((ang_rad + j) * M_PI / 180) * (i);
+			if (i == 10 && j == 10)
+				diprintf(new_y);
+			pixel_put(data, new_x, new_y, WHITE);
+			pixel_put(data, new_x, new_y, WHITE);
+			i++;
+		}
+		j += 2;
+	}
+}
+
+//0x2b2d2e
 void	get_rays(t_data *arr, t_line *line)
 {
 	int			direction;
@@ -81,6 +144,7 @@ void	get_rays(t_data *arr, t_line *line)
 
 	ra = arr->p_a - ODR01 * 0.25 * arr->width;
 	r = 0;
+	// draw_vision(arr);
 	while (r <= arr->width)
 	{
 		ra += ODR01 * 0.5;

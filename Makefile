@@ -6,7 +6,7 @@ ODIR = o-files
 USER = $(shell echo $$USER)
 # -L followed by the relative path of the library to link it
 
-LINUX_LIBRARIES = -L ./libft -lft -L ./minilibX -lmlx_Linux -Imlx_linux -lXext -lX11 -lm # OLD MLXLIB
+#LINUX_LIBRARIES = -L ./libft -lft -L ./minilibX -lmlx_Linux -Imlx_linux -lXext -lX11 -lm # OLD MLXLIB
 # NEW MLXLIB: LINUX_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -ldl
 # Maybe this works for libft? -> MAC_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
 MAC_LIBRARIES = libft/libft.a -L ./libft -L ./mlx -lmlx -framework OpenGL -framework AppKit
@@ -14,26 +14,26 @@ MAC_LIBRARIES = libft/libft.a -L ./libft -L ./mlx -lmlx -framework OpenGL -frame
 CFILES = \
 err_exit.c \
 init.c \
+key_hook.c \
 line.c \
 main.c \
-minimap.c \
 minimap_ray.c \
-parsing.c \
-parsing_map.c \
-parsing_map_utils.c \
-parsing_map_utils_two.c \
-parsing_map_validation.c \
-parsing_store_data.c \
-parsing_store_data_utils.c \
-textures.c \
-textures_utils.c \
-player.c \
-walls.c \
+minimap.c \
 move.c \
-window.c \
-key_hook.c
+parsing_map_utils_two.c \
+parsing_map_utils.c \
+parsing_map_validation.c \
+parsing_map.c \
+parsing_store_data_utils.c \
+parsing_store_data.c \
+parsing.c \
+player.c \
+textures_utils.c \
+textures.c \
+walls.c \
+window.c
 
-LINUX_KEYHOOK = key_hook_linux.c
+
 
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 OBJECTS := $(addprefix $(ODIR)/,$(OBJECTS))
@@ -42,13 +42,8 @@ UNAME_S := $(shell uname -s)
 $(NAME): $(ODIR) $(OBJECTS) 
 	@make -C ./libft
 #	@make -C ./mlx
-
-ifeq ($(UNAME_S),Linux)
-	@make -C ./minilibX
-	$(CC) $(CFLAGS) $(OBJECTS) $(LINUX_KEYHOOK) -lm $(LINUX_LIBRARIES) -o $(NAME)
-else
 	$(CC) $(CFLAGS) $(OBJECTS) $(MAC_KEYHOOK) -lm $(MAC_LIBRARIES) -o $(NAME)
-endif
+
 
 $(ODIR):
 	@mkdir $(ODIR)

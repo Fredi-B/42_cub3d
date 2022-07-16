@@ -258,4 +258,8 @@ void	map_to_image(t_data *arr);
 void	all_images_to_window(t_data *arr);
 bool	pixel_is_inside_window(int x, int y, t_data *arr);
 
+
+/* move.c*/
+int		hook(t_data *data);
+
 #endif

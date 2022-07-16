@@ -32,9 +32,9 @@ static int	get_color_from_imageatx(t_image *original, int *image_start_x, float 
 	{
 		ty = y * scale;
 		//printf("ORGheight:%d, tx %f, ty: %f, scale: %f\n", original->height, tx, ty, scale);
-		color = get_pixel_color(original, tx, ty);
+		color = get_pixel_color(original, (int) tx, (int) ty);
 		//(x=r, y=-line_h*0.5+y);
-		pixel_put(data, r, data->height * 0.5 + (int) - line_h*0.5+y, color);
+		pixel_put(data, r, data->height * 0.5 - line_h * 0.5 + y, color);
 		y++;
 	}
 	return (OK); //soll man überhaupt returnen?

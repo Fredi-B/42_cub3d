@@ -28,9 +28,10 @@ parsing_store_data_utils.c \
 textures.c \
 textures_utils.c \
 player.c \
-player_movement.c \
 walls.c \
-window.c
+move.c \
+window.c 
+#player_movement.c \
 
 MAC_KEYHOOK = key_hook.c # diese zeile oben einfuegen und unten rausnehmen
 LINUX_KEYHOOK = key_hook_linux.c

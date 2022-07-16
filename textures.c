@@ -36,7 +36,7 @@ static bool	put_wall_in_image(t_data *arr, int side, char *direction)
 	x_and_y[0] = 200;
 	x_and_y[1] = 200;
 	resize_texture(arr->mlx, &arr->xpm_file[side], &arr->wall[side], x_and_y);
-	// mlx_destroy_image(arr->mlx, arr->xpm_file[side].img); // von fred: brauchen wir das?
+	mlx_destroy_image(arr->mlx, arr->xpm_file[side].img);
 	return (true);
 }
 

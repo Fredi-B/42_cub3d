@@ -230,10 +230,6 @@ void	turn(t_data *arr, int sign);
 void	move_sideways(t_data *arr, int sign);
 int		move(t_data *arr);
 
-
-//int		deal_key(int key, t_array *fdf_win);
-
-
 /* player.c*/
 void	get_player(t_data *arr, t_line *line);
 void	get_rays(t_data *arr, t_line *line);
@@ -249,8 +245,11 @@ void	destroy_window(t_data *arr);
 void	map_to_image(t_data *arr);
 bool	pixel_is_inside_window(int x, int y, t_data *arr);
 
-
 /* move.c*/
-int		hook(t_data *data);
+bool	check_if_is_wall(t_data *arr, int x, int y);
+bool	search_wall_x(t_data *data, int *old_x, int old_y, int new_x);
+bool	search_wall_y(t_data *data, int old_x_copy, int *old_y, int new_y);
+bool	going_across(t_data *data, float new_x, float new_y);
+bool	less_than_x_pixels(t_data *data, float new_x, float new_y, int p);
 
 #endif

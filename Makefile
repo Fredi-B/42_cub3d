@@ -20,6 +20,7 @@ main.c \
 minimap_ray.c \
 minimap.c \
 move.c \
+move_check.c \
 parsing_map_utils_two.c \
 parsing_map_utils.c \
 parsing_map_validation.c \
@@ -27,6 +28,7 @@ parsing_map.c \
 parsing_store_data_utils.c \
 parsing_store_data.c \
 parsing.c \
+pixel_put.c \
 player.c \
 textures_utils.c \
 textures.c \

@@ -237,6 +237,8 @@ void	move_y(t_data *arr, int sign);
 void	move_x(t_data *arr, int sign);
 void	turn(t_data *arr, int sign);
 void	move_sideways(t_data *arr, int sign);
+int		move(t_data *arr);
+
 
 //int		deal_key(int key, t_array *fdf_win);
 

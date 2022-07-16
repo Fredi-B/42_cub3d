@@ -48,7 +48,6 @@ void	key_hooks(t_data *arr)
 	mlx_hook(arr->mlx_window, 3, 0, &key_released, arr);
 	mlx_hook(arr->mlx_window, 06, 0L, &move_mouse, arr);
 	mlx_hook(arr->mlx_window, 17, (1L << 17), &red_x_exit, arr);
-	mlx_loop_hook(arr->mlx, &hook, arr);
 }
 
 /* sets key_flags to on */

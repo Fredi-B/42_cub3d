@@ -120,24 +120,21 @@ void	pixel_put(t_data *arr, int x, int y, int color)
 
 void	map_to_image(t_data *arr)
 {
-	t_line			line;
-
-	mlx_clear_window(arr->mlx, arr->mlx_window);
+	// mlx_clear_window(arr->mlx, arr->mlx_window);
 	arr->img = mlx_new_image(arr->mlx, arr->width, arr->height);
+	if (arr->img == NULL)
+		err_exit(arr, "Error: could not create mlx image", 33, 1);
 	arr->addr = mlx_get_data_addr(arr->img, &arr->bits_per_pixel, \
 								&arr->size_line, &arr->endian);
-	arr->minimap_width = arr->cols * arr->subsize / arr->scale_map;
-	arr->minimap_height = arr->rows * arr->subsize / arr->scale_map;
+	arr->minimap_width = 5 * arr->subsize;
+	arr->minimap_height = 5 * arr->subsize;
+	// exception has occured (auch wenn nicht direkt an wand.
+	// Löschen wir die images richtig?)
 	arr->img_map = mlx_new_image(arr->mlx,arr->minimap_width, arr->minimap_height);
+	if (arr->img_map == NULL)
+		err_exit(arr, "Error: could not create mlx image", 33, 1);
 	arr->addr_map = mlx_get_data_addr(arr->img_map, &arr->bits_per_pixel, \
 								&arr->size_line_map, &arr->endian);
-	init_line(&line);
-	arr->map_flag = ON;
-	if (arr->draw_map_flag == ON)
-		get_map(arr, &line);
-	get_player(arr, &line);
-	get_rays(arr, &line);
-
 }
 
 void	all_images_to_window(t_data *arr)
@@ -149,6 +146,22 @@ void	all_images_to_window(t_data *arr)
 							arr->img_map, 0, 0);
 	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->xpm_file[WEST].img, 500, 500);
 	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->wall[SOUTH].img, 0, 0);
+}
+
+static int	main_loop(t_data *arr)
+{
+	t_line	line;
+
+	move(arr);
+	mlx_do_sync(arr->mlx);
+	init_line(&line);
+	arr->map_flag = ON;
+	if (arr->draw_map_flag == ON)
+		get_map(arr, &line);
+	get_player(arr, &line);
+	get_rays(arr, &line);
+	all_images_to_window(arr);
+	return (0);
 }
 
 bool	draw_map(t_data *arr)
@@ -164,6 +177,7 @@ bool	draw_map(t_data *arr)
 		return (false);
 
 	map_to_image(arr);
-	all_images_to_window(arr);
+	mlx_loop_hook(arr->mlx, &main_loop, arr);
+
 	return (true);
 }

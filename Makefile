@@ -30,10 +30,9 @@ textures_utils.c \
 player.c \
 walls.c \
 move.c \
-window.c 
-#player_movement.c \
+window.c \
+key_hook.c
 
-MAC_KEYHOOK = key_hook.c # diese zeile oben einfuegen und unten rausnehmen
 LINUX_KEYHOOK = key_hook_linux.c
 
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))

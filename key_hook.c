@@ -23,10 +23,30 @@ int	red_x_exit(t_data *arr)
 	return (0);
 }
 
+static int	move_mouse(int x, int y, t_data *data)
+{
+	if (data->key_flag.mouse_x == 1)
+		data->key_flag.mouse_x = x;
+	if (x < data->key_flag.mouse_x - 10)
+	{
+		data->p_a -= 10 * ODR;
+		inside_360(&data->p_a);
+		data->key_flag.mouse_x = x;
+	}
+	else if (x > data->key_flag.mouse_x + 10)
+	{
+		data->p_a +=  10 * ODR;
+		inside_360(&data->p_a);
+		data->key_flag.mouse_x = x;
+	}
+	return (0);
+}
+
 void	key_hooks(t_data *arr)
 {
 	mlx_hook(arr->mlx_window, 2, 0, &key_pressed, arr);
 	mlx_hook(arr->mlx_window, 3, 0, &key_released, arr);
+	mlx_hook(arr->mlx_window, 06, 0L, &move_mouse, arr);
 	mlx_hook(arr->mlx_window, 17, (1L << 17), &red_x_exit, arr);
 	mlx_loop_hook(arr->mlx, &hook, arr);
 }
@@ -36,7 +56,6 @@ static int	key_pressed(int key, t_data *arr)
 {
 	if (key == ESC)
 		destroy_window(arr);
-
 	if (key == LEFT_ROT)
 		arr->key_flag.left_rot = ON;
 	if (key == RIGHT_ROT)

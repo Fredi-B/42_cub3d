@@ -53,6 +53,7 @@ typedef struct s_key_flags
 	int	right;
 	int	left_rot;
 	int	right_rot;
+	int	mouse_x;
 }				t_key_flags;
 
 typedef struct s_image

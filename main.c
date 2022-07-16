@@ -59,6 +59,7 @@ static void	init_key_flags(t_data *data)
 	data->key_flag.right_rot = OFF;
 	data->map_flag = OFF;
 	data->draw_map_flag = ON;
+	data->key_flag.mouse_x = 1;
 }
 
 static void	init_xpm(t_data *data)

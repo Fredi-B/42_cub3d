@@ -79,9 +79,6 @@ typedef struct s_data
 	char			*map;
 	int				subsize;
 	int				sub_bit;
-	int				scale_map;
-	int				map_flag;
-	int				draw_map_flag;
 	/* general variables NEEDS CHECKING!*/
 	int			*num;
 	int			cols;
@@ -104,23 +101,17 @@ typedef struct s_data
 	void		*mlx;
 	void		*mlx_window;
 	void		*img;
-	void		*img_map;
 	char		*addr;
-	char		*addr_map;
 	int			bits_per_pixel;
 	int			line_length;
 	int			size_line;
-	int			size_line_map;
 	int			endian;
 	int			width;
 	int			height;
-	int			minimap_width;
-	int			minimap_height;
 	/* mlx variables OLDMLXLIB in eigenem struct für mehrere images */
 	t_image		xpm_file[4];
 	t_image		wall[4];
 	t_image		first_person_view;
-	t_image		minimap;
 	// t_image		player_in_minimap;
 	
 	/* mlx variables NEWMLXLIB*/
@@ -255,7 +246,6 @@ bool	draw_map(t_data *arr);
 void	pixel_put(t_data *arr, int x, int y, int color);
 void	destroy_window(t_data *arr);
 void	map_to_image(t_data *arr);
-void	all_images_to_window(t_data *arr);
 bool	pixel_is_inside_window(int x, int y, t_data *arr);
 
 

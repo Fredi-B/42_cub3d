@@ -8,7 +8,6 @@
 #define LEFT 2
 #define LEFT_ROT 123
 #define RIGHT_ROT 124
-#define MINIMAP 46
 
 static int	key_pressed(int key, t_data *arr);
 static int	key_released(int key, t_data *arr);
@@ -16,7 +15,6 @@ static int	key_released(int key, t_data *arr);
 int	red_x_exit(t_data *arr)
 {
 	mlx_destroy_image(arr->mlx, arr->img);
-	mlx_destroy_image(arr->mlx, arr->img_map);
 	mlx_destroy_window(arr->mlx, arr->mlx_window);
 	free_arr(arr);
 	exit(0);
@@ -40,8 +38,6 @@ static int	key_pressed(int key, t_data *arr)
 		arr->key_flag.left_rot = ON;
 	if (key == RIGHT_ROT)
 		arr->key_flag.right_rot = ON;
-	if (key == MINIMAP)
-		arr->draw_map_flag = ON;
 	if (key == DOWN)
 		arr->key_flag.down = ON;
 	if (key == LEFT)
@@ -68,7 +64,5 @@ static int	key_released(int key, t_data *arr)
 		arr->key_flag.left_rot = OFF;
 	if (key == RIGHT_ROT)
 		arr->key_flag.right_rot = OFF;
-	if (key == MINIMAP)
-		arr->draw_map_flag = OFF;
 	return (0);
 }

@@ -39,12 +39,8 @@ static void	init_data(t_data *data)
 	data->mlx_window = NULL;
 	data->img = NULL;
 	data->addr = NULL;
-	data->img_map = NULL;
-	data->addr_map = NULL;
 	data->first_person_view.img = NULL;
 	data->first_person_view.addr = NULL;
-	data->minimap.img = NULL;
-	data-> minimap.addr = NULL;
 	init_key_flags(data);
 	init_xpm(data);
 }
@@ -57,8 +53,6 @@ static void	init_key_flags(t_data *data)
 	data->key_flag.right = OFF;
 	data->key_flag.left_rot = OFF;
 	data->key_flag.right_rot = OFF;
-	data->map_flag = OFF;
-	data->draw_map_flag = ON;
 }
 
 static void	init_xpm(t_data *data)

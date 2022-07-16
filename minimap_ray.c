@@ -139,7 +139,6 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 	t_points	pv;
 	t_points	ph;
 
-	arr->map_flag = ON;
 	ph.color = WHITE;
 	pv.color = WHITE;
 	//returns distance of ray
@@ -151,22 +150,6 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 		ph.x = arr->p_x; //set the other point
 		ph.y = arr->p_y;
 		*image_start_x = pv.y % arr->subsize;
-		//printf("playerv: %d %d\n",ph.x, ph.y);
-		//printf("rayendv: %d %d!\n",pv.x, pv.y);
-		//printf("rayendv: %d %d!\n",((int)pv.y % arr->subsize), pv.y);
-		if (arr->draw_map_flag == ON)
-		{
-			// Versuch die rays an der Stelle des fixierten players (5 * 64 + 3) zu fixieren
-			// t_points	ph_tmp;
-			// t_points	pv_tmp;
-			// ph_tmp.color = ph.color;
-			// ph_tmp.x = 5 * 64 + 3;
-			// ph_tmp.y = 3 * 64;
-			// pv_tmp.color = pv.color;
-			// pv_tmp.x = (5 * 64 + 3) + ph.x - pv.x;
-			// pv_tmp.y = (3 * 64) - ph.y - pv.y;
-			set_line(line, arr, ph, pv); //draw RAY in 2D Map
-		}
 		*direction = *direction / 10;
 		return (dis_v);
 	}
@@ -176,22 +159,6 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 	//printf("playerh: %d %d\n",pv.x, pv.y);
 	//printf("rayendh: %d! %d\n",ph.x, ph.y);
 	//printf("rayendh: %d! %d\n",ph.x, ((int)ph.x % arr->subsize));
-	if (arr->draw_map_flag == ON)
-	{
-		// Versuch die rays an der Stelle des fixierten players (5 * 64 + 3) zu fixieren
-		// t_points	ph_tmp;
-		// t_points	pv_tmp;
-		// ph_tmp.color = ph.color;
-		// ph_tmp.x = 5 * 64 + 3;
-		// ph_tmp.y = 3 * 64;
-		// pv_tmp.color = pv.color;
-		// // if (ph.x < pv.x)
-		// 	pv_tmp.x = (5 * 64 + 3) + pv.x - ph.x;
-		// else
-
-		// pv_tmp.y = (3 * 64) - pv.y - ph.y;
-		set_line(line, arr, ph, pv); //draw RAY in 2D Map
-	}
 	*direction = *direction % 10;
 	return (dis_h);
 /* 		if (disV + 0.001 > disH && disV - 0.001 < disH) //RAY hits Corner?
@@ -231,7 +198,6 @@ void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, fl
 	//t_points pv;
 	//t_points ph;
 	//ph.color = WHITE;
-	arr->map_flag = OFF;
 	ca = arr->p_a - ra; //fisheye start
 	inside_360(&ca);
 	dist_t = dist_t * cos(ca); //fisheye end

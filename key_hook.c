@@ -16,7 +16,6 @@ int	red_x_exit(t_data *arr)
 {
 	mlx_destroy_image(arr->mlx, arr->img);
 	mlx_destroy_window(arr->mlx, arr->mlx_window);
-	free_arr(arr);
 	exit(0);
 	return (0);
 }
@@ -33,7 +32,7 @@ static int	move_mouse(int x, int y, t_data *data)
 	}
 	else if (x > data->key_flag.mouse_x + 10)
 	{
-		data->p_a +=  10 * ODR;
+		data->p_a += 10 * ODR;
 		inside_360(&data->p_a);
 		data->key_flag.mouse_x = x;
 	}

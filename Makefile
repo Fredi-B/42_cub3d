@@ -13,12 +13,10 @@ MAC_LIBRARIES = libft/libft.a -L ./libft -L ./mlx -lmlx -framework OpenGL -frame
 
 CFILES = \
 err_exit.c \
-init.c \
 key_hook.c \
 line.c \
 main.c \
-minimap_ray.c \
-minimap.c \
+map_init.c \
 move.c \
 move_check.c \
 parsing_map_utils_two.c \
@@ -30,6 +28,8 @@ parsing_store_data.c \
 parsing.c \
 pixel_put.c \
 player.c \
+ray.c \
+ray_util.c \
 textures_utils.c \
 textures.c \
 walls.c \

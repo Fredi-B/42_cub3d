@@ -12,7 +12,6 @@
 
 static int	key_pressed(int key, t_data *arr);
 static int	key_released(int key, t_data *arr);
-static int	hook(t_data *arr);
 
 int	red_x_exit(t_data *arr)
 {
@@ -29,7 +28,6 @@ void	key_hooks(t_data *arr)
 	mlx_hook(arr->mlx_window, 2, 0, &key_pressed, arr);
 	mlx_hook(arr->mlx_window, 3, 0, &key_released, arr);
 	mlx_hook(arr->mlx_window, 17, (1L << 17), &red_x_exit, arr);
-	mlx_loop_hook(arr->mlx, &hook, arr);
 }
 
 /* sets key_flags to on */
@@ -76,7 +74,7 @@ static int	key_released(int key, t_data *arr)
 }
 
 /* update player position using key_flags */
-static int	hook(t_data *arr)
+int	move(t_data *arr)
 {
 	if (arr->key_flag.up == ON)
 		move_x(arr, -3);
@@ -90,7 +88,7 @@ static int	hook(t_data *arr)
 		turn(arr, -1);
 	if (arr->key_flag.right_rot == ON)
 		turn(arr, 1);
-	map_to_image(arr);
-	all_images_to_window(arr);
+	// map_to_image(arr);
+	// all_images_to_window(arr);
 	return (0);
 }

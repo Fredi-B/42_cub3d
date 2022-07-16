@@ -12,7 +12,6 @@
 
 static int	key_pressed(int key, t_data *arr);
 static int	key_released(int key, t_data *arr);
-static int	hook(t_data *arr);
 
 int	red_x_exit(t_data *arr)
 {
@@ -72,25 +71,5 @@ static int	key_released(int key, t_data *arr)
 		arr->key_flag.right_rot = OFF;
 	if (key == MINIMAP)
 		arr->draw_map_flag = OFF;
-	return (0);
-}
-
-/* update player position using key_flags */
-static int	hook(t_data *arr)
-{
-	if (arr->key_flag.up == ON)
-		move_x(arr, -3);
-	if (arr->key_flag.down == ON)
-		move_x(arr, 3);
-	if (arr->key_flag.left == ON)
-		move_sideways(arr, -3);
-	if (arr->key_flag.right == ON)
-		move_sideways(arr, 3);
-	if (arr->key_flag.left_rot == ON)
-		turn(arr, -1);
-	if (arr->key_flag.right_rot == ON)
-		turn(arr, 1);
-	map_to_image(arr);
-	all_images_to_window(arr);
 	return (0);
 }

@@ -201,23 +201,24 @@ void	*my_new_image(void *mlx, int width, int height, t_image *copy);
 bool	pixel_is_inside_image(int x, int y, t_image *img);
 void	image_pixel_put(t_image *img, int x, int y, int color);
 
-/* init.c*/
-void	init_arr(t_data *arr);
-void	free_arr(t_data *arr);
-void	init_line(t_line *line);
-
 /* line.c*/
 void	set_line(t_line *line, t_data *arr, t_points p0, t_points p1);
 void	draw_line(t_line *line, t_data *arr);
 
 /* minimap.c*/
 int		map_init(t_data *arr);
+void	init_line(t_line *line);
 
-/* minimap_ray.c*/
+/* ray_util.c*/
 void	inside_360(float *ra);
+float	dist_vec(t_data *arr, float x, float y);
+float	calc_dist(t_data *arr, float rx, float ry, t_points *po, float xo, float yo);
+float	calc_atan(float ra);
+float	calc_ntan(float ra);
+
+/* ray.c*/
 float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra);
 void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra, int r, float dist_t);
-float	dist_vec(t_data *arr, float x, float y);
 
 /* key_hook.c*/
 //void	hook(void *param); NEWMINILIB

@@ -4,7 +4,6 @@ void	destroy_window(t_data *arr)
 {
 	mlx_destroy_image(arr->mlx, arr->img);
 	mlx_destroy_window(arr->mlx, arr->mlx_window);
-	free_arr(arr);
 	exit(0);
 }
 	/* system("leaks fdf"); */

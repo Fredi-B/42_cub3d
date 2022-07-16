@@ -1,57 +1,7 @@
 #include "cub3D.h"
 
-//is angle inside 360 degrees?
-void	inside_360(float *ra)
-{
-	if (*ra < 0)
-		*ra += 2 * M_PI;
-	if (*ra >= 2 * M_PI)
-		*ra -= 2 * M_PI;
-}
-
-float	dist_vec(t_data *arr, float x, float y)
-{
-	return (sqrt((x - arr->p_x) * (x - arr->p_x) + \
-			(y - arr->p_y) * (y - arr->p_y)));
-}
-
-float	calc_dist(t_data *arr, float rx, float ry, t_points *po, float xo, float yo)
-{
-	int		dof;
-	int		mx;
-	int		my;
-	int		mp;
-
-	dof = 0;
-	while (dof < arr->dof)
-	{
-		//printf("mx: %d my: %d mp: %d\n",mx, my, mp);
-		mx = (int)(rx) >> arr->sub_bit;
-		my = (int)(ry) >> arr->sub_bit;
-		mp = my * arr->cols + mx;
-		//printf("map: %c my:%d mx:%d\n",arr->map[mp], my, mx);
-		if (mp >= 0 && mp < arr->cols * arr->rows 
-			&& (arr->map[mp] == '1' || arr->map[mp] == 'X')) //passt das besser, dass er auch bei X endet
-		{
-			po->x = rx;
-			po->y = ry;
-			return (dist_vec(arr, rx, ry));
-		}
-		rx += xo;
-		ry += yo;
-		dof++;
-	}
-	return (1000000);
-}
-
-float	calc_atan(float ra)
-{
-	if ((ra < 0.00001 && ra > -0.00001) || (ra < M_PI + 0.00001 && ra > M_PI - 0.00001))
-		return (-2147483647);
-	return (-1 / tan(ra));
-}
-
-float	dist_horizontal(t_points *ph, t_data *arr, float ra, int *direction) //returns distance of ray
+/* returns distance of ray for horizontal walls */
+float	dist_horizontal(t_points *ph, t_data *arr, float ra, int *direction)
 {
 	float	atan;
 	float	rx;
@@ -61,12 +11,12 @@ float	dist_horizontal(t_points *ph, t_data *arr, float ra, int *direction) //ret
 
 	ph->color = WHITE;
 	atan = calc_atan(ra);
-	if (ra == 0  || ra == M_PI)
+	if (ra == 0 || ra == M_PI)
 	{
 		//ph->x = arr->p_x; ph->y=arr->p_y; dof = arr->dof;
 		return (1000000);
 	}
-	else if (ra < M_PI) //player schaut nach oben
+	else if (ra < M_PI)
 	{
 		ry = (((int)arr->p_y >> arr->sub_bit) << arr->sub_bit) - 0.0001;
 		rx = (arr->p_y - ry) * atan + arr->p_x;
@@ -74,7 +24,7 @@ float	dist_horizontal(t_points *ph, t_data *arr, float ra, int *direction) //ret
 		xo = -yo * atan;
 		*direction = 0;
 	}
-	else if (ra > M_PI) //player schaut nach unten
+	else if (ra > M_PI)
 	{
 		ry = (((int)arr->p_y >> arr->sub_bit) << arr->sub_bit) + arr->subsize;
 		rx = (arr->p_y - ry) * atan + arr->p_x;
@@ -85,20 +35,8 @@ float	dist_horizontal(t_points *ph, t_data *arr, float ra, int *direction) //ret
 	return (calc_dist(arr, rx, ry, ph, xo, yo));
 }
 
-float	calc_ntan(float ra)
-{
-	if (ra > M_PI * 0.5 - 0.00001 && ra < M_PI * 0.5)
-		return (2147483647);
-	else if (ra < M_PI * 0.5 + 0.00001 && ra > M_PI * 0.5)
-		return (-2147483647);
-	else if (ra > M_PI * 1.5 - 0.00001 && ra < M_PI * 1.5)
-		return (2147483647);
-	else if (ra < M_PI * 1.5 + 0.00001 && ra > M_PI * 1.5)
-		return (-2147483647);
-	return (-tan(ra));
-}
-
-float	dist_vertical(t_points *pv, t_data *arr, float ra, int *direction) //returns distance of ray
+/* returns distance of ray for vertical walls */
+float	dist_vertical(t_points *pv, t_data *arr, float ra, int *direction)
 {
 	float	ntan;
 	float	rx;
@@ -108,12 +46,11 @@ float	dist_vertical(t_points *pv, t_data *arr, float ra, int *direction) //retur
 
 	pv->color = WHITE;
 	ntan = calc_ntan(ra);
-	if (ra == 0 || ra == M_PI) //player schaut oben unten
+	if (ra == 0 || ra == M_PI)
 	{
-		//rx = arr->p_x; ry=arr->p_y; dof = arr->dof;
 		return (1000000);
 	}
-	else if (ra < M_PI * 0.5 || ra > M_PI * 1.5)//player schaut nach links??
+	else if (ra < M_PI * 0.5 || ra > M_PI * 1.5)
 	{
 		rx = (((int)arr->p_x >> arr->sub_bit) << arr->sub_bit) - 0.0001;
 		ry = (arr->p_x - rx) * ntan + arr->p_y;
@@ -121,7 +58,7 @@ float	dist_vertical(t_points *pv, t_data *arr, float ra, int *direction) //retur
 		yo = -xo * ntan;
 		*direction = *direction + 30;
 	}
-	else if (ra > M_PI * 0.5 && ra < M_PI * 1.5) //player schaut nach rechts??
+	else if (ra > M_PI * 0.5 && ra < M_PI * 1.5)
 	{
 		rx = (((int)arr->p_x >> arr->sub_bit) << arr->sub_bit) + arr->subsize;
 		ry = (arr->p_x - rx) * ntan + arr->p_y;
@@ -132,7 +69,8 @@ float	dist_vertical(t_points *pv, t_data *arr, float ra, int *direction) //retur
 	return (calc_dist(arr, rx, ry, pv, xo, yo));
 }
 
-float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra) //return dist_T
+/* fct returns  the distance of closest wall dist_T */
+float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra)
 {
 	float		dis_v;
 	float		dis_h;
@@ -167,12 +105,12 @@ float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *
 		} */
 }
 
+/* at first draws the floor in first call of set_line; then the ceiling*/
 void	draw_floor_ceiling(float lineH, float lineO, t_data *arr, t_line *line, int r)
 {
 	t_points	p0;
 	t_points	p1;
 
-	// draw FLOOR
 	p0.color = arr->floor_rgb;
 	p0.x = r;
 	p0.y = arr->height;
@@ -180,7 +118,6 @@ void	draw_floor_ceiling(float lineH, float lineO, t_data *arr, t_line *line, int
 	p1.y = lineH + lineO;
 	p1.color = p0.color;
 	set_line(line, arr, p0, p1);
-	// draw CEILING
 	p0.color = arr->ceiling_rgb;
 	p0.x = r;
 	p0.y = lineO;
@@ -194,6 +131,7 @@ void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, fl
 {
 	float	ca;
 	float	line_h;
+	float	line_o;
 	//float	dist_t;
 	//t_points pv;
 	//t_points ph;
@@ -202,8 +140,6 @@ void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, fl
 	inside_360(&ca);
 	dist_t = dist_t * cos(ca); //fisheye end
 	line_h = (arr->height * arr->subsize) / dist_t; //line_height
-
-	float	line_o;
 		line_o = (arr->height / 2) - line_h * 0.5;
 	draw_floor_ceiling(line_h, line_o, arr, line, r);
 	//draw WALL

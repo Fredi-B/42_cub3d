@@ -147,7 +147,7 @@ void	turn(t_data *arr, int sign)
 			arr->p_a += 2 * M_PI;
 }
 
-int	hook(t_data *data)
+int	move(t_data *data)
 {
 	float	velocity;
 	int		rotation_speed;
@@ -168,8 +168,6 @@ int	hook(t_data *data)
 		turn(data, -1);
 	if (data->key_flag.right_rot == ON)
 		turn(data, 1);
-	map_to_image(data);
-	all_images_to_window(data);
 	return (0);
 }
 

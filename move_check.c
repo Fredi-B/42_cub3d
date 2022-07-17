@@ -9,7 +9,7 @@ bool	check_for_wall(t_data *arr, int x, int y)
 	mx = (int)(x);
 	my = (int)(y);
 	mp = my * arr->cols + mx;
-	if (arr->map[mp] != '0' || arr->map[mp] != 'X')
+	if (arr->map[mp] != '0')
 		return (true);
 	return (false);
 }

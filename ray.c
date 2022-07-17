@@ -11,7 +11,7 @@ float	dist_horizontal(t_points *ph, t_data *arr, float ra)
 		return (1000000);
 	else if (ra < M_PI)
 	{
-		box[RY] = (((int)arr->p_y >> arr->sub_bit) << arr->sub_bit) - 0.0001;
+		box[RY] = (((int)arr->p_y >> arr->sub_bit) << arr->sub_bit) - 0.1;
 		box[RX] = (arr->p_y - box[RY]) * box[TAN] + arr->p_x;
 		box[YO] = -arr->subsize;
 		box[XO] = -box[YO] * box[TAN];
@@ -40,7 +40,7 @@ float	dist_vertical(t_points *pv, t_data *arr, float ra)
 		return (1000000);
 	else if (ra < M_PI * 0.5 || ra > M_PI * 1.5)
 	{
-		box[RX] = (((int)arr->p_x >> arr->sub_bit) << arr->sub_bit) - 0.0001;
+		box[RX] = (((int)arr->p_x >> arr->sub_bit) << arr->sub_bit) - 0.1;
 		box[RY] = (arr->p_x - box[RX]) * box[TAN] + arr->p_y;
 		box[XO] = -arr->subsize;
 		box[YO] = -box[XO] * box[TAN];

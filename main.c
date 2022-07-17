@@ -34,7 +34,6 @@ static void	init_data(t_data *data)
 	data->south = NULL;
 	data->west = NULL;
 	data->east = NULL;
-	data->num = NULL;
 	data->mlx = NULL;
 	data->mlx_window = NULL;
 	data->img = NULL;

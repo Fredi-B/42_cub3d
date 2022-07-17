@@ -19,14 +19,14 @@ float	dist_horizontal(t_points *ph, t_data *arr, float ra)
 	}
 	else if (ra > M_PI)
 	{
-		box[RY] = (((int)arr->p_y >> arr->sub_bit) << arr->sub_bit) + arr->subsize;
+		box[RY] = (((int)arr->p_y >> arr->sub_bit) << arr->sub_bit) \
+				+ arr->subsize;
 		box[RX] = (arr->p_y - box[RY]) * box[TAN] + arr->p_x;
 		box[YO] = arr->subsize;
 		box[XO] = -box[YO] * box[TAN];
 		arr->direction = 2;
 	}
 	return (calc_dist(arr, ph, box));
-	//return (calc_dist(arr, rx, ry, ph, xo, yo));
 }
 
 /* returns distance of ray for vertical walls */
@@ -48,14 +48,14 @@ float	dist_vertical(t_points *pv, t_data *arr, float ra)
 	}
 	else if (ra > M_PI * 0.5 && ra < M_PI * 1.5)
 	{
-		box[RX] = (((int)arr->p_x >> arr->sub_bit) << arr->sub_bit) + arr->subsize;
+		box[RX] = (((int)arr->p_x >> arr->sub_bit) << arr->sub_bit) \
+				+ arr->subsize;
 		box[RY] = (arr->p_x - box[RX]) * box[TAN] + arr->p_y;
 		box[XO] = arr->subsize;
 		box[YO] = -box[XO] * box[TAN];
 		arr->direction = arr->direction + 10;
 	}
 	return (calc_dist(arr, pv, box));
-	//return (calc_dist(arr, rx, ry, pv, xo, box[YO]));
 }
 
 /* fct returns  the distance of closest wall dist_T */
@@ -68,30 +68,21 @@ float	draw_ray_minimap(t_data *arr, t_line *line)
 
 	ph.color = WHITE;
 	pv.color = WHITE;
-	//returns distance of ray
 	dis_h = dist_horizontal(&ph, arr, arr->curr_ang);
 	dis_v = dist_vertical(&pv, arr, arr->curr_ang);
-	//printf("dish: %f disv:%f dof %d\n",dis_h, dis_v, arr->dof);
-	if (dis_v < dis_h) //RAY hits Vertical line
+	if (dis_v < dis_h)
 	{
-		ph.x = arr->p_x; //set the other point
+		ph.x = arr->p_x;
 		ph.y = arr->p_y;
 		arr->image_x = pv.y % arr->subsize;
 		arr->direction = arr->direction / 10;
 		return (dis_v);
 	}
-	pv.x = arr->p_x; //RAY hits horizontal line
+	pv.x = arr->p_x;
 	pv.y = arr->p_y;
 	arr->image_x = ph.x % arr->subsize;
-	//printf("playerh: %d %d\n",pv.x, pv.y);
-	//printf("rayendh: %d! %d\n",ph.x, ph.y);
-	//printf("rayendh: %d! %d\n",ph.x, ((int)ph.x % arr->subsize));
 	arr->direction = arr->direction % 10;
 	return (dis_h);
-/* 		if (disV + 0.001 > disH && disV - 0.001 < disH) //RAY hits Corner?
-		{
-			direction = old_direction;
-		} */
 }
 
 /* at first fct draws the floor in first call of set_line; then the ceiling*/
@@ -118,21 +109,16 @@ static void	draw_floor_ceiling(float line_h, t_data *arr, t_line *line, int r)
 	set_line(line, arr, p0, p1);
 }
 
+/* check for fisheye effect then draw floor-ceiling */
 void	draw_wall(t_data *arr, t_line *line, int r, float dist_t)
 {
 	float	ca;
 	float	line_h;
-	//float	dist_t;
-	//t_points pv;
-	//t_points ph;
-	//ph.color = WHITE;
-	ca = arr->p_a - arr->curr_ang; //fisheye start
+
+	ca = arr->p_a - arr->curr_ang;
 	inside_360(&ca);
-	dist_t = dist_t * cos(ca); //fisheye end
-	line_h = (arr->height * arr->subsize) / dist_t; //line_height
+	dist_t = dist_t * cos(ca);
+	line_h = (arr->height * arr->subsize) / dist_t;
 	draw_floor_ceiling(line_h, arr, line, r);
-	//draw WALL
-	//p0.color = get_wall(direction);
-	//old_direction = direction;
 	draw_wall_line(line_h, arr, r);
 }

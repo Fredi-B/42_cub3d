@@ -25,11 +25,9 @@ float	calc_dist(t_data *arr, t_points *po, float *box)
 	dof = 0;
 	while (dof < arr->dof)
 	{
-		//printf("mx: %d my: %d mp: %d\n",mx, my, mp);
 		mx = (int)(box[RX]) >> arr->sub_bit;
 		my = (int)(box[RY]) >> arr->sub_bit;
 		mp = my * arr->cols + mx;
-		//printf("map: %c my:%d mx:%d\n",arr->map[mp], my, mx);
 		if (mp >= 0 && mp < arr->cols * arr->rows
 			&& (arr->map[mp] == '1' || arr->map[mp] == 'X'))
 		{
@@ -46,7 +44,8 @@ float	calc_dist(t_data *arr, t_points *po, float *box)
 
 float	calc_atan(float ra)
 {
-	if ((ra < 0.00001 && ra > -0.00001) || (ra < M_PI + 0.00001 && ra > M_PI - 0.00001))
+	if ((ra < 0.00001 && ra > -0.00001) \
+		|| (ra < M_PI + 0.00001 && ra > M_PI - 0.00001))
 		return (-2147483647);
 	return (-1 / tan(ra));
 }

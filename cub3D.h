@@ -237,10 +237,10 @@ void	map_to_image(t_data *arr);
 bool	pixel_is_inside_window(int x, int y, t_data *arr);
 
 /* move.c*/
-bool	check_if_is_wall(t_data *arr, int x, int y);
+bool	check_for_wall(t_data *arr, int x, int y);
 bool	search_wall_x(t_data *data, int *old_x, int old_y, int new_x);
 bool	search_wall_y(t_data *data, int old_x_copy, int *old_y, int new_y);
-bool	going_across(t_data *data, float new_x, float new_y);
-bool	less_than_x_pixels(t_data *data, float new_x, float new_y, int p);
+bool	go_by_pixel(t_data *data, float new_x, float new_y);
+bool	saftey_wall(t_data *data, float new_x, float new_y, int p);
 
 #endif

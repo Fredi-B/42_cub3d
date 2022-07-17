@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-bool	check_if_is_wall(t_data *arr, int x, int y)
+bool	check_for_wall(t_data *arr, int x, int y)
 {
 	int		mx;
 	int		my;
@@ -9,7 +9,7 @@ bool	check_if_is_wall(t_data *arr, int x, int y)
 	mx = (int)(x);
 	my = (int)(y);
 	mp = my * arr->cols + mx;
-	if (arr->map[mp] != '0')
+	if (arr->map[mp] != '0' || arr->map[mp] != 'X')
 		return (true);
 	return (false);
 }
@@ -23,7 +23,7 @@ bool	search_wall_x(t_data *data, int *old_x, int old_y, int new_x)
 			(*old_x)++;
 	else
 		(*old_x)--;
-	if (check_if_is_wall(data, (*old_x) / tile, old_y / tile))
+	if (check_for_wall(data, (*old_x) / tile, old_y / tile))
 		return (true);
 	return (false);
 }
@@ -37,12 +37,12 @@ bool	search_wall_y(t_data *data, int old_x_copy, int *old_y, int new_y)
 		(*old_y)++;
 	else
 		(*old_y)--;
-	if (check_if_is_wall(data, old_x_copy / tile, (*old_y) / tile))
+	if (check_for_wall(data, old_x_copy / tile, (*old_y) / tile))
 		return (true);
 	return (false);
 }
 
-bool	going_across(t_data *data, float new_x, float new_y)
+bool	go_by_pixel(t_data *data, float new_x, float new_y)
 {
 	int		old_x;
 	int		old_y;
@@ -64,28 +64,28 @@ bool	going_across(t_data *data, float new_x, float new_y)
 	return (false);
 }
 
-bool	less_than_x_pixels(t_data *data, float new_x, float new_y, int p)
+bool	saftey_wall(t_data *data, float new_x, float new_y, int dist)
 {
 	float	tile;
 
 	tile = data->subsize;
-	if (check_if_is_wall(data, (new_x + p) / tile, (new_y - p) / tile))
+	if (check_for_wall(data, (new_x + dist) / tile, (new_y - dist) / tile))
 		return (true);
-	if (check_if_is_wall(data, new_x / tile, (new_y - p) / tile))
+	if (check_for_wall(data, new_x / tile, (new_y - dist) / tile))
 		return (true);
-	if (check_if_is_wall(data, (new_x - p) / tile, (new_y - p) / tile))
+	if (check_for_wall(data, (new_x - dist) / tile, (new_y - dist) / tile))
 		return (true);
-	if (check_if_is_wall(data, (new_x + p) / tile, new_y / tile))
+	if (check_for_wall(data, (new_x + dist) / tile, new_y / tile))
 		return (true);
-	if (check_if_is_wall(data, new_x / tile, new_y / tile))
+	if (check_for_wall(data, new_x / tile, new_y / tile))
 		return (true);
-	if (check_if_is_wall(data, (new_x - p) / tile, new_y / tile))
+	if (check_for_wall(data, (new_x - dist) / tile, new_y / tile))
 		return (true);
-	if (check_if_is_wall(data, (new_x + p) / tile, (new_y + p) / tile))
+	if (check_for_wall(data, (new_x + dist) / tile, (new_y + dist) / tile))
 		return (true);
-	if (check_if_is_wall(data, new_x / tile, (new_y + p) / tile))
+	if (check_for_wall(data, new_x / tile, (new_y + dist) / tile))
 		return (true);
-	if (check_if_is_wall(data, (new_x - p) / tile, (new_y + p) / tile))
+	if (check_for_wall(data, (new_x - dist) / tile, (new_y + dist) / tile))
 		return (true);
 	return (false);
 }

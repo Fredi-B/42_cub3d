@@ -28,7 +28,6 @@ void	get_rays(t_data *arr, t_line *line)
 		arr->image_x = 0;
 		arr->direction = 0;
 		dist_t = draw_ray_minimap(arr, line);
-		//dist_t = draw_ray_minimap(&image_start_x, &direction, arr, line, ra);
 		if (dist_t < 2)
 			single_color_wall(arr, line, r);
 		else

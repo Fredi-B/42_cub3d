@@ -15,7 +15,7 @@ float	dist_vec(t_data *arr, float x, float y)
 			(y - arr->p_y) * (y - arr->p_y)));
 }
 
-float	calc_dist(t_data *arr, float rx, float ry, t_points *po, float xo, float yo)
+float	calc_dist(t_data *arr, t_points *po, float *box)
 {
 	int		dof;
 	int		mx;
@@ -25,20 +25,18 @@ float	calc_dist(t_data *arr, float rx, float ry, t_points *po, float xo, float y
 	dof = 0;
 	while (dof < arr->dof)
 	{
-		//printf("mx: %d my: %d mp: %d\n",mx, my, mp);
-		mx = (int)(rx) >> arr->sub_bit;
-		my = (int)(ry) >> arr->sub_bit;
+		mx = (int)(box[RX]) >> arr->sub_bit;
+		my = (int)(box[RY]) >> arr->sub_bit;
 		mp = my * arr->cols + mx;
-		//printf("map: %c my:%d mx:%d\n",arr->map[mp], my, mx);
 		if (mp >= 0 && mp < arr->cols * arr->rows
-			&& (arr->map[mp] == '1' || arr->map[mp] == 'X')) //passt das besser, dass er auch bei X endet
+			&& (arr->map[mp] == '1' || arr->map[mp] == 'X'))
 		{
-			po->x = rx;
-			po->y = ry;
-			return (dist_vec(arr, rx, ry));
+			po->x = box[RX];
+			po->y = box[RY];
+			return (dist_vec(arr, box[RX], box[RY]));
 		}
-		rx += xo;
-		ry += yo;
+		box[RX] += box[XO];
+		box[RY] += box[YO];
 		dof++;
 	}
 	return (1000000);
@@ -46,7 +44,8 @@ float	calc_dist(t_data *arr, float rx, float ry, t_points *po, float xo, float y
 
 float	calc_atan(float ra)
 {
-	if ((ra < 0.00001 && ra > -0.00001) || (ra < M_PI + 0.00001 && ra > M_PI - 0.00001))
+	if ((ra < 0.00001 && ra > -0.00001) \
+		|| (ra < M_PI + 0.00001 && ra > M_PI - 0.00001))
 		return (-2147483647);
 	return (-1 / tan(ra));
 }

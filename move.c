@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-bool	movement_collision(t_data *data, float x, float y)
+static bool	mov_coll(t_data *data, float x, float y)
 {
 	float	new_x;
 	float	new_y;
@@ -11,18 +11,18 @@ bool	movement_collision(t_data *data, float x, float y)
 	new_y = data->p_y + y;
 	i = new_x / data->subsize;
 	j = new_y / data->subsize;
-	if (check_if_is_wall(data, i, j))
+	if (check_for_wall(data, i, j))
 		return (true);
-	else if (less_than_x_pixels(data, new_x, new_y, 12))
+	else if (saftey_wall(data, new_x, new_y, 12))
 		return (true);
-	else if (going_across(data, new_x, new_y))
+	else if (go_by_pixel(data, new_x, new_y))
 		return (true);
 	return (false);
 }
 
 static void	move_vertical(t_data *data, float x, float y, int sign)
 {
-	if (!movement_collision(data, x * sign, y * sign))
+	if (!mov_coll(data, x * sign, y * sign))
 	{
 		data->p_x += x * sign;
 		data->p_y += y * sign;

@@ -32,7 +32,11 @@
 # define WEST		3
 # define ON			1
 # define OFF		0
-
+# define RX			0
+# define RY			1
+# define XO			2
+# define YO			3
+# define TAN		4
 
 
 
@@ -47,13 +51,13 @@
 
 typedef struct s_key_flags
 {
-	int	up;
-	int	down;
-	int	left;
-	int	right;
-	int	left_rot;
-	int	right_rot;
-	int	mouse_x;
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+	int		left_rot;
+	int		right_rot;
+	int		mouse_x;
 }				t_key_flags;
 
 typedef struct s_image
@@ -80,47 +84,35 @@ typedef struct s_data
 	char			*map;
 	int				subsize;
 	int				sub_bit;
-	/* general variables NEEDS CHECKING!*/
-	int			*num;
-	int			cols;
-	int			rows;
-	int			dof;
-	int			i;
-	int			j;
-	double		rot_x;
-	double		rot_y;
-	double		rot_z;
-	size_t		sum;
+	float			curr_ang;
+	int				image_x;
+	int				direction;
+	int				cols;
+	int				rows;
+	int				dof;
+	int				i;
+	int				j;
 	/* player variables*/
-	float		p_x; //player position x+ y
-	float		p_y;
-	float		p_dx; //player move in x+ y
-	float		p_dy;
-	float		p_a; //player angle
-
+	float			p_x; //player position x+ y
+	float			p_y;
+	float			p_dx; //player move in x+ y
+	float			p_dy;
+	float			p_a; //player angle
 	/* mlx variables OLDMLXLIB*/
-	void		*mlx;
-	void		*mlx_window;
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			size_line;
-	int			endian;
-	int			width;
-	int			height;
+	void			*mlx;
+	void			*mlx_window;
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				size_line;
+	int				endian;
+	int				width;
+	int				height;
 	/* mlx variables OLDMLXLIB in eigenem struct für mehrere images */
-	t_image		xpm_file[4];
-	t_image		wall[4];
-	t_image		first_person_view;
-	// t_image		player_in_minimap;
-	
-	/* mlx variables NEWMLXLIB*/
-	// u_int32_t	width;
-	// u_int32_t	height;
-	// mlx_t		*mlx;
-	// mlx_image_t	*img;
-
+	t_image			xpm_file[4];
+	t_image			wall[4];
+	t_image			first_person_view;
 	/* key hook variables */
 	t_key_flags	key_flag;
 	int		debug_flag;
@@ -162,10 +154,10 @@ typedef struct s_input_flags
 
 typedef struct s_counter
 {
-	int	tmp_x;
-	int	tmp_y;
-	int	map;
-	int	line;
+	int		tmp_x;
+	int		tmp_y;
+	int		map;
+	int		line;
 }				t_counter;
 
 /*  ------------------------ Function prototypes --------------------------- */
@@ -213,32 +205,30 @@ void	init_line(t_line *line);
 /* ray_util.c*/
 void	inside_360(float *ra);
 float	dist_vec(t_data *arr, float x, float y);
-float	calc_dist(t_data *arr, float rx, float ry, t_points *po, float xo, float yo);
+float	calc_dist(t_data *arr, t_points *po, float *box);
 float	calc_atan(float ra);
 float	calc_ntan(float ra);
 
 /* ray.c*/
-float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra);
-void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra, int r, float dist_t);
+float	draw_ray_minimap(t_data *arr, t_line *line);
+void	draw_wall(t_data *arr, t_line *line, int r, float dist_t);
 
 /* key_hook.c*/
 //void	hook(void *param); NEWMINILIB
 void	key_hooks(t_data *arr);
 
 /* player_movement.c */
-void	move_y(t_data *arr, int sign);
-void	move_x(t_data *arr, int sign);
 void	turn(t_data *arr, int sign);
-void	move_sideways(t_data *arr, int sign);
+//void	move_sideways(t_data *arr, int sign);
 int		move(t_data *arr);
 
 /* player.c*/
-void	get_player(t_data *arr, t_line *line);
+//void	get_player(t_data *arr, t_line *line);
 void	get_rays(t_data *arr, t_line *line);
 
 /* walls.c*/
-unsigned int	get_wall(int direction, float line_h);
-void	draw_wall_line(int *direction, int *image_start_x, float line_h, t_data *data, int r);
+// nicht gefunden ?unsigned int	get_wall(int direction, float line_h);
+void	draw_wall_line(float line_h, t_data *data, int r);
 
 /* window.c*/
 bool	draw_map(t_data *arr);
@@ -248,10 +238,10 @@ void	map_to_image(t_data *arr);
 bool	pixel_is_inside_window(int x, int y, t_data *arr);
 
 /* move.c*/
-bool	check_if_is_wall(t_data *arr, int x, int y);
+bool	check_for_wall(t_data *arr, int x, int y);
 bool	search_wall_x(t_data *data, int *old_x, int old_y, int new_x);
 bool	search_wall_y(t_data *data, int old_x_copy, int *old_y, int new_y);
-bool	going_across(t_data *data, float new_x, float new_y);
-bool	less_than_x_pixels(t_data *data, float new_x, float new_y, int p);
+bool	go_by_pixel(t_data *data, float new_x, float new_y);
+bool	saftey_wall(t_data *data, float new_x, float new_y, int p);
 
 #endif

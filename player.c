@@ -16,25 +16,22 @@ static void	single_color_wall(t_data *arr, t_line *line, int r)
 
 void	get_rays(t_data *arr, t_line *line)
 {
-	int			direction;
-	int			image_start_x;
-	float		ra;
 	float		dist_t;
 	int			r;
 
-	ra = arr->p_a - ODR01 * 0.25 * arr->width;
+	arr->curr_ang = arr->p_a - ODR01 * 0.25 * arr->width;
 	r = 0;
 	while (r <= arr->width)
 	{
-		ra += ODR01 * 0.5;
-		inside_360(&ra);
-		image_start_x = 0;
-		direction = 0;
-		dist_t = draw_ray_minimap(&image_start_x, &direction, arr, line, ra);
+		arr->curr_ang += ODR01 * 0.5;
+		inside_360(&arr->curr_ang);
+		arr->image_x = 0;
+		arr->direction = 0;
+		dist_t = draw_ray_minimap(arr, line);
 		if (dist_t < 2)
 			single_color_wall(arr, line, r);
 		else
-			draw_wall(&image_start_x, &direction, arr, line, ra, r, dist_t);
+			draw_wall(arr, line, r, dist_t);
 		r++;
 	}
 }

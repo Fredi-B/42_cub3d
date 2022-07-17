@@ -77,6 +77,8 @@ bool	parse_map(t_data *data)
 	t_counter	i;
 	bool		only_one_player_flag;
 
+	// if (data->rows > 500 || data->cols > 500)
+	// 	return (false);
 	tmp_map = ft_split(data->map, '\n');
 	if (malloc_map(data) == false)
 		return (false);

@@ -16,6 +16,9 @@ void	velocity_ctrl(t_data *data)
 	}
 }
 
+/* gets and prints lap time and fastest lap.
+start line (3,4) and finish line (9,2) are one tile long and 16 pixels thick
+(if too thin, it can be ignored, if thicker it prints it too often) */
 void	lap_time(t_data *data)
 {
 	// dfprintf(data->p_y);

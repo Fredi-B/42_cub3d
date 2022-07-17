@@ -40,7 +40,7 @@ static bool	get_walls_and_rgb(t_data *data, int fd)
 	!= true || flag.ceiling != true || flag.floor != true) && flag.eof != true)
 	{
 		trimmed_line = get_next_trimmed_line(fd, &flag);
-		if (trimmed_line == NULL)
+		if (trimmed_line == NULL || trimmed_line[0] == '\0')
 			continue ;
 		if (store_data(data, &flag, trimmed_line) == false)
 		{

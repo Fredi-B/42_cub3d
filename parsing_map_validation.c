@@ -9,6 +9,8 @@ bool	validate_map(t_data *data)
 	{
 		if (data->map[i] == '0')
 			return (false);
+		if (data->map[i] == 'X' && (data->map[i + data->cols] == '0'))
+			return (false);
 		i++;
 	}
 	while (i < (data->rows -1) * data->cols)
@@ -22,6 +24,8 @@ bool	validate_map(t_data *data)
 	while (i >= (data->rows -1) * data->cols && i < data->rows * data->cols)
 	{
 		if (data->map[i] == '0')
+			return (false);
+		if (data->map[i] == 'X' && (data->map[i - data->cols] == '0'))
 			return (false);
 		i++;
 	}

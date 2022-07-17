@@ -62,7 +62,7 @@ int	move(t_data *data)
 	float	velocity;
 	int		rotation_speed;
 
-	velocity = 0.05 * data->subsize;
+	velocity = 0.25 * data->subsize;
 	rotation_speed = 5;
 	data->p_dx = cos(data->p_a) * velocity;
 	data->p_dy = sin(data->p_a) * velocity;

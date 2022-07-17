@@ -123,6 +123,7 @@ typedef struct s_data
 
 	/* key hook variables */
 	t_key_flags	key_flag;
+	int		debug_flag;
 }				t_data;
 
 typedef struct s_line

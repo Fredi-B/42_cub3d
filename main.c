@@ -8,19 +8,22 @@ void	check_leaks(void)
 {
 	system("leaks cub3D");
 }
+/* atexit(check_leaks); */
 
 int	main(int argc __attribute__ ((unused)), char **argv)
 {
 	t_data	data;
 
-	// atexit(check_leaks);
 	if (argc != 2)
 		err_exit(&data, "Wrong number of arguments", 26, 1);
 	init_data(&data);
 	parsing(&data, argv);
 	map_init(&data);
 	if (draw_map(&data) == false)
+	{
+		free_data(&data);
 		err_exit(&data, "Could not draw map", 18, 1);
+	}
 	key_hooks(&data);
 	mlx_loop(data.mlx);
 	free_data(&data);

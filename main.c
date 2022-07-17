@@ -53,9 +53,13 @@ static void	init_key_flags(t_data *data)
 	data->key_flag.down = OFF;
 	data->key_flag.left = OFF;
 	data->key_flag.right = OFF;
+	data->key_flag.vel_down = OFF;
+	data->key_flag.vel_up = OFF;
 	data->key_flag.left_rot = OFF;
 	data->key_flag.right_rot = OFF;
-	data->key_flag.mouse_x = 1;
+	data->key_flag.mouse_x = ON;
+	data->start_flag = OFF;
+	data->finish_flag = OFF;
 	data->debug_flag = OFF;
 }
 

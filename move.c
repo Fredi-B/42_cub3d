@@ -59,21 +59,21 @@ void	turn(t_data *arr, int sign)
 
 int	move(t_data *data)
 {
-	float	velocity;
 	int		rotation_speed;
 
-	velocity = 0.25 * data->subsize;
 	rotation_speed = 5;
-	data->p_dx = cos(data->p_a) * velocity;
-	data->p_dy = sin(data->p_a) * velocity;
+	data->p_dx = cos(data->p_a) * data->velocity;
+	data->p_dy = sin(data->p_a) * data->velocity;
+	velocity_ctrl(data);
+	lap_time(data);
 	if (data->key_flag.up == ON)
 		move_vertical(data, data->p_dx, data->p_dy, -1);
 	if (data->key_flag.down == ON)
 		move_vertical(data, data->p_dx, data->p_dy, 1);
 	if (data->key_flag.left == ON)
-		move_sideways2(data, velocity, -1);
+		move_sideways2(data, data->velocity, -1);
 	if (data->key_flag.right == ON)
-		move_sideways2(data, velocity, 1);
+		move_sideways2(data, data->velocity, 1);
 	if (data->key_flag.left_rot == ON)
 		turn(data, -1);
 	if (data->key_flag.right_rot == ON)

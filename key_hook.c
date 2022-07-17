@@ -8,6 +8,8 @@
 #define LEFT 2
 #define LEFT_ROT 123
 #define RIGHT_ROT 124
+#define VEL_DOWN 125
+#define VEL_UP 126
 #define DEBUG 46
 
 static int	key_pressed(int key, t_data *arr);
@@ -65,6 +67,10 @@ static int	key_pressed(int key, t_data *arr)
 		arr->key_flag.right = ON;
 	if (key == UP)
 		arr->key_flag.up = ON;
+	if (key == VEL_DOWN)
+		arr->key_flag.vel_down = ON;
+	if (key == VEL_UP)
+		arr->key_flag.vel_up = ON;
 	if (key == DEBUG)
 		arr->debug_flag = ON;
 	return (0);
@@ -85,6 +91,10 @@ static int	key_released(int key, t_data *arr)
 		arr->key_flag.left_rot = OFF;
 	if (key == RIGHT_ROT)
 		arr->key_flag.right_rot = OFF;
+	if (key == VEL_DOWN)
+		arr->key_flag.vel_down = OFF;
+	if (key == VEL_UP)
+		arr->key_flag.vel_up = OFF;
 	if (key == DEBUG)
 		arr->debug_flag = OFF;
 	return (0);

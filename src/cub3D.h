@@ -2,8 +2,8 @@
 # define CUB3D_H
 
 /* ----------------------------- Includes ---------------------------------- */
-# include "./minilibX/mlx.h"
-# include "libft/libft.h"
+# include "../minilibX/mlx.h"
+# include "../libft/libft.h"
 # include <stdint.h>
 # include <stdio.h>
 # include <stdbool.h>

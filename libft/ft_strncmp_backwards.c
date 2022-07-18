@@ -6,12 +6,12 @@
 /*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 19:08:50 by fbechtol          #+#    #+#             */
-/*   Updated: 2022/06/15 14:43:40 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/07/18 15:16:36 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../cub3D.h"
+#include "../src/cub3D.h"
 
 int	ft_strncmp_backwards(const char *s1, const char *s2, size_t n)
 {

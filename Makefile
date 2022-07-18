@@ -20,6 +20,7 @@ map_init.c \
 move.c \
 move_check.c \
 move_race.c \
+move_race_utils_bonus.c \
 parsing_map_utils_two.c \
 parsing_map_utils.c \
 parsing_map_validation.c \

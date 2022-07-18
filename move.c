@@ -59,9 +59,6 @@ void	turn(t_data *arr, int sign)
 
 int	move(t_data *data)
 {
-	int		rotation_speed;
-
-	rotation_speed = 5;
 	data->p_dx = cos(data->p_a) * data->velocity;
 	data->p_dy = sin(data->p_a) * data->velocity;
 	velocity_ctrl(data);

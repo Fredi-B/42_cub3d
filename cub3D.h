@@ -122,9 +122,12 @@ typedef struct s_data
 	int				debug_flag;
 	int				finish_flag;
 	int				start_flag;
-	long long		start_time;
-	long long		finish_time;
-	long long		fastest_lap;
+	long long		start_seconds;
+	long long		finish_seconds;
+	long long		start_milliseconds;
+	long long		finish_milliseconds;
+	long long		fastest_lap_sec;
+	long long		fastest_lap_millisec;
 
 }				t_data;
 
@@ -257,4 +260,8 @@ bool	saftey_wall(t_data *data, float new_x, float new_y, int p);
 /* move_race.c */
 void	velocity_ctrl(t_data *data);
 void	lap_time(t_data *data);	
+
+/* move_race_utils_bonus.c */
+long long	get_seconds(void);
+long long	get_milliseconds(void);
 #endif

@@ -25,6 +25,7 @@ int	red_x_exit(t_data *arr)
 
 static int	move_mouse(int x, int y, t_data *data)
 {
+	(void)y;
 	if (data->key_flag.mouse_x == 1)
 		data->key_flag.mouse_x = x;
 	if (x < data->key_flag.mouse_x - 10)
@@ -46,7 +47,7 @@ void	key_hooks(t_data *arr)
 {
 	mlx_hook(arr->mlx_window, 2, 0, &key_pressed, arr);
 	mlx_hook(arr->mlx_window, 3, 0, &key_released, arr);
-	//mlx_hook(arr->mlx_window, 06, 0L, &move_mouse, arr);
+	mlx_hook(arr->mlx_window, 06, 0L, &move_mouse, arr);
 	mlx_hook(arr->mlx_window, 17, (1L << 17), &red_x_exit, arr);
 }
 

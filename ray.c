@@ -59,7 +59,7 @@ float	dist_vertical(t_points *pv, t_data *arr, float ra)
 }
 
 /* fct returns  the distance of closest wall dist_T */
-float	draw_ray_minimap(t_data *arr, t_line *line)
+float	draw_ray_minimap(t_data *arr)
 {
 	float		dis_v;
 	float		dis_h;

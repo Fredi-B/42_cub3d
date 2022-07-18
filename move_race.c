@@ -21,13 +21,9 @@ start line (3,4) and finish line (9,2) are one tile long and 16 pixels thick
 (if too thin, it can be ignored, if thicker it prints it too often) */
 void	lap_time(t_data *data)
 {
-	if (data->debug_flag == ON)
-		dfprintf(data->p_y);
 	if (data->p_y > 176 && data->p_y < 208 \
 		&& data->p_x >= 128 && data->p_x <= 192)
 		data->start_flag = ON;
-	if (data->debug_flag == ON)
-		dfprintf(data->p_x);
 	if (data->p_x > 608 && data->p_x < 640 \
 		&& data->p_y >= 48 && data->p_y <= 144)
 		data->finish_flag = ON;
@@ -57,16 +53,18 @@ static void	finish_lap(t_data *data)
 	write(1, "######################\n", 23);
 	lap_sec = data->finish_seconds - data->start_seconds - 1;
 	lap_millisec = ((data->finish_milliseconds - data->start_milliseconds) \
-					- ((data->finish_seconds - data->start_seconds) * 1000)) / 10;
+				- ((data->finish_seconds - data->start_seconds) * 1000)) / 10;
 	if (lap_millisec < 0)
 		lap_millisec += 100;
 	printf("#  Lap time: %lld.%lld   # \n", lap_sec, lap_millisec);
 	if (lap_sec < data->fastest_lap_sec \
-		|| lap_sec == data->fastest_lap_sec && lap_millisec < data->fastest_lap_millisec)
+		|| (lap_sec == data->fastest_lap_sec \
+		&& lap_millisec < data->fastest_lap_millisec))
 	{
 		data->fastest_lap_sec = lap_sec;
 		data->fastest_lap_millisec = lap_millisec;
 	}
-	printf("# Fastest lap: %lld.%lld #\n", data->fastest_lap_sec, data->fastest_lap_millisec);
+	printf("# Fastest lap: %lld.%lld #\n", data->fastest_lap_sec, \
+										data->fastest_lap_millisec);
 	write(1, "######################\n", 23);
 }

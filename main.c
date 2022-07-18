@@ -41,8 +41,6 @@ static void	init_data(t_data *data)
 	data->mlx_window = NULL;
 	data->img = NULL;
 	data->addr = NULL;
-	data->first_person_view.img = NULL;
-	data->first_person_view.addr = NULL;
 	init_key_flags(data);
 	init_xpm(data);
 }

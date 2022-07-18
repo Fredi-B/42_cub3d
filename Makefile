@@ -1,14 +1,10 @@
 NAME = cub3D
 
 CC = gcc
-CFLAGS = -g # -Wall -Wextra -Werror #-g -ggdb3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 ODIR = o-files
 USER = $(shell echo $$USER)
-# -L followed by the relative path of the library to link it
 
-#LINUX_LIBRARIES = -L ./libft -lft -L ./minilibX -lmlx_Linux -Imlx_linux -lXext -lX11 -lm # OLD MLXLIB
-# NEW MLXLIB: LINUX_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -ldl
-# Maybe this works for libft? -> MAC_LIBRARIES = -L ./libft -lft MLX42/libmlx42.a -lglfw -L /Users/$(USER)/.brew/lib
 MAC_LIBRARIES = libft/libft.a -L ./libft -L ./mlx -lmlx -framework OpenGL -framework AppKit
 
 CFILES = \
@@ -45,7 +41,6 @@ UNAME_S := $(shell uname -s)
 
 $(NAME): $(ODIR) $(OBJECTS) 
 	@make -C ./libft
-#	@make -C ./mlx
 	$(CC) $(CFLAGS) $(OBJECTS) $(MAC_KEYHOOK) -lm $(MAC_LIBRARIES) -o $(NAME)
 
 

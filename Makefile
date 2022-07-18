@@ -1,9 +1,12 @@
 NAME = cub3D
+BONUS = cub3D_bonus
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+SDIR = ./src
+SDIR_BONUS = ./src_bonus
 ODIR = o-files
-USER = $(shell echo $$USER)
+ODIR_BONUS = o-files_bonus
 
 MAC_LIBRARIES = libft/libft.a -L ./libft -L ./mlx -lmlx -framework OpenGL -framework AppKit
 
@@ -16,7 +19,7 @@ map_init.c \
 move.c \
 move_check.c \
 move_race.c \
-move_race_utils_bonus.c \
+move_race_utils.c \
 parsing_map_utils_two.c \
 parsing_map_utils.c \
 parsing_map_validation.c \
@@ -33,39 +36,47 @@ textures.c \
 walls.c \
 window.c
 
-
-
 OBJECTS = $(patsubst %.c,%.o,$(CFILES))
 OBJECTS := $(addprefix $(ODIR)/,$(OBJECTS))
-UNAME_S := $(shell uname -s)
+
+CFILES_BONUS = $(patsubst %.c,%_bonus.c,$(CFILES))
+OBJECTS_BONUS = $(patsubst %.c,%.o,$(CFILES_BONUS))
+OBJECTS_BONUS := $(addprefix $(ODIR_BONUS)/,$(OBJECTS_BONUS))
 
 $(NAME): $(ODIR) $(OBJECTS) 
 	@make -C ./libft
 	$(CC) $(CFLAGS) $(OBJECTS) $(MAC_KEYHOOK) -lm $(MAC_LIBRARIES) -o $(NAME)
 
-
 $(ODIR):
 	@mkdir $(ODIR)
 
-$(ODIR)/%.o: %.c
-ifeq ($(UNAME_S),Linux)
-	$(CC) $(CFLAGS) -c $< -o $@
-else
+$(ODIR)/%.o: $(SDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ 
-endif
 
+$(BONUS): $(ODIR_BONUS) $(OBJECTS_BONUS)
+	@make -C ./libft
+	$(CC) $(CFLAGS) $(OBJECTS_BONUS) -lm $(MAC_LIBRARIES) -o $(BONUS)
+
+$(ODIR_BONUS):
+	@mkdir $(ODIR_BONUS)
+
+$(ODIR_BONUS)/%.o: $(SDIR_BONUS)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .phony: all
-all: $(NAME)
+all: $(NAME) $(BONUS)
+
+.phony: BONUS
+bonus: $(BONUS)
 
 .phony: clean
 clean: clean_libft 
-	rm -f $(OBJECTS)
-	rm -rf $(ODIR)
+	rm -f $(OBJECTS) $(OBJECTS_BONUS)
+	rm -rf $(ODIR) $(ODIR_BONUS)
 
 .phony: fclean
 fclean: clean fclean_libft
-	rm -f $(NAME) *~
+	rm -f $(NAME) $(BONUS) *~
 
 .phony: re
 re: fclean all

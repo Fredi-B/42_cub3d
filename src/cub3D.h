@@ -13,7 +13,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include <memory.h>
-# include <sys/time.h>
 
 /* ----------------------------- Defines ----------------------------------- */
 # define ERROR		1
@@ -53,11 +52,8 @@ typedef struct s_key_flags
 	int		down;
 	int		left;
 	int		right;
-	int		vel_up;
-	int		vel_down;
 	int		left_rot;
 	int		right_rot;
-	int		mouse_x;
 }				t_key_flags;
 
 typedef struct s_image
@@ -110,16 +106,6 @@ typedef struct s_data
 	t_image			xpm_file[4];
 	t_image			wall[4];
 	t_key_flags		key_flag;
-	int				debug_flag;
-	int				finish_flag;
-	int				start_flag;
-	long long		start_seconds;
-	long long		finish_seconds;
-	long long		start_milliseconds;
-	long long		finish_milliseconds;
-	long long		fastest_lap_sec;
-	long long		fastest_lap_millisec;
-
 }				t_data;
 
 typedef struct s_line
@@ -230,11 +216,5 @@ bool		search_wall_x(t_data *data, int *old_x, int old_y, int new_x);
 bool		search_wall_y(t_data *data, int old_x_copy, int *old_y, int new_y);
 bool		go_by_pixel(t_data *data, float new_x, float new_y);
 bool		saftey_wall(t_data *data, float new_x, float new_y, int p);
-/* move_race.c */
-void		velocity_ctrl(t_data *data);
-void		lap_time(t_data *data);	
-/* move_race_utils_bonus.c */
-long long	get_seconds(void);
-long long	get_milliseconds(void);
 
 #endif

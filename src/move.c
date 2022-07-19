@@ -61,8 +61,6 @@ int	move(t_data *data)
 {
 	data->p_dx = cos(data->p_a) * data->velocity;
 	data->p_dy = sin(data->p_a) * data->velocity;
-	velocity_ctrl(data);
-	lap_time(data);
 	if (data->key_flag.up == ON)
 		move_vertical(data, data->p_dx, data->p_dy, -1);
 	if (data->key_flag.down == ON)

@@ -11,12 +11,6 @@ int	map_init(t_data *arr)
 	arr->p_dx = cos(arr->p_a);
 	arr->p_dy = sin(arr->p_a);
 	arr->velocity = 0.2 * arr->subsize;
-	arr->start_seconds = 0;
-	arr->finish_seconds = 0;
-	arr->start_milliseconds = 0;
-	arr->finish_milliseconds = 0;
-	arr->fastest_lap_sec = 1000;
-	arr->fastest_lap_millisec = 999999;
 	if (arr->rows > arr->cols)
 		arr->dof = arr->rows;
 	else

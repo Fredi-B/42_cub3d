@@ -1,6 +1,5 @@
 #include "cub3D.h"
 
-/* static fehlt bei allen fcts */
 static bool	get_walls_and_rgb(t_data *data, int fd);
 static char	*get_next_trimmed_line(int fd, t_input_flags *flag);
 bool		check_textures_extensions(t_data *data);

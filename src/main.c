@@ -51,14 +51,8 @@ static void	init_key_flags(t_data *data)
 	data->key_flag.down = OFF;
 	data->key_flag.left = OFF;
 	data->key_flag.right = OFF;
-	data->key_flag.vel_down = OFF;
-	data->key_flag.vel_up = OFF;
 	data->key_flag.left_rot = OFF;
 	data->key_flag.right_rot = OFF;
-	data->key_flag.mouse_x = ON;
-	data->start_flag = OFF;
-	data->finish_flag = OFF;
-	data->debug_flag = OFF;
 }
 
 static void	init_xpm(t_data *data)
@@ -70,11 +64,6 @@ static void	init_xpm(t_data *data)
 	{
 		data->wall[i].img = NULL;
 		data->wall[i].addr = NULL;
-		i++;
-	}
-	i = 0;
-	while (i < 4)
-	{
 		data->xpm_file[i].img = NULL;
 		data->xpm_file[i].addr = NULL;
 		i++;

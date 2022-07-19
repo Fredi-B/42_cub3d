@@ -6,7 +6,7 @@
 #    By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/21 10:45:40 by fbechtol          #+#    #+#              #
-#    Updated: 2022/05/26 12:42:04 by fbechtol         ###   ########.fr        #
+#    Updated: 2022/07/19 10:03:17 by fbechtol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,18 +46,18 @@ BONUSOBJECTS = $(BONUS:.c=.o)
 # $@ = target's name
 # ‘$<’ is the first prerequisite <-- doesn't work with the test 
 $(NAME): $(OBJECTS)
-	ar -crs $@ $(OBJECTS)
+	@ar -crs $@ $(OBJECTS)
 
 bonus: $(NAME) $(BONUSOBJECTS)
-	ar -crs $(NAME) $(BONUSOBJECTS)
+	@ar -crs $(NAME) $(BONUSOBJECTS)
 
 all: $(NAME) bonus
 
 # -f --> force remove
 clean:
-	rm -f *.o
+	@rm -f *.o
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

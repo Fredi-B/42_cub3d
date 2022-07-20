@@ -57,6 +57,7 @@ dkms.conf
 # Miscellaneous
 .vscode/settings.json
 cub3D
+cub3D_bonus
 test.cub
 .vscode/launch.json
 .vscode/tasks.json

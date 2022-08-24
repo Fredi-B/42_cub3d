@@ -61,20 +61,38 @@ bool	pixel_is_inside_window(int x, int y, t_data *arr)
 		return (false);
 	return (true);
 }
+/* same as pixel_is_inside_window() but for minimap. */
+bool	pixel_is_inside_minimap(int x, int y, t_data *arr)
+{
+	// diprintf(y);
+	// diprintf(arr->minimap_height);
+	if (x < 0 || x > arr->minimap_width -1 || x > arr->width -1) // not sure why -1
+		return (false);
+	if (y < 0 || y > arr->minimap_height -1 || y > arr->height -1)
+		return (false);
+	return (true);
+}
 
 void	pixel_put(t_data *arr, int x, int y, int color)
 {
 	char	*dst;
-
 	// diprintf(x);
 	// diprintf(y);
 	// diprintf(arr->width);
-	if (arr->map_flag == 1)
+	if (arr->map_flag == ON)
 	{
-		dst = arr->addr_map + (y * arr->size_line_map + x * \
-								(arr->bits_per_pixel / 8));
-		*(unsigned int *)dst = color;
-	 	return ;
+		if (x % arr->scale_map || y % arr->scale_map)
+			return ;
+		x = x / arr->scale_map;
+		y = y / arr->scale_map;
+		if (pixel_is_inside_minimap(x, y, arr) == true)
+		{
+			dst = arr->addr_map + (y * arr->size_line_map + x * \
+									(arr->bits_per_pixel / 8));
+			*(unsigned int *)dst = color;
+	 		return ;
+		}
+		return ;
 	}
 	if (pixel_is_inside_window(x, y, arr) == true)
 	{
@@ -92,13 +110,15 @@ void	map_to_image(t_data *arr)
 	arr->img = mlx_new_image(arr->mlx, arr->width, arr->height);
 	arr->addr = mlx_get_data_addr(arr->img, &arr->bits_per_pixel, \
 								&arr->size_line, &arr->endian);
-
-	arr->img_map = mlx_new_image(arr->mlx, arr->cols * arr->subsize, arr->rows * arr->subsize);
+	arr->minimap_width = arr->cols * arr->subsize / arr->scale_map;
+	arr->minimap_height = arr->rows * arr->subsize / arr->scale_map;
+	arr->img_map = mlx_new_image(arr->mlx,arr->minimap_width, arr->minimap_height);
 	arr->addr_map = mlx_get_data_addr(arr->img_map, &arr->bits_per_pixel, \
 								&arr->size_line_map, &arr->endian);
 	init_line(&line);
-	arr->map_flag = 1;
-	get_map(arr, &line);
+	arr->map_flag = ON;
+	if (arr->draw_map_flag == ON)
+		get_map(arr, &line);
 	get_player(arr, &line);
 	get_rays(arr, &line);
 
@@ -108,13 +128,14 @@ void	all_images_to_window(t_data *arr)
 {
 	mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
 							arr->img, 0, 0);
-	mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
+	if (arr->draw_map_flag == ON)
+		mlx_put_image_to_window(arr->mlx, arr->mlx_window, \
 							arr->img_map, 0, 0);
 	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->xpm_file[WEST].img, 500, 500);
 	// mlx_put_image_to_window(arr->mlx, arr->mlx_window, arr->wall[SOUTH].img, 0, 0);
 }
 
-void	draw_map(t_data *arr)
+bool	draw_map(t_data *arr)
 {
 	arr->mlx = mlx_init();
 	if (!arr->mlx)
@@ -123,9 +144,10 @@ void	draw_map(t_data *arr)
 	arr->mlx_window = mlx_new_window(arr->mlx, arr->width, \
 											arr->height, "cub3D");
 	
-	put_walls_in_images(arr);
+	if (put_walls_in_images(arr) == false)
+		return (false);
 
 	map_to_image(arr);
 	all_images_to_window(arr);
-
+	return (true);
 }

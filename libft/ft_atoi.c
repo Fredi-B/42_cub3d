@@ -6,7 +6,7 @@
 /*   By: fbechtol <fbechtol@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 13:39:13 by fbechtol          #+#    #+#             */
-/*   Updated: 2021/11/24 15:08:43 by fbechtol         ###   ########.fr       */
+/*   Updated: 2022/06/15 17:30:29 by fbechtol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	isnbr(const char *str)
 {
 	if (*str < '0' || *str > '9')
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error\nft_atoi: input is not a number\n", 37);
 		exit(2);
 	}
 }

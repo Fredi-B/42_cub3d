@@ -39,6 +39,8 @@
 /* ---------------------- Defines for debugging ---------------------------- */
 # define dsprintf(expr) printf("\n" #expr ":\n|%s|\n", expr)
 # define diprintf(expr) printf("\n" #expr ":\n|%d|\n", expr)
+# define dfprintf(expr) printf("\n" #expr ":\n|%f|\n", expr)
+
 # define dwrite(expr) write(2, "\n" #expr "\n", strlen(#expr) + 2)
 
 /* ----------------------------- Structures -------------------------------- */
@@ -49,6 +51,8 @@ typedef struct s_key_flags
 	int	down;
 	int	left;
 	int	right;
+	int	left_rot;
+	int	right_rot;
 }				t_key_flags;
 
 typedef struct s_image
@@ -75,7 +79,9 @@ typedef struct s_data
 	char			*map;
 	int				subsize;
 	int				sub_bit;
+	int				scale_map;
 	int				map_flag;
+	int				draw_map_flag;
 	/* general variables NEEDS CHECKING!*/
 	int			*num;
 	int			cols;
@@ -108,6 +114,8 @@ typedef struct s_data
 	int			endian;
 	int			width;
 	int			height;
+	int			minimap_width;
+	int			minimap_height;
 	/* mlx variables OLDMLXLIB in eigenem struct für mehrere images */
 	t_image		xpm_file[4];
 	t_image		wall[4];
@@ -156,6 +164,7 @@ typedef struct s_input_flags
 	bool	ea;
 	bool	ceiling;
 	bool	floor;
+	bool	eof;
 }				t_input_flags;
 
 typedef struct s_counter
@@ -171,8 +180,10 @@ typedef struct s_counter
 
 /*  ---------------------------- parsing.c --------------------------------- */
 int		parsing(t_data *data, char **argv);
-/*  ----------------------- parsing_store_map.c ---------------------------- */
-bool	store_data(t_data *data, t_input_flags *flag, char **splitted_line);
+/*  ----------------------- parsing_store_data.c ---------------------------- */
+bool	store_data(t_data *data, t_input_flags *flag, char *trimmed_line);
+/*  -------------------- parsing_store_data_utils.c ------------------------- */
+bool	check_commas_in_rgb(char *rgb);
 /*  -------------------------- parsing_map.c ------------------------------- */
 bool	read_map(t_data *data, int fd);
 bool	parse_map(t_data *data);
@@ -210,6 +221,12 @@ void	draw_line(t_line *line, t_data *arr);
 /* minimap.c*/
 int		map_init(t_data *arr);
 
+/* minimap_ray.c*/
+void	inside_360(float *ra);
+float	draw_ray_minimap(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra);
+void	draw_wall(int *image_start_x, int *direction, t_data *arr, t_line *line, float ra, int r, float dist_t);
+float	dist_vec(t_data *arr, float x, float y);
+
 /* key_hook.c*/
 //void	hook(void *param); NEWMINILIB
 void	key_hooks(t_data *arr);
@@ -218,6 +235,7 @@ void	key_hooks(t_data *arr);
 void	move_y(t_data *arr, int sign);
 void	move_x(t_data *arr, int sign);
 void	turn(t_data *arr, int sign);
+void	move_sideways(t_data *arr, int sign);
 
 //int		deal_key(int key, t_array *fdf_win);
 
@@ -227,11 +245,11 @@ void	get_player(t_data *arr, t_line *line);
 void	get_rays(t_data *arr, t_line *line);
 
 /* walls.c*/
-unsigned int	get_wall(int direction);
-void	draw_wall_line(int direction, int image_start_x, float lineH, t_data data);
+unsigned int	get_wall(int direction, float line_h);
+void	draw_wall_line(int *direction, int *image_start_x, float line_h, t_data *data, int r);
 
 /* window.c*/
-void	draw_map(t_data *arr);
+bool	draw_map(t_data *arr);
 void	pixel_put(t_data *arr, int x, int y, int color);
 void	destroy_window(t_data *arr);
 void	map_to_image(t_data *arr);

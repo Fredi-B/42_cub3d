@@ -7,7 +7,6 @@ static void	join_lines(t_data *data, char *line, int *longest_row);
 skips empty lines in the beginning, checks against them thereafter */
 bool	read_map(t_data *data, int fd)
 {
-	//leaks??
 	char	*line;
 	int		longest_row;
 

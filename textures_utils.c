@@ -14,7 +14,7 @@ void	*my_new_image(void *mlx, int width, int height, t_image *copy)
 
 bool	pixel_is_inside_image(int x, int y, t_image *img)
 {
-	if (x < 0 || x > img->width -1) // not sure why -1
+	if (x < 0 || x > img->width -1)
 		return (false);
 	if (y < 0 || y > img->height -1)
 		return (false);
